@@ -83,20 +83,38 @@
 
     const html = buildPreviewHtml({ name, title, course, dateStr, issuer, issuerTitle, color, template });
 
-    // Inject into iframe (srcdoc = same-origin, no CSP issues)
-    let iframe = document.getElementById("previewIframe");
-    if (!iframe) {
-      const previewBody = document.getElementById("previewBody");
+    // Scale: fit 1100×850 certificate into the preview panel
+    // The previewBody is roughly 500px wide — scale to fill it
+    const CERT_W = 1100, CERT_H = 850;
+    const previewBody = document.getElementById("previewBody");
+    const panelW = previewBody.offsetWidth || 480;
+    const scale  = Math.min((panelW - 8) / CERT_W, 400 / CERT_H);
+    const dispW  = Math.round(CERT_W * scale);
+    const dispH  = Math.round(CERT_H * scale);
+
+    let wrapper = document.getElementById("previewWrapper");
+    let iframe  = document.getElementById("previewIframe");
+
+    if (!wrapper) {
       previewBody.innerHTML = "";
-      previewBody.style.cssText = "padding:0;background:#666;display:flex;align-items:center;justify-content:center;height:100%;";
+      previewBody.style.cssText = "padding:0;background:#555;display:flex;align-items:flex-start;justify-content:center;";
+
+      wrapper = document.createElement("div");
+      wrapper.id = "previewWrapper";
+      wrapper.style.cssText = `position:relative;overflow:hidden;flex-shrink:0;`;
+      previewBody.appendChild(wrapper);
+
       iframe = document.createElement("iframe");
       iframe.id = "previewIframe";
-      iframe.style.cssText = "width:1100px;height:850px;border:none;transform:scale(0.44);transform-origin:top left;flex-shrink:0;display:block;";
-      previewBody.style.overflow = "hidden";
-      previewBody.appendChild(iframe);
-      // Wrapper to handle transform offset
-      previewBody.style.height = "374px";  // 850 * 0.44
+      iframe.style.cssText = `position:absolute;top:0;left:0;width:${CERT_W}px;height:${CERT_H}px;border:none;`;
+      wrapper.appendChild(iframe);
     }
+
+    // Apply scale via wrapper clip + iframe transform
+    wrapper.style.width  = dispW + "px";
+    wrapper.style.height = dispH + "px";
+    iframe.style.transform       = `scale(${scale})`;
+    iframe.style.transformOrigin = "top left";
     iframe.srcdoc = html;
   }
 
