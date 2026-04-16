@@ -1,14 +1,15 @@
 /* ============================================================
    formal.js — Formal/academic certificate template for pdfmake
-   Target: parchment background, ornate double border, flourish
-   divider, course name prominent & uppercase, seal left +
-   signature right + QR bottom-right.
+   Premium: deep parchment background, filled burgundy corner
+   ornament blocks, multi-ring seal, ornate flourish lines,
+   course name bold & prominent.
    ============================================================ */
 
 const mm = (v) => v * 2.8346;
 
 module.exports = function formalTemplate(data, options = {}) {
-  const color    = options.color || "#6B1D2A";   // Burgundy/maroon
+  const color    = options.color || "#6B1D2A";   // Burgundy
+  const gold     = "#B8962E";                    // Antique gold accent
   const pageSize = (options.pageSize || "letter").toUpperCase();
 
   const { recipient = {}, certificate = {}, verifyId, qrDataUrl } = data;
@@ -23,128 +24,154 @@ module.exports = function formalTemplate(data, options = {}) {
 
   const W = 792;
   const H = 612;
-  const pad = 22;
+  const pad = 20;
+  const co  = 18; // corner ornament size
 
-  // ── Parchment background + double border ──
-  const background = () => ({
+  // ── Background layers ──
+  const bgLayer = () => ({
     absolutePosition: { x: 0, y: 0 },
     canvas: [
-      // Parchment fill
-      { type: "rect", x: 0,    y: 0,    w: W,          h: H,          color: "#F9F3E3" },
-      // Thick outer border
-      { type: "rect", x: pad,  y: pad,  w: W-pad*2,    h: H-pad*2,    lineWidth: 4, lineColor: color },
-      // Thin inner border
-      { type: "rect", x: pad+8, y: pad+8, w: W-pad*2-16, h: H-pad*2-16, lineWidth: 1, lineColor: color },
+      // Deep parchment fill
+      { type: "rect", x: 0, y: 0, w: W, h: H, color: "#F5EDD8" },
+
+      // Subtle inner cream panel
+      { type: "rect", x: pad + 4, y: pad + 4, w: W - pad*2 - 8, h: H - pad*2 - 8, color: "#FDFAF3" },
+
+      // Outer border — thick burgundy
+      { type: "rect", x: pad, y: pad, w: W - pad*2, h: H - pad*2, lineWidth: 4, lineColor: color },
+      // Inner border — thin gold
+      { type: "rect", x: pad + 8, y: pad + 8, w: W - pad*2 - 16, h: H - pad*2 - 16, lineWidth: 1, lineColor: gold },
+
+      // ── Filled corner block ornaments ──
+      // Top-left
+      { type: "rect", x: pad,              y: pad,              w: co, h: co, color: color },
+      { type: "rect", x: pad + 2,          y: pad + 2,          w: co - 4, h: co - 4, color: "#FDFAF3" },
+      // Top-right
+      { type: "rect", x: W - pad - co,     y: pad,              w: co, h: co, color: color },
+      { type: "rect", x: W - pad - co + 2, y: pad + 2,          w: co - 4, h: co - 4, color: "#FDFAF3" },
+      // Bottom-left
+      { type: "rect", x: pad,              y: H - pad - co,     w: co, h: co, color: color },
+      { type: "rect", x: pad + 2,          y: H - pad - co + 2, w: co - 4, h: co - 4, color: "#FDFAF3" },
+      // Bottom-right
+      { type: "rect", x: W - pad - co,     y: H - pad - co,     w: co, h: co, color: color },
+      { type: "rect", x: W - pad - co + 2, y: H - pad - co + 2, w: co - 4, h: co - 4, color: "#FDFAF3" },
+
+      // ── Mid-border diamond tick marks (decorative) ──
+      { type: "rect", x: W/2 - 5, y: pad - 2,   w: 10, h: 10, color: gold },
+      { type: "rect", x: W/2 - 5, y: H - pad - 8, w: 10, h: 10, color: gold },
+      { type: "rect", x: pad - 2,     y: H/2 - 5, w: 10, h: 10, color: gold },
+      { type: "rect", x: W - pad - 8, y: H/2 - 5, w: 10, h: 10, color: gold },
     ],
   });
 
   // ── Title ──
   const titleSection = {
     text: certTitle,
-    fontSize: 28,
+    fontSize: 26,
     bold: true,
     color: color,
     alignment: "center",
-    margin: [0, 16, 0, 6],
+    margin: [0, 22, 0, 4],
   };
 
-  // ── Ornate flourish divider (text-based) ──
+  // ── Ornate flourish — lines + diamond ──
   const flourish = {
-    text: "───── ✦ ─────",
-    fontSize: 11,
-    color: color,
-    alignment: "center",
-    margin: [0, 2, 0, 12],
+    canvas: [
+      { type: "line", x1: 100, y1: 4, x2: 330, y2: 4, lineWidth: 1, lineColor: color },
+      { type: "rect", x: 335, y: 0, w: 8, h: 8, color: gold },
+      { type: "line", x1: 346, y1: 4, x2: 576, y2: 4, lineWidth: 1, lineColor: color },
+    ],
+    margin: [0, 2, 0, 8],
   };
 
-  // ── Presented to ──
+  // ── "Presented to" ──
   const presentedTo = {
     text: "Presented to",
-    fontSize: 12,
+    fontSize: 11,
     italics: true,
-    color: "#555555",
+    color: "#666666",
     alignment: "center",
-    margin: [0, 0, 0, 6],
+    margin: [0, 0, 0, 4],
   };
 
-  // ── Recipient name ──
+  // ── Recipient — large italic ──
   const recipientSection = {
     text: recipientName,
-    fontSize: 40,
+    fontSize: 42,
     bold: true,
     italics: true,
     color: "#111111",
     alignment: "center",
-    margin: [60, 0, 60, 6],
+    margin: [60, 0, 60, 4],
   };
 
   // ── Name underline ──
-  const nameUnderline = {
+  const nameRule = {
     canvas: [
-      { type: "line", x1: 200, y1: 0, x2: 542, y2: 0, lineWidth: 1, lineColor: "#cccccc" },
+      { type: "line", x1: 190, y1: 0, x2: 560, y2: 0, lineWidth: 1, lineColor: "#cccccc" },
     ],
-    margin: [0, 0, 0, 10],
+    margin: [0, 0, 0, 8],
   };
 
-  // ── Course description ──
+  // ── Course ──
   const courseSection = courseName ? [
     {
-      text: "In recognition of successfully completing all requirements for the course",
-      fontSize: 11,
+      text: "In recognition of completing",
+      fontSize: 10,
       italics: true,
-      color: "#444444",
+      color: "#555555",
       alignment: "center",
-      margin: [80, 0, 80, 4],
+      margin: [80, 0, 80, 3],
     },
     {
       text: courseName.toUpperCase(),
-      fontSize: 16,
+      fontSize: 15,
       bold: true,
       color: color,
       alignment: "center",
       characterSpacing: 2,
-      margin: [40, 0, 40, 10],
+      margin: [40, 0, 40, 8],
     },
-  ] : [{ text: "", margin: [0, 0, 0, 10] }];
+  ] : [{ text: "", margin: [0, 0, 0, 8] }];
 
   // ── Date ──
   const dateSection = {
     text: rawDate,
-    fontSize: 11,
-    color: "#777777",
+    fontSize: 10,
+    color: "#888888",
     alignment: "center",
-    margin: [0, 0, 0, 10],
+    margin: [0, 0, 0, 8],
   };
 
-  // ── Bottom: Seal left | Signature center | QR right ──
+  // ── Bottom: Seal | Issuer | QR ──
   const bottomRow = {
     columns: [
-      // Left: Circular seal
+      // Left: multi-ring seal
       {
         width: 90,
         alignment: "center",
         stack: [
           {
             canvas: [
-              { type: "ellipse", x: 36, y: 36, r1: 34, r2: 34, lineWidth: 2.5, lineColor: color },
-              { type: "ellipse", x: 36, y: 36, r1: 27, r2: 27, lineWidth: 1,   lineColor: color },
+              { type: "ellipse", x: 34, y: 34, r1: 32, r2: 32, lineWidth: 3,   lineColor: color },
+              { type: "ellipse", x: 34, y: 34, r1: 26, r2: 26, lineWidth: 1,   lineColor: color },
+              { type: "ellipse", x: 34, y: 34, r1: 20, r2: 20, lineWidth: 0.5, lineColor: gold  },
             ],
           },
-          { text: "EST.", fontSize: 6.5, bold: true, color: color, alignment: "center", margin: [0, -58, 0, 0] },
-          { text: "✦", fontSize: 10, color: color, alignment: "center", margin: [0, 2, 0, 0] },
-          { text: "OFFICIAL", fontSize: 6, bold: true, color: color, alignment: "center", margin: [0, 2, 0, 0] },
-          { text: "SEAL", fontSize: 6, color: color, alignment: "center", margin: [0, 1, 0, 22] },
+          { text: "OFFICIAL", fontSize: 6,  bold: true, color: color, alignment: "center", margin: [0, -46, 0, 0] },
+          { text: "✦",        fontSize: 10, color: gold, alignment: "center",  margin: [0, 1, 0, 0] },
+          { text: "SEAL",     fontSize: 6,  color: color, alignment: "center", margin: [0, 1, 0, 22] },
         ],
       },
-      // Center: Signature block
+      // Center: issuer
       {
         width: "*",
         alignment: "center",
-        margin: [0, 20, 0, 0],
+        margin: [0, 18, 0, 0],
         stack: [
-          { canvas: [{ type: "line", x1: 40, y1: 0, x2: 260, y2: 0, lineWidth: 1, lineColor: "#999999" }] },
+          { canvas: [{ type: "line", x1: 40, y1: 0, x2: 280, y2: 0, lineWidth: 1, lineColor: "#bbbbbb" }] },
           issuerName  ? { text: issuerName,  fontSize: 11, bold: true, color: "#222222", alignment: "center", margin: [0, 5, 0, 0] } : null,
-          issuerTitle ? { text: issuerTitle, fontSize: 9,  color: "#888888", alignment: "center", margin: [0, 2, 0, 0] } : null,
+          issuerTitle ? { text: issuerTitle, fontSize: 8,  color: "#888888", alignment: "center", margin: [0, 2, 0, 0] } : null,
         ].filter(Boolean),
       },
       // Right: QR
@@ -152,7 +179,7 @@ module.exports = function formalTemplate(data, options = {}) {
         width: 80,
         alignment: "right",
         stack: [
-          { image: qrDataUrl, width: 58, height: 58, margin: [0, 10, 0, 0] },
+          { image: qrDataUrl, width: 56, height: 56, margin: [0, 8, 0, 0] },
           { text: verifyId || "", fontSize: 5.5, color: "#aaaaaa", alignment: "center", margin: [0, 2, 0, 0] },
         ],
       } : { width: 80, text: "" },
@@ -163,14 +190,14 @@ module.exports = function formalTemplate(data, options = {}) {
   return {
     pageSize,
     pageOrientation: "landscape",
-    pageMargins: [pad + 16, pad + 14, pad + 16, options.watermark ? pad + 12 + 14 : pad + 12],
-    background,
+    pageMargins: [pad + 14, pad + 12, pad + 14, options.watermark ? pad + 10 + 14 : pad + 10],
+    background: bgLayer,
     content: [
       titleSection,
       flourish,
       presentedTo,
       recipientSection,
-      nameUnderline,
+      nameRule,
       ...courseSection,
       dateSection,
       bottomRow,
@@ -178,7 +205,7 @@ module.exports = function formalTemplate(data, options = {}) {
     defaultStyle: {
       font: "Roboto",
       fontSize: 11,
-      lineHeight: 1.35,
+      lineHeight: 1.3,
       color: "#1a1a1a",
     },
     footer: options.watermark

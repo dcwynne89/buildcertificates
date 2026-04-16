@@ -1,13 +1,14 @@
 /* ============================================================
    modern.js — Modern certificate template for pdfmake
-   Target: bold purple top bar, massive left-aligned recipient
-   name, signature+date bottom row with QR bottom-left.
+   Premium: bold left accent column, geometric background block,
+   indigo header, dramatic name, clean bottom layout.
    ============================================================ */
 
 const mm = (v) => v * 2.8346;
 
 module.exports = function modernTemplate(data, options = {}) {
-  const color    = options.color || "#4F46E5";
+  const color    = options.color || "#4F46E5";  // Indigo
+  const light    = "#EEF2FF";                   // Very light indigo tint
   const pageSize = (options.pageSize || "letter").toUpperCase();
 
   const { recipient = {}, certificate = {}, verifyId, qrDataUrl } = data;
@@ -20,89 +21,111 @@ module.exports = function modernTemplate(data, options = {}) {
   const issuerName    = certificate.issuer        || "";
   const issuerTitle   = certificate.issuer_title  || "";
 
-  const W = 752; // content width for letter landscape minus margins
+  const W = 792;
+  const H = 612;
+  const sidebarW = 14; // thick left accent strip
 
-  // ── Full-width top accent bar ──
-  const accentBar = {
-    absolutePosition: { x: 20, y: 20 },
+  // ── Background geometry ──
+  const bgLayer = () => ({
+    absolutePosition: { x: 0, y: 0 },
     canvas: [
-      { type: "rect", x: 0, y: 0, w: W + 40, h: 10, color: color },
+      // White page
+      { type: "rect", x: 0, y: 0, w: W, h: H, color: "#FFFFFF" },
+      // Thick left accent strip
+      { type: "rect", x: 0, y: 0, w: sidebarW, h: H, color: color },
+      // Thinner accent strip
+      { type: "rect", x: sidebarW + 4, y: 0, w: 3, h: H, color: color, fillOpacity: 0.3 },
+      // Top accent band
+      { type: "rect", x: 0, y: 0, w: W, h: 8, color: color },
+      // Bottom accent band
+      { type: "rect", x: 0, y: H - 8, w: W, h: 8, color: color },
+      // Light tint background block behind name area
+      { type: "rect", x: sidebarW + 22, y: 60, w: W - sidebarW - 22 - 30, h: 160, color: light },
+      // Accent right edge of tint block
+      { type: "rect", x: W - 30, y: 60, w: 4, h: 160, color: color },
     ],
-  };
-
-  // ── Full-width bottom accent bar ──
-  const bottomBar = {
-    absolutePosition: { x: 20, y: 602 },
-    canvas: [
-      { type: "rect", x: 0, y: 0, w: W + 40, h: 6, color: color },
-    ],
-  };
+  });
 
   // ── Certificate type label ──
   const typeLabel = {
     text: certTitle.toUpperCase(),
-    fontSize: 13,
+    fontSize: 11,
     bold: true,
     color: color,
-    characterSpacing: 5,
-    margin: [0, 28, 0, 20],
+    characterSpacing: 6,
+    margin: [50, 14, 0, 8],
   };
 
-  // ── Recipient name — very large, left-aligned ──
+  // ── Recipient name — extremely large, left-aligned ──
   const recipientSection = {
     text: recipientName,
-    fontSize: 52,
+    fontSize: 54,
     bold: true,
     color: "#111111",
-    margin: [0, 0, 0, 10],
+    margin: [50, 6, 0, 4],
   };
 
-  // ── Course line ──
+  // ── Course ──
   const courseSection = courseName ? {
-    text: `For successfully completing ${courseName}`,
+    text: `For successfully completing  ${courseName}`,
     fontSize: 13,
     color: "#555555",
-    margin: [0, 0, 0, 0],
+    margin: [50, 4, 0, 0],
   } : { text: "", margin: [0, 0, 0, 0] };
 
-  // ── Bottom row: QR left | date + issuer + signature right ──
+  // ── Separator rule ──
+  const separator = {
+    canvas: [{ type: "rect", x: 50, y: 0, w: 660, h: 1, color: "#E5E7EB" }],
+    margin: [0, 24, 0, 16],
+  };
+
+  // ── Bottom row ──
   const bottomRow = {
     columns: [
-      // Left: QR code
+      // QR left
       qrDataUrl ? {
-        width: 72,
+        width: 86,
+        margin: [50, 0, 0, 0],
         stack: [
-          { image: qrDataUrl, width: 60, height: 60 },
-          { text: verifyId || "", fontSize: 5.5, color: "#aaaaaa", alignment: "center", margin: [0, 2, 0, 0] },
+          { image: qrDataUrl, width: 64, height: 64 },
+          { text: verifyId || "", fontSize: 5.5, color: "#aaaaaa", margin: [0, 2, 0, 0] },
         ],
-      } : { width: 72, text: "" },
+      } : { width: 86, margin: [50, 0, 0, 0], text: "" },
       // Spacer
-      { width: 20, text: "" },
-      // Right: Date, Issuer, Signature line
+      { width: 24, text: "" },
+      // Issuer block
       {
         width: "*",
         stack: [
-          { text: rawDate, fontSize: 11, color: "#888888", margin: [0, 0, 0, 14] },
-          { canvas: [{ type: "line", x1: 0, y1: 0, x2: 200, y2: 0, lineWidth: 1, lineColor: "#dddddd" }] },
-          issuerName  ? { text: issuerName,  fontSize: 11, bold: true, color: "#222222", margin: [0, 5, 0, 0] } : null,
-          issuerTitle ? { text: issuerTitle, fontSize: 9,  color: "#888888", margin: [0, 2, 0, 0] } : null,
+          { canvas: [{ type: "rect", x: 0, y: 0, w: 200, h: 2, color: color }], margin: [0, 0, 0, 6] },
+          issuerName  ? { text: issuerName,  fontSize: 12, bold: true, color: "#111111", margin: [0, 0, 0, 2] } : null,
+          issuerTitle ? { text: issuerTitle, fontSize: 9,  color: "#666666" } : null,
         ].filter(Boolean),
       },
+      // Date right
+      {
+        width: 140,
+        alignment: "right",
+        margin: [0, 0, 30, 0],
+        stack: [
+          { text: "DATE ISSUED", fontSize: 7, color: "#aaaaaa", characterSpacing: 2, margin: [0, 0, 0, 4] },
+          { text: rawDate, fontSize: 11, bold: true, color: "#333333" },
+        ],
+      },
     ],
-    margin: [0, 28, 0, 0],
   };
 
   return {
     pageSize,
     pageOrientation: "landscape",
-    pageMargins: [mm(22), mm(20), mm(22), options.watermark ? mm(18) + 14 : mm(18)],
+    pageMargins: [0, 0, 0, options.watermark ? 22 : 10],
+    background: bgLayer,
     content: [
-      accentBar,
       typeLabel,
       recipientSection,
       courseSection,
+      separator,
       bottomRow,
-      bottomBar,
     ],
     defaultStyle: {
       font: "Roboto",
