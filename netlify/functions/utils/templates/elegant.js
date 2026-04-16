@@ -119,10 +119,10 @@ module.exports = function elegantTemplate(data, options = {}) {
   /* Certificate title */
   .cert-title {
     font-family: 'Cinzel', serif;
-    font-size: 13px;
+    font-size: 22px;
     font-weight: 600;
     color: ${navy};
-    letter-spacing: 8px;
+    letter-spacing: 6px;
     text-transform: uppercase;
     margin-bottom: 0.12in;
   }
@@ -131,7 +131,7 @@ module.exports = function elegantTemplate(data, options = {}) {
   .presented {
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 15px;
+    font-size: 20px;
     color: #888;
     margin-bottom: 0.04in;
   }
@@ -159,13 +159,13 @@ module.exports = function elegantTemplate(data, options = {}) {
   .nr-diamond-sm { width:5px; height:5px; background:${gold}; transform:rotate(45deg); flex-shrink:0; opacity:0.6; }
 
   /* Course */
-  .course-intro { font-family:'EB Garamond',serif; font-style:italic; font-size:13px; color:#999; margin-bottom:3px; }
-  .course-name  { font-family:'Cinzel',serif; font-size:14px; font-weight:600; color:${navy}; letter-spacing:3px; text-transform:uppercase; margin-bottom:0.08in; }
+  .course-intro { font-family:'EB Garamond',serif; font-style:italic; font-size:18px; color:#999; margin-bottom:4px; }
+  .course-name  { font-family:'Cinzel',serif; font-size:22px; font-weight:600; color:${navy}; letter-spacing:3px; text-transform:uppercase; margin-bottom:0.08in; }
 
   /* Date & Issuer */
-  .meta-row { display:flex; flex-direction:column; gap:2px; margin-bottom:0; }
-  .meta-date   { font-family:'EB Garamond',serif; font-size:12px; color:#aaa; }
-  .meta-issuer { font-family:'Cinzel',serif; font-size:12px; font-weight:600; color:${navy}; letter-spacing:2px; }
+  .meta-row { display:flex; flex-direction:column; gap:3px; margin-bottom:0; }
+  .meta-date   { font-family:'EB Garamond',serif; font-size:16px; color:#aaa; }
+  .meta-issuer { font-family:'Cinzel',serif; font-size:16px; font-weight:600; color:${navy}; letter-spacing:2px; }
 
   /* Bottom footer */
   .footer {
@@ -176,10 +176,10 @@ module.exports = function elegantTemplate(data, options = {}) {
   }
 
   .sig-block { display:flex; flex-direction:column; }
-  .sig-label  { font-family:'EB Garamond',serif; font-size:9px; color:#bbb; letter-spacing:2px; text-transform:uppercase; margin-bottom:3px; }
-  .sig-script { font-family:'Dancing Script',cursive; font-size:24px; color:#444; line-height:1; margin-bottom:5px; }
-  .sig-line   { width:160px; height:1px; background:#ccc; margin-bottom:5px; }
-  .sig-name   { font-family:'EB Garamond',serif; font-size:11px; color:#888; }
+  .sig-label  { font-family:'EB Garamond',serif; font-size:13px; color:#bbb; letter-spacing:2px; text-transform:uppercase; margin-bottom:3px; }
+  .sig-script { font-family:'Dancing Script',cursive; font-size:32px; color:#444; line-height:1; margin-bottom:5px; }
+  .sig-line   { width:200px; height:1px; background:#ccc; margin-bottom:5px; }
+  .sig-name   { font-family:'EB Garamond',serif; font-size:15px; color:#888; }
 
   .seal-wrap { display:flex; align-items:center; justify-content:center; }
 

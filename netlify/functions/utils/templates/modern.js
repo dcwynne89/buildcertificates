@@ -62,7 +62,7 @@ module.exports = function modernTemplate(data, options = {}) {
 
   .header-eyebrow {
     font-family: 'Inter', sans-serif;
-    font-size: 10px;
+    font-size: 14px;
     font-weight: 500;
     color: rgba(255,255,255,0.65);
     letter-spacing: 6px;
@@ -72,14 +72,14 @@ module.exports = function modernTemplate(data, options = {}) {
 
   .header-title {
     font-family: 'Inter', sans-serif;
-    font-size: 32px;
+    font-size: 42px;
     font-weight: 800;
     color: #fff;
     letter-spacing: 5px;
     text-transform: uppercase;
     text-align: center;
     line-height: 1;
-    margin-bottom: 12px;
+    margin-bottom: 14px;
   }
 
   .header-rule {
@@ -98,7 +98,7 @@ module.exports = function modernTemplate(data, options = {}) {
 
   .presented {
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-size: 16px;
     font-weight: 400;
     color: #aaa;
     letter-spacing: 3px;
@@ -125,8 +125,8 @@ module.exports = function modernTemplate(data, options = {}) {
   }
 
   .course-block { margin-bottom: auto; }
-  .course-intro { font-family:'Inter',sans-serif; font-size:18px; font-weight:400; color:#888; line-height:1.4; }
-  .course-name  { font-family:'Inter',sans-serif; font-size:18px; font-weight:700; color:#555; line-height:1.4; }
+  .course-intro { font-family:'Inter',sans-serif; font-size:24px; font-weight:400; color:#888; line-height:1.4; }
+  .course-name  { font-family:'Inter',sans-serif; font-size:24px; font-weight:700; color:#444; line-height:1.4; }
 
   /* ── Bottom bar ── */
   .bottom {
@@ -138,13 +138,13 @@ module.exports = function modernTemplate(data, options = {}) {
   }
 
   .meta-block { display:flex; flex-direction:column; gap:3px; }
-  .meta-date   { font-family:'Inter',sans-serif; font-size:14px; color:#999; }
-  .meta-issuer { font-family:'Inter',sans-serif; font-size:15px; font-weight:700; color:#222; }
+  .meta-date   { font-family:'Inter',sans-serif; font-size:18px; color:#999; }
+  .meta-issuer { font-family:'Inter',sans-serif; font-size:20px; font-weight:700; color:#222; }
 
   .sig-block { display:flex; flex-direction:column; align-items:center; }
-  .sig-script { font-family:'Dancing Script',cursive; font-size:28px; color:#333; line-height:1; margin-bottom:4px; }
-  .sig-line   { width:180px; height:1px; background:#ddd; margin-bottom:5px; }
-  .sig-label  { font-family:'Inter',sans-serif; font-size:10px; color:#bbb; letter-spacing:2px; }
+  .sig-script { font-family:'Dancing Script',cursive; font-size:34px; color:#333; line-height:1; margin-bottom:4px; }
+  .sig-line   { width:200px; height:1px; background:#ddd; margin-bottom:5px; }
+  .sig-label  { font-family:'Inter',sans-serif; font-size:13px; color:#bbb; letter-spacing:2px; }
 
   .qr-wrap { display:flex; flex-direction:column; align-items:flex-end; }
   .qr-img  { width:62px; height:62px; }

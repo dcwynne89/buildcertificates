@@ -190,23 +190,24 @@
         .top-rule{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
         .trl{flex:1;height:1px;background:linear-gradient(90deg,${gold},transparent);}
         .trd{width:8px;height:8px;background:${gold};transform:rotate(45deg);flex-shrink:0;}
-        .ctitle{font-family:"Cinzel",serif;font-size:13px;font-weight:600;color:${navy};letter-spacing:8px;text-transform:uppercase;margin-bottom:12px;}
-        .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:15px;color:#888;margin-bottom:4px;}
+        /* FONT SIZES: print-correct for 1100x850 canvas */
+        .ctitle{font-family:"Cinzel",serif;font-size:22px;font-weight:600;color:${navy};letter-spacing:6px;text-transform:uppercase;margin-bottom:12px;}
+        .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:#888;margin-bottom:4px;}
         .rname{font-family:"Playfair Display",serif;font-size:78px;font-weight:800;color:${navy};line-height:0.95;letter-spacing:-1px;margin-bottom:10px;}
         .nrule{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
         .nrl{flex:1;height:1.5px;background:linear-gradient(90deg,${gold},rgba(201,168,76,0.2));}
         .nrd{width:8px;height:8px;background:${gold};transform:rotate(45deg);flex-shrink:0;}
         .nrds{width:5px;height:5px;background:${gold};transform:rotate(45deg);flex-shrink:0;opacity:0.6;}
-        .cintro{font-family:"EB Garamond",serif;font-style:italic;font-size:13px;color:#999;margin-bottom:3px;}
-        .cname{font-family:"Cinzel",serif;font-size:14px;font-weight:600;color:${navy};letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
-        .mdate{font-family:"EB Garamond",serif;font-size:12px;color:#aaa;}
-        .missuer{font-family:"Cinzel",serif;font-size:12px;font-weight:600;color:${navy};letter-spacing:2px;}
+        .cintro{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:#999;margin-bottom:4px;}
+        .cname{font-family:"Cinzel",serif;font-size:22px;font-weight:600;color:${navy};letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+        .mdate{font-family:"EB Garamond",serif;font-size:16px;color:#aaa;}
+        .missuer{font-family:"Cinzel",serif;font-size:16px;font-weight:600;color:${navy};letter-spacing:2px;}
         .footer{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;}
         .sig{display:flex;flex-direction:column;}
-        .siglabel{font-family:"EB Garamond",serif;font-size:9px;color:#bbb;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
-        .sigscript{font-family:"Dancing Script",cursive;font-size:24px;color:#444;line-height:1;margin-bottom:5px;}
-        .sigline{width:160px;height:1px;background:#ccc;margin-bottom:5px;}
-        .signame{font-family:"EB Garamond",serif;font-size:11px;color:#888;}
+        .siglabel{font-family:"EB Garamond",serif;font-size:13px;color:#bbb;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+        .sigscript{font-family:"Dancing Script",cursive;font-size:32px;color:#444;line-height:1;margin-bottom:5px;}
+        .sigline{width:200px;height:1px;background:#ccc;margin-bottom:5px;}
+        .signame{font-family:"EB Garamond",serif;font-size:15px;color:#888;}
       </style></head><body><div class="page">
         <div class="left">${panelOrn}</div>
         <div class="main">
@@ -245,22 +246,23 @@
         .page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;overflow:hidden;}
         .header{flex-shrink:0;height:200px;background:linear-gradient(135deg,${c} 0%,${cB} 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 70px;position:relative;}
         .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.15);}
-        .heyebrow{font-family:"Inter",sans-serif;font-size:10px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:6px;text-transform:uppercase;margin-bottom:8px;}
-        .htitle{font-family:"Inter",sans-serif;font-size:32px;font-weight:800;color:#fff;letter-spacing:5px;text-transform:uppercase;text-align:center;line-height:1;margin-bottom:12px;}
+        /* FONT SIZES: print-correct */
+        .heyebrow{font-family:"Inter",sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:6px;text-transform:uppercase;margin-bottom:8px;}
+        .htitle{font-family:"Inter",sans-serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:5px;text-transform:uppercase;text-align:center;line-height:1;margin-bottom:14px;}
         .hrule{width:260px;height:1px;background:rgba(255,255,255,0.35);}
         .body{flex:1;display:flex;flex-direction:column;padding:42px 70px 28px;}
-        .presented{font-family:"Inter",sans-serif;font-size:12px;font-weight:400;color:#aaa;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
+        .presented{font-family:"Inter",sans-serif;font-size:16px;font-weight:400;color:#aaa;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
         .rname{font-family:"Inter",sans-serif;font-size:85px;font-weight:900;color:#0f0f0f;line-height:0.95;letter-spacing:-3px;margin-bottom:18px;}
         .divider{width:60px;height:4px;background:${c};border-radius:2px;margin-bottom:14px;}
-        .cintro{font-family:"Inter",sans-serif;font-size:18px;font-weight:400;color:#888;line-height:1.4;}
-        .cname{font-family:"Inter",sans-serif;font-size:18px;font-weight:700;color:#555;line-height:1.4;}
+        .cintro{font-family:"Inter",sans-serif;font-size:24px;font-weight:400;color:#888;line-height:1.4;}
+        .cname{font-family:"Inter",sans-serif;font-size:24px;font-weight:700;color:#444;line-height:1.4;}
         .bottom{display:flex;align-items:flex-end;justify-content:space-between;padding-top:18px;border-top:1px solid #f0f0f0;margin-top:auto;}
-        .mdate{font-family:"Inter",sans-serif;font-size:14px;color:#999;}
-        .missuer{font-family:"Inter",sans-serif;font-size:15px;font-weight:700;color:#222;}
+        .mdate{font-family:"Inter",sans-serif;font-size:18px;color:#999;}
+        .missuer{font-family:"Inter",sans-serif;font-size:20px;font-weight:700;color:#222;}
         .sigblock{display:flex;flex-direction:column;align-items:center;}
-        .sigscript{font-family:"Dancing Script",cursive;font-size:28px;color:#333;line-height:1;margin-bottom:4px;}
-        .sigline{width:180px;height:1px;background:#ddd;margin-bottom:5px;}
-        .siglabel{font-family:"Inter",sans-serif;font-size:10px;color:#bbb;letter-spacing:2px;}
+        .sigscript{font-family:"Dancing Script",cursive;font-size:34px;color:#333;line-height:1;margin-bottom:4px;}
+        .sigline{width:200px;height:1px;background:#ddd;margin-bottom:5px;}
+        .siglabel{font-family:"Inter",sans-serif;font-size:13px;color:#bbb;letter-spacing:2px;}
       </style></head><body><div class="page">
         <div class="header">
           <div class="heyebrow">Official Document</div>
@@ -289,7 +291,6 @@
     // HERITAGE (formal)
     // =================================================================
     const bg = '#0F1729', gold = '#C9A84C', goldL = '#E8CB7A', cream = '#F5ECD7';
-    const fc = color || bg;
     const corner = `<svg viewBox="0 0 100 100" style="width:100px;height:100px;" xmlns="http://www.w3.org/2000/svg">
       <line x1="0" y1="2" x2="100" y2="2" stroke="${gold}" stroke-width="2.5"/>
       <line x1="2" y1="0" x2="2" y2="100" stroke="${gold}" stroke-width="2.5"/>
@@ -339,24 +340,21 @@
       html,body{width:1100px;height:850px;overflow:hidden;background:${bg};}
       .page{width:1100px;height:850px;position:relative;background:${bg};display:flex;flex-direction:column;overflow:hidden;}
       .corner{position:absolute;z-index:5;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
-      .boh{position:absolute;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;}
-      .bov{position:absolute;top:100px;bottom:100px;width:2.5px;background:${gold};z-index:4;}
-      .bih{position:absolute;left:108px;right:108px;height:0.8px;background:${gold};opacity:0.5;z-index:4;}
-      .biv{position:absolute;top:108px;bottom:108px;width:0.8px;background:${gold};opacity:0.5;z-index:4;}
+      /* FONT SIZES: print-correct */
       .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:55px 110px 15px;flex:1;}
-      .ctitle{font-family:"Cinzel",serif;font-size:22px;font-weight:700;color:${gold};letter-spacing:8px;text-align:center;margin-bottom:12px;}
-      .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:15px;color:rgba(245,236,215,0.6);margin-bottom:4px;text-align:center;}
+      .ctitle{font-family:"Cinzel",serif;font-size:30px;font-weight:700;color:${gold};letter-spacing:8px;text-align:center;margin-bottom:12px;}
+      .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:rgba(245,236,215,0.6);margin-bottom:4px;text-align:center;}
       .rname{font-family:"Cormorant Garamond",serif;font-size:78px;font-weight:700;font-style:italic;color:${gold};text-align:center;line-height:1;letter-spacing:1px;margin-bottom:8px;text-shadow:0 0 40px rgba(201,168,76,0.25);}
       .nrule{width:500px;height:1px;background:linear-gradient(90deg,transparent,${gold} 20%,${gold} 80%,transparent);margin:0 auto 12px;}
-      .recog{font-family:"EB Garamond",serif;font-style:italic;font-size:14px;color:rgba(245,236,215,0.65);text-align:center;line-height:1.6;margin-bottom:6px;}
-      .cname{font-family:"Cinzel",serif;font-size:18px;font-weight:700;color:${goldL};letter-spacing:4px;text-align:center;text-transform:uppercase;}
+      .recog{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:rgba(245,236,215,0.65);text-align:center;line-height:1.6;margin-bottom:6px;}
+      .cname{font-family:"Cinzel",serif;font-size:26px;font-weight:700;color:${goldL};letter-spacing:4px;text-align:center;text-transform:uppercase;}
       .footer{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;padding:0 100px 38px;}
       .sigblock{flex:1;display:flex;flex-direction:column;align-items:center;}
-      .sigscript{font-family:"Dancing Script",cursive;font-size:28px;color:${cream};line-height:1;margin-bottom:5px;}
-      .siglineg{width:200px;height:1px;background:linear-gradient(90deg,transparent,${gold} 30%,${gold} 70%,transparent);margin-bottom:6px;}
-      .signame{font-family:"Cinzel",serif;font-size:11px;font-weight:600;color:${gold};letter-spacing:2px;margin-bottom:3px;}
-      .sigtitle{font-family:"EB Garamond",serif;font-size:10px;color:rgba(245,236,215,0.55);font-style:italic;}
-      .sigdate{font-family:"EB Garamond",serif;font-size:12px;color:${gold};opacity:0.7;margin-top:6px;}
+      .sigscript{font-family:"Dancing Script",cursive;font-size:34px;color:${cream};line-height:1;margin-bottom:5px;}
+      .siglineg{width:220px;height:1px;background:linear-gradient(90deg,transparent,${gold} 30%,${gold} 70%,transparent);margin-bottom:6px;}
+      .signame{font-family:"Cinzel",serif;font-size:15px;font-weight:600;color:${gold};letter-spacing:2px;margin-bottom:3px;}
+      .sigtitle{font-family:"EB Garamond",serif;font-size:13px;color:rgba(245,236,215,0.55);font-style:italic;}
+      .sigdate{font-family:"EB Garamond",serif;font-size:16px;color:${gold};opacity:0.7;margin-top:6px;}
     </style></head><body><div class="page">
       <div style="position:absolute;top:2px;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;"></div>
       <div style="position:absolute;bottom:2px;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;"></div>

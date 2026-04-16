@@ -154,7 +154,7 @@ module.exports = function formalTemplate(data, options = {}) {
 
   .cert-title {
     font-family: 'Cinzel', serif;
-    font-size: 22px; font-weight: 700;
+    font-size: 30px; font-weight: 700;
     color: ${gold};
     letter-spacing: 8px;
     text-align: center;
@@ -166,7 +166,7 @@ module.exports = function formalTemplate(data, options = {}) {
   .presented {
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 15px;
+    font-size: 20px;
     color: rgba(245,236,215,0.6);
     margin-bottom: 0.04in;
     text-align: center;
@@ -197,7 +197,7 @@ module.exports = function formalTemplate(data, options = {}) {
   .recog-text {
     font-family: 'EB Garamond', serif;
     font-style: italic;
-    font-size: 14px;
+    font-size: 18px;
     color: rgba(245,236,215,0.65);
     text-align: center;
     line-height: 1.6;
@@ -206,7 +206,7 @@ module.exports = function formalTemplate(data, options = {}) {
 
   .course-name {
     font-family: 'Cinzel', serif;
-    font-size: 18px;
+    font-size: 26px;
     font-weight: 700;
     color: ${goldLight};
     letter-spacing: 4px;
@@ -227,11 +227,11 @@ module.exports = function formalTemplate(data, options = {}) {
 
   /* Center: signature block */
   .sig-block { flex:1; display:flex; flex-direction:column; align-items:center; }
-  .sig-script { font-family:'Dancing Script',cursive; font-size:28px; color:${cream}; line-height:1; margin-bottom:5px; }
-  .sig-line-gold { width:200px; height:1px; background:linear-gradient(90deg,transparent,${gold} 30%,${gold} 70%,transparent); margin-bottom:6px; }
-  .sig-name  { font-family:'Cinzel',serif; font-size:11px; font-weight:600; color:${gold}; letter-spacing:2px; margin-bottom:3px; }
-  .sig-title { font-family:'EB Garamond',serif; font-size:10px; color:rgba(245,236,215,0.55); font-style:italic; }
-  .sig-date  { font-family:'EB Garamond',serif; font-size:12px; color:${gold}; opacity:0.7; margin-top:6px; }
+  .sig-script { font-family:'Dancing Script',cursive; font-size:34px; color:${cream}; line-height:1; margin-bottom:5px; }
+  .sig-line-gold { width:220px; height:1px; background:linear-gradient(90deg,transparent,${gold} 30%,${gold} 70%,transparent); margin-bottom:6px; }
+  .sig-name  { font-family:'Cinzel',serif; font-size:15px; font-weight:600; color:${gold}; letter-spacing:2px; margin-bottom:3px; }
+  .sig-title { font-family:'EB Garamond',serif; font-size:13px; color:rgba(245,236,215,0.55); font-style:italic; }
+  .sig-date  { font-family:'EB Garamond',serif; font-size:16px; color:${gold}; opacity:0.7; margin-top:6px; }
 
   /* Right: QR */
   .qr-wrap { flex-shrink:0; display:flex; flex-direction:column; align-items:flex-end; }
