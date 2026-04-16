@@ -120,231 +120,249 @@
 
   // -- Build preview HTML (mirrors Chromium templates exactly) --
   function buildPreviewHtml({ name, title, course, dateStr, issuer, issuerTitle, color, template }) {
-    const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const e = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-    // ============================================================
-    // ELEGANT
-    // ============================================================
+    // =================================================================
+    // PRESTIGE (elegant)
+    // =================================================================
     if (template === 'elegant') {
-      const navy = '#1B365D';
-      const gold = '#C5A55A';
-      const words = title.split(' ');
-      const mid = Math.ceil(words.length / 2);
-      const line1 = words.slice(0, mid).join(' ').toUpperCase();
-      const line2 = words.slice(mid).join(' ').toUpperCase();
-      const C = (transform) => `<svg viewBox="0 0 120 120" style="width:120px;height:120px;" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="22" height="22" fill="${navy}"/>
-        <line x1="22" y1="4" x2="116" y2="4" stroke="${gold}" stroke-width="2.5"/>
-        <line x1="22" y1="11" x2="116" y2="11" stroke="${navy}" stroke-width="7"/>
-        <line x1="4" y1="22" x2="4" y2="116" stroke="${gold}" stroke-width="2.5"/>
-        <line x1="11" y1="22" x2="11" y2="116" stroke="${navy}" stroke-width="7"/>
-        <path d="M22,22 Q30,22 30,30 Q30,38 38,38" stroke="${gold}" stroke-width="1.5" fill="none"/>
-        <circle cx="38" cy="38" r="3" fill="${gold}" opacity="0.7"/>
-        <path d="M56,4 L56,0 M56,0 L52,4 M56,0 L60,4" stroke="${gold}" stroke-width="1.2" fill="none"/>
-        <path d="M4,56 L0,56 M0,56 L4,52 M0,56 L4,60" stroke="${gold}" stroke-width="1.2" fill="none"/>
+      const navy = '#1B365D', gold = '#C9A84C', cream = '#F9F6EE';
+      const sealSvg = `<svg viewBox="0 0 90 90" style="width:90px;height:90px;" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="45" cy="45" r="43" fill="none" stroke="${gold}" stroke-width="2"/>
+        <circle cx="45" cy="45" r="36" fill="none" stroke="${gold}" stroke-width="0.8" stroke-dasharray="3,3"/>
+        <path d="M18,55 Q12,48 15,40 Q18,33 23,36 Q18,42 20,48 Q22,54 18,55Z" fill="${gold}" opacity="0.8"/>
+        <path d="M22,62 Q14,56 16,47 Q18,39 24,41 Q20,47 21,54 Q23,60 22,62Z" fill="${gold}" opacity="0.65"/>
+        <path d="M72,55 Q78,48 75,40 Q72,33 67,36 Q72,42 70,48 Q68,54 72,55Z" fill="${gold}" opacity="0.8"/>
+        <path d="M68,62 Q76,56 74,47 Q72,39 66,41 Q70,47 69,54 Q67,60 68,62Z" fill="${gold}" opacity="0.65"/>
+        <path d="M45,18 L60,24 L60,44 Q60,60 45,68 Q30,60 30,44 L30,24 Z" fill="${navy}" opacity="0.9"/>
+        <path d="M45,22 L56,27 L56,44 Q56,57 45,64 Q34,57 34,44 L34,27 Z" fill="none" stroke="${gold}" stroke-width="1" opacity="0.6"/>
+        <rect x="38" y="34" width="14" height="10" rx="0.5" fill="none" stroke="${gold}" stroke-width="1.2"/>
+        <line x1="45" y1="34" x2="45" y2="44" stroke="${gold}" stroke-width="1"/>
+        <line x1="40" y1="37.5" x2="44" y2="37.5" stroke="${gold}" stroke-width="0.7"/>
+        <line x1="40" y1="40" x2="44" y2="40" stroke="${gold}" stroke-width="0.7"/>
+        <line x1="46" y1="37.5" x2="50" y2="37.5" stroke="${gold}" stroke-width="0.7"/>
+        <line x1="46" y1="40" x2="50" y2="40" stroke="${gold}" stroke-width="0.7"/>
+        <circle cx="45" cy="60" r="2" fill="${gold}"/>
       </svg>`;
-      const seal = `<svg viewBox="0 0 80 80" style="width:68px;height:68px;" xmlns="http://www.w3.org/2000/svg">
-        <path d="M40,4 L68,14 L68,42 Q68,62 40,76 Q12,62 12,42 L12,14 Z" fill="none" stroke="${gold}" stroke-width="2"/>
-        <rect x="30" y="30" width="20" height="14" rx="1" fill="none" stroke="${navy}" stroke-width="1.5"/>
-        <line x1="40" y1="30" x2="40" y2="44" stroke="${navy}" stroke-width="1.2"/>
-        <line x1="33" y1="34" x2="38" y2="34" stroke="${navy}" stroke-width="0.8"/>
-        <line x1="42" y1="34" x2="47" y2="34" stroke="${navy}" stroke-width="0.8"/>
-        <circle cx="40" cy="60" r="2" fill="${gold}"/>
+      const panelOrn = `<svg viewBox="0 0 60 200" style="width:60px;height:200px;" xmlns="http://www.w3.org/2000/svg">
+        <line x1="30" y1="0" x2="30" y2="200" stroke="${gold}" stroke-width="0.5" stroke-opacity="0.4"/>
+        <circle cx="30" cy="30" r="4" fill="${gold}" opacity="0.6"/>
+        <circle cx="30" cy="30" r="7" fill="none" stroke="${gold}" stroke-width="0.8" opacity="0.4"/>
+        <path d="M30,40 Q22,55 30,70 Q38,55 30,40Z" fill="${gold}" opacity="0.4"/>
+        <path d="M30,80 L26,90 L30,100 L34,90 Z" fill="${gold}" opacity="0.3"/>
+        <circle cx="30" cy="115" r="4" fill="${gold}" opacity="0.5"/>
+        <path d="M30,125 Q22,140 30,155 Q38,140 30,125Z" fill="${gold}" opacity="0.3"/>
+        <circle cx="30" cy="170" r="4" fill="${gold}" opacity="0.6"/>
       </svg>`;
       return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}html,body{width:1100px;height:850px;overflow:hidden;background:#FDFAF3;}
-.page{width:1100px;height:850px;position:relative;background:#FDFAF3;display:flex;flex-direction:column;align-items:center;overflow:hidden;}
-.corner{position:absolute;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
-.b-top{position:absolute;top:11px;left:112px;right:112px;height:7px;background:${navy};}
-.b-top::before{content:"";position:absolute;top:-4px;left:0;right:0;height:2.5px;background:${gold};}
-.b-bottom{position:absolute;bottom:11px;left:112px;right:112px;height:7px;background:${navy};}
-.b-bottom::before{content:"";position:absolute;bottom:-4px;left:0;right:0;height:2.5px;background:${gold};}
-.b-left{position:absolute;left:11px;top:112px;bottom:112px;width:7px;background:${navy};}
-.b-left::before{content:"";position:absolute;left:-4px;top:0;bottom:0;width:2.5px;background:${gold};}
-.b-right{position:absolute;right:11px;top:112px;bottom:112px;width:7px;background:${navy};}
-.b-right::before{content:"";position:absolute;right:-4px;top:0;bottom:0;width:2.5px;background:${gold};}
-.inner-border{position:absolute;top:24px;left:24px;right:24px;bottom:24px;border:1px solid ${gold};pointer-events:none;}
-.content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;flex:1;padding:0 130px 0;}
-.t1{font-family:'Cinzel',serif;font-size:52px;font-weight:700;color:${navy};letter-spacing:6px;text-align:center;line-height:1;}
-.t2{font-family:'Cinzel',serif;font-size:38px;font-weight:600;color:${navy};letter-spacing:4px;text-align:center;line-height:1;margin-bottom:10px;}
-.presented{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;color:#666;margin-bottom:5px;}
-.recname{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:700;color:${navy};text-align:center;line-height:1;letter-spacing:2px;margin-bottom:4px;}
-.nrule{width:480px;height:1.5px;background:linear-gradient(90deg,transparent,${gold} 20%,${gold} 80%,transparent);margin:6px auto 12px;}
-.ct{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:#444;letter-spacing:3px;text-align:center;margin-bottom:4px;}
-.cn{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#222;letter-spacing:3px;text-align:center;margin-bottom:8px;}
-.ddate{font-family:'EB Garamond',serif;font-size:14px;color:#888;text-align:center;margin-bottom:6px;}
-.iissuer{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:${navy};letter-spacing:4px;text-align:center;}
-.footer{position:relative;z-index:5;display:flex;align-items:flex-end;justify-content:space-between;width:100%;padding:0 100px 28px;}
-.sig{display:flex;flex-direction:column;}.siglabel{font-family:'EB Garamond',serif;font-size:10px;color:#888;margin-bottom:3px;}
-.sigscript{font-family:'Dancing Script',cursive;font-size:22px;color:#333;line-height:1;margin-bottom:3px;}
-.sigline{width:150px;height:1px;background:#aaa;margin-bottom:5px;}.signame{font-family:'EB Garamond',serif;font-size:11px;color:#555;}
-</style></head><body><div class="page">
-<div class="b-top"></div><div class="b-bottom"></div><div class="b-left"></div><div class="b-right"></div>
-<div class="inner-border"></div>
-<div class="corner c-tl">${C()}</div><div class="corner c-tr">${C()}</div>
-<div class="corner c-bl">${C()}</div><div class="corner c-br">${C()}</div>
-<div class="content">
-  <div class="t1">${esc(line1)}</div>${line2 ? `<div class="t2">${esc(line2)}</div>` : ''}
-  <div class="presented">This is proudly presented to</div>
-  <div class="recname">${esc(name)}</div><div class="nrule"></div>
-  ${course ? `<div class="ct">FOR SUCCESSFULLY COMPLETING</div><div class="cn">${esc(course.toUpperCase())}</div>` : ''}
-  <div class="ddate">Date: ${esc(dateStr)}</div>
-  ${issuer ? `<div class="iissuer">${esc(issuer.toUpperCase())}</div>` : ''}
-</div>
-<div class="footer">
-  <div class="sig">
-    <div class="siglabel">Authorized Signature:</div>
-    <div class="sigscript">${esc(issuer || 'Signature')}</div>
-    <div class="sigline"></div>
-    ${issuerTitle ? `<div class="signame">${esc(issuerTitle)}${issuer ? ', ' + esc(issuer) : ''}</div>` : ''}
-  </div>
-  <div>${seal}</div>
-  <div></div>
-</div>
-</div></body></html>`;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{width:1100px;height:850px;overflow:hidden;background:${cream};}
+        .page{width:1100px;height:850px;position:relative;background:${cream};display:flex;overflow:hidden;}
+        .left{width:140px;background:${navy};flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;}
+        .left::after{content:"";position:absolute;right:-1px;top:8%;bottom:8%;width:2px;background:linear-gradient(180deg,transparent,${gold} 15%,${gold} 85%,transparent);}
+        .main{flex:1;display:flex;flex-direction:column;padding:52px 60px 22px 50px;}
+        .top-rule{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
+        .trl{flex:1;height:1px;background:linear-gradient(90deg,${gold},transparent);}
+        .trd{width:8px;height:8px;background:${gold};transform:rotate(45deg);flex-shrink:0;}
+        .ctitle{font-family:"Cinzel",serif;font-size:13px;font-weight:600;color:${navy};letter-spacing:8px;text-transform:uppercase;margin-bottom:12px;}
+        .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:15px;color:#888;margin-bottom:4px;}
+        .rname{font-family:"Playfair Display",serif;font-size:78px;font-weight:800;color:${navy};line-height:0.95;letter-spacing:-1px;margin-bottom:10px;}
+        .nrule{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
+        .nrl{flex:1;height:1.5px;background:linear-gradient(90deg,${gold},rgba(201,168,76,0.2));}
+        .nrd{width:8px;height:8px;background:${gold};transform:rotate(45deg);flex-shrink:0;}
+        .nrds{width:5px;height:5px;background:${gold};transform:rotate(45deg);flex-shrink:0;opacity:0.6;}
+        .cintro{font-family:"EB Garamond",serif;font-style:italic;font-size:13px;color:#999;margin-bottom:3px;}
+        .cname{font-family:"Cinzel",serif;font-size:14px;font-weight:600;color:${navy};letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
+        .mdate{font-family:"EB Garamond",serif;font-size:12px;color:#aaa;}
+        .missuer{font-family:"Cinzel",serif;font-size:12px;font-weight:600;color:${navy};letter-spacing:2px;}
+        .footer{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;}
+        .sig{display:flex;flex-direction:column;}
+        .siglabel{font-family:"EB Garamond",serif;font-size:9px;color:#bbb;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
+        .sigscript{font-family:"Dancing Script",cursive;font-size:24px;color:#444;line-height:1;margin-bottom:5px;}
+        .sigline{width:160px;height:1px;background:#ccc;margin-bottom:5px;}
+        .signame{font-family:"EB Garamond",serif;font-size:11px;color:#888;}
+      </style></head><body><div class="page">
+        <div class="left">${panelOrn}</div>
+        <div class="main">
+          <div class="top-rule"><div class="trl"></div><div class="trd"></div></div>
+          <div class="ctitle">${e(title)}</div>
+          <div class="presented">This is proudly presented to</div>
+          <div class="rname">${e(name)}</div>
+          <div class="nrule"><div class="nrl"></div><div class="nrds"></div><div class="nrd"></div><div class="nrds"></div></div>
+          ${course ? `<div class="cintro">For successfully completing</div><div class="cname">${e(course)}</div>` : ''}
+          <div class="mdate">${e(dateStr)}</div>
+          ${issuer ? `<div class="missuer">${e(issuer)}</div>` : ''}
+          <div class="footer">
+            <div class="sig">
+              <div class="siglabel">Authorized Signature</div>
+              <div class="sigscript">${e(issuer || 'Signature')}</div>
+              <div class="sigline"></div>
+              ${issuerTitle ? `<div class="signame">${e(issuerTitle)}</div>` : ''}
+            </div>
+            <div>${sealSvg}</div>
+            <div></div>
+          </div>
+        </div>
+      </div></body></html>`;
     }
 
-    // ============================================================
-    // MODERN
-    // ============================================================
+    // =================================================================
+    // EXECUTIVE (modern)
+    // =================================================================
     if (template === 'modern') {
-      const c = color || '#4F46E5';
+      const c = color || '#3730A3';
+      const cB = '#7C3AED';
       return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Dancing+Script:wght@600&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}html,body{width:1100px;height:850px;overflow:hidden;background:#fff;}
-.page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;overflow:hidden;}
-.topbar{height:18px;background:${c};flex-shrink:0;}
-.content{flex:1;display:flex;flex-direction:column;justify-content:flex-start;padding:60px 75px 20px;}
-.mtype{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:${c};letter-spacing:5px;text-transform:uppercase;margin-bottom:18px;}
-.mname{font-family:'Inter',sans-serif;font-size:82px;font-weight:900;color:#111;line-height:1;letter-spacing:-2px;margin-bottom:18px;}
-.mcl1{font-family:'Inter',sans-serif;font-size:24px;font-weight:600;color:#777;line-height:1.4;}
-.mcl2{font-family:'Inter',sans-serif;font-size:24px;font-weight:600;color:#777;line-height:1.4;}
-.bottom{padding:0 75px 50px;}
-.metarow{display:flex;align-items:flex-end;gap:50px;margin-bottom:22px;}
-.dateval{font-family:'Inter',sans-serif;font-size:16px;color:#111;}
-.issuval{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#111;}
-.siggrp{display:flex;align-items:flex-end;gap:12px;}
-.sigscript{font-family:'Dancing Script',cursive;font-size:28px;color:#333;line-height:1;margin-bottom:-4px;}
-.sigline{width:200px;height:1px;background:#ccc;margin-bottom:8px;}
-</style></head><body><div class="page">
-<div class="topbar"></div>
-<div class="content">
-  <div class="mtype">${esc(title)}</div>
-  <div class="mname">${esc(name)}</div>
-  ${course ? `<div class="mcl1">For successfully completing</div><div class="mcl2">${esc(course)}</div>` : ''}
-</div>
-<div class="bottom">
-  <div class="metarow">
-    <div>
-      <div class="dateval">${esc(dateStr)}</div>
-      ${issuer ? `<div class="issuval">${esc(issuer)}</div>` : ''}
-    </div>
-    <div class="siggrp">
-      <div class="sigscript">${esc(issuerTitle || issuer || 'Signature')}</div>
-      <div class="sigline"></div>
-    </div>
-  </div>
-</div>
-</div></body></html>`;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@600;700&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{width:1100px;height:850px;overflow:hidden;background:#fff;}
+        .page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;overflow:hidden;}
+        .header{flex-shrink:0;height:200px;background:linear-gradient(135deg,${c} 0%,${cB} 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 70px;position:relative;}
+        .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.15);}
+        .heyebrow{font-family:"Inter",sans-serif;font-size:10px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:6px;text-transform:uppercase;margin-bottom:8px;}
+        .htitle{font-family:"Inter",sans-serif;font-size:32px;font-weight:800;color:#fff;letter-spacing:5px;text-transform:uppercase;text-align:center;line-height:1;margin-bottom:12px;}
+        .hrule{width:260px;height:1px;background:rgba(255,255,255,0.35);}
+        .body{flex:1;display:flex;flex-direction:column;padding:42px 70px 28px;}
+        .presented{font-family:"Inter",sans-serif;font-size:12px;font-weight:400;color:#aaa;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
+        .rname{font-family:"Inter",sans-serif;font-size:85px;font-weight:900;color:#0f0f0f;line-height:0.95;letter-spacing:-3px;margin-bottom:18px;}
+        .divider{width:60px;height:4px;background:${c};border-radius:2px;margin-bottom:14px;}
+        .cintro{font-family:"Inter",sans-serif;font-size:18px;font-weight:400;color:#888;line-height:1.4;}
+        .cname{font-family:"Inter",sans-serif;font-size:18px;font-weight:700;color:#555;line-height:1.4;}
+        .bottom{display:flex;align-items:flex-end;justify-content:space-between;padding-top:18px;border-top:1px solid #f0f0f0;margin-top:auto;}
+        .mdate{font-family:"Inter",sans-serif;font-size:14px;color:#999;}
+        .missuer{font-family:"Inter",sans-serif;font-size:15px;font-weight:700;color:#222;}
+        .sigblock{display:flex;flex-direction:column;align-items:center;}
+        .sigscript{font-family:"Dancing Script",cursive;font-size:28px;color:#333;line-height:1;margin-bottom:4px;}
+        .sigline{width:180px;height:1px;background:#ddd;margin-bottom:5px;}
+        .siglabel{font-family:"Inter",sans-serif;font-size:10px;color:#bbb;letter-spacing:2px;}
+      </style></head><body><div class="page">
+        <div class="header">
+          <div class="heyebrow">Official Document</div>
+          <div class="htitle">${e(title)}</div>
+          <div class="hrule"></div>
+        </div>
+        <div class="body">
+          <div class="presented">Presented to</div>
+          <div class="rname">${e(name)}</div>
+          <div class="divider"></div>
+          ${course ? `<div class="cintro">For successfully completing</div><div class="cname">${e(course)}</div>` : ''}
+          <div class="bottom">
+            <div><div class="mdate">${e(dateStr)}</div>${issuer ? `<div class="missuer">${e(issuer)}</div>` : ''}</div>
+            <div class="sigblock">
+              <div class="sigscript">${e(issuerTitle || issuer || 'Signature')}</div>
+              <div class="sigline"></div>
+              <div class="siglabel">Authorized Signature</div>
+            </div>
+            <div></div>
+          </div>
+        </div>
+      </div></body></html>`;
     }
 
-    // ============================================================
-    // FORMAL
-    // ============================================================
-    const fc = color || '#6B1D2A';
-    const fg = '#B8962E';
-    const fCorner = `<svg viewBox="0 0 90 90" style="width:90px;height:90px;" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="0" x2="90" y2="0" stroke="${fc}" stroke-width="3.5"/>
-      <line x1="0" y1="0" x2="0" y2="90" stroke="${fc}" stroke-width="3.5"/>
-      <line x1="4" y1="4" x2="88" y2="4" stroke="${fc}" stroke-width="1"/>
-      <line x1="4" y1="4" x2="4" y2="88" stroke="${fc}" stroke-width="1"/>
-      <path d="M10,10 Q20,8 22,18 Q24,28 14,28 Q4,28 6,18 Q8,10 14,12" fill="${fc}" opacity="0.85"/>
-      <line x1="14" y1="28" x2="14" y2="40" stroke="${fc}" stroke-width="1.5"/>
-      <path d="M14,40 Q10,36 12,32" stroke="${fc}" stroke-width="1" fill="none"/>
-      <path d="M14,40 Q18,36 16,32" stroke="${fc}" stroke-width="1" fill="none"/>
-      <line x1="28" y1="14" x2="40" y2="14" stroke="${fc}" stroke-width="1.5"/>
-      <path d="M40,14 Q36,10 32,12" stroke="${fc}" stroke-width="1" fill="none"/>
-      <path d="M40,14 Q36,18 32,16" stroke="${fc}" stroke-width="1" fill="none"/>
+    // =================================================================
+    // HERITAGE (formal)
+    // =================================================================
+    const bg = '#0F1729', gold = '#C9A84C', goldL = '#E8CB7A', cream = '#F5ECD7';
+    const fc = color || bg;
+    const corner = `<svg viewBox="0 0 100 100" style="width:100px;height:100px;" xmlns="http://www.w3.org/2000/svg">
+      <line x1="0" y1="2" x2="100" y2="2" stroke="${gold}" stroke-width="2.5"/>
+      <line x1="2" y1="0" x2="2" y2="100" stroke="${gold}" stroke-width="2.5"/>
+      <line x1="8" y1="8" x2="100" y2="8" stroke="${gold}" stroke-width="0.8"/>
+      <line x1="8" y1="8" x2="8" y2="100" stroke="${gold}" stroke-width="0.8"/>
+      <rect x="0" y="0" width="28" height="28" fill="${gold}" opacity="0.12"/>
+      <rect x="13" y="13" width="10" height="10" fill="${gold}" transform="rotate(45,18,18)"/>
+      <circle cx="46" cy="2" r="2.5" fill="${gold}"/>
+      <circle cx="2" cy="46" r="2.5" fill="${gold}"/>
+      <path d="M22,10 Q28,8 30,14" stroke="${gold}" stroke-width="0.8" fill="none"/>
+      <path d="M10,22 Q8,28 14,30" stroke="${gold}" stroke-width="0.8" fill="none"/>
     </svg>`;
-    const flourish = `<svg viewBox="0 0 600 28" style="width:600px;height:28px;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
-      <rect x="295" y="9" width="10" height="10" fill="${fc}" transform="rotate(45,300,14)"/>
-      <line x1="0" y1="14" x2="276" y2="14" stroke="${fc}" stroke-width="1"/>
-      <path d="M276,14 Q284,14 284,8 Q284,2 290,2 Q296,2 296,8" stroke="${fc}" stroke-width="1.2" fill="none"/>
-      <line x1="600" y1="14" x2="324" y2="14" stroke="${fc}" stroke-width="1"/>
-      <path d="M324,14 Q316,14 316,8 Q316,2 310,2 Q304,2 304,8" stroke="${fc}" stroke-width="1.2" fill="none"/>
-      <path d="M230,14 Q222,14 222,8 Q222,4 228,4" stroke="${fc}" stroke-width="0.8" fill="none" opacity="0.7"/>
-      <path d="M370,14 Q378,14 378,8 Q378,4 372,4" stroke="${fc}" stroke-width="0.8" fill="none" opacity="0.7"/>
+    const flourish = `<svg viewBox="0 0 700 36" style="width:700px;height:36px;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
+      <rect x="344" y="13" width="12" height="12" fill="${gold}" transform="rotate(45,350,19)"/>
+      <rect x="338" y="16" width="6" height="6" fill="${gold}" opacity="0.5" transform="rotate(45,341,19)"/>
+      <rect x="356" y="16" width="6" height="6" fill="${gold}" opacity="0.5" transform="rotate(45,359,19)"/>
+      <line x1="0" y1="19" x2="322" y2="19" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
+      <line x1="700" y1="19" x2="378" y2="19" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
+      <path d="M322,19 Q330,19 330,12 Q330,5 340,5" stroke="${gold}" stroke-width="1.2" fill="none"/>
+      <path d="M378,19 Q370,19 370,12 Q370,5 360,5" stroke="${gold}" stroke-width="1.2" fill="none"/>
+      <path d="M270,19 Q278,19 278,14 Q278,9 285,9" stroke="${gold}" stroke-width="0.8" fill="none" opacity="0.6"/>
+      <path d="M430,19 Q422,19 422,14 Q422,9 415,9" stroke="${gold}" stroke-width="0.8" fill="none" opacity="0.6"/>
+      <circle cx="285" cy="9" r="2" fill="${gold}" opacity="0.5"/>
+      <circle cx="415" cy="9" r="2" fill="${gold}" opacity="0.5"/>
     </svg>`;
-    const notches = Array.from({length:16},(_,i)=>{
-      const a=(i/16)*Math.PI*2;
-      const x1=(55+48*Math.cos(a)).toFixed(1), y1=(55+48*Math.sin(a)).toFixed(1);
-      const x2=(55+52*Math.cos(a)).toFixed(1), y2=(55+52*Math.sin(a)).toFixed(1);
-      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${fc}" stroke-width="2"/>`;
-    }).join('');
-    const medal = `<svg viewBox="0 0 110 110" style="width:110px;height:110px;" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="55" cy="55" r="52" fill="${fc}" opacity="0.08"/>
-      <circle cx="55" cy="55" r="52" fill="none" stroke="${fc}" stroke-width="3"/>
-      <circle cx="55" cy="55" r="44" fill="none" stroke="${fc}" stroke-width="1.5"/>
-      <circle cx="55" cy="55" r="36" fill="none" stroke="${fc}" stroke-width="0.8"/>
+    const notches = Array.from({length:24},(_,i)=>{const a=(i/24)*Math.PI*2,x1=(60+53*Math.cos(a)).toFixed(1),y1=(60+53*Math.sin(a)).toFixed(1),x2=(60+57*Math.cos(a)).toFixed(1),y2=(60+57*Math.sin(a)).toFixed(1);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${gold}" stroke-width="1.8"/>`;}).join('');
+    const medal = `<svg viewBox="0 0 120 120" style="width:105px;height:105px;" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="60" cy="60" r="57" fill="${bg}" stroke="${gold}" stroke-width="2.5"/>
+      <circle cx="60" cy="60" r="50" fill="none" stroke="${gold}" stroke-width="0.8"/>
+      <circle cx="60" cy="60" r="43" fill="none" stroke="${gold}" stroke-width="0.4" stroke-dasharray="2,3"/>
       ${notches}
-      <path d="M55,22 L74,28 L74,50 Q74,68 55,78 Q36,68 36,50 L36,28 Z" fill="none" stroke="${fc}" stroke-width="1.5"/>
-      <rect x="46" y="38" width="18" height="12" rx="1" fill="none" stroke="${fc}" stroke-width="1.2"/>
-      <line x1="55" y1="38" x2="55" y2="50" stroke="${fc}" stroke-width="1"/>
-      <text x="55" y="92" font-family="sans-serif" font-size="5" fill="${fc}" text-anchor="middle" font-weight="bold">ACADEMY OF EXCELLENCE</text>
+      <path d="M22,68 Q14,58 18,47 Q22,37 29,40 Q24,50 27,58 Q29,65 22,68Z" fill="${gold}" opacity="0.7"/>
+      <path d="M26,76 Q17,68 20,57 Q23,47 31,50 Q26,60 28,68 Q30,74 26,76Z" fill="${gold}" opacity="0.55"/>
+      <path d="M98,68 Q106,58 102,47 Q98,37 91,40 Q96,50 93,58 Q91,65 98,68Z" fill="${gold}" opacity="0.7"/>
+      <path d="M94,76 Q103,68 100,57 Q97,47 89,50 Q94,60 92,68 Q90,74 94,76Z" fill="${gold}" opacity="0.55"/>
+      <path d="M60,22 L80,30 L80,56 Q80,76 60,86 Q40,76 40,56 L40,30 Z" fill="${gold}" opacity="0.12"/>
+      <path d="M60,22 L80,30 L80,56 Q80,76 60,86 Q40,76 40,56 L40,30 Z" fill="none" stroke="${gold}" stroke-width="1.5"/>
+      <rect x="50" y="42" width="20" height="14" rx="1" fill="none" stroke="${goldL}" stroke-width="1.2"/>
+      <line x1="60" y1="42" x2="60" y2="56" stroke="${goldL}" stroke-width="1"/>
+      <circle cx="60" cy="68" r="6" fill="none" stroke="${gold}" stroke-width="1"/>
+      <line x1="54" y1="68" x2="66" y2="68" stroke="${gold}" stroke-width="0.7"/>
+      <text x="60" y="100" font-family="sans-serif" font-size="6" font-weight="bold" fill="${gold}" text-anchor="middle" letter-spacing="2">OFFICIAL SEAL</text>
     </svg>`;
     return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,700&family=Dancing+Script:wght@500;600&family=IM+Fell+English:ital@0;1&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}html,body{width:1100px;height:850px;overflow:hidden;background:#F5EDD8;}
-.page{width:1100px;height:850px;position:relative;background:#F5EDD8;display:flex;flex-direction:column;overflow:hidden;}
-.corner{position:absolute;z-index:10;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
-.bt{position:absolute;top:0;left:90px;right:90px;height:3.5px;background:${fc};z-index:5;}
-.bb{position:absolute;bottom:0;left:90px;right:90px;height:3.5px;background:${fc};z-index:5;}
-.bl{position:absolute;left:0;top:90px;bottom:90px;width:3.5px;background:${fc};z-index:5;}
-.br{position:absolute;right:0;top:90px;bottom:90px;width:3.5px;background:${fc};z-index:5;}
-.bti{position:absolute;top:4px;left:94px;right:94px;height:1px;background:${fc};z-index:5;}
-.bbi{position:absolute;bottom:4px;left:94px;right:94px;height:1px;background:${fc};z-index:5;}
-.bli{position:absolute;left:4px;top:94px;bottom:94px;width:1px;background:${fc};z-index:5;}
-.bri{position:absolute;right:4px;top:94px;bottom:94px;width:1px;background:${fc};z-index:5;}
-.content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;padding:60px 100px 0;flex:1;}
-.fctitle{font-family:'Cinzel',serif;font-size:30px;font-weight:700;color:${fc};letter-spacing:3px;text-align:center;margin-bottom:10px;}
-.fptitle{font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:#666;text-align:center;margin-bottom:6px;}
-.fname{font-family:'Cormorant Garamond',serif;font-size:70px;font-weight:700;font-style:italic;color:#1a1a1a;text-align:center;line-height:1;margin-bottom:6px;}
-.fnrule{width:400px;height:1px;background:linear-gradient(90deg,transparent,#bbb 20%,#bbb 80%,transparent);margin:0 auto 14px;}
-.frecog{font-family:'IM Fell English',serif;font-size:14px;color:#555;text-align:center;line-height:1.5;margin-bottom:6px;}
-.fcname{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:${fc};letter-spacing:3px;text-align:center;text-transform:uppercase;}
-.footer{position:relative;z-index:5;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 85px 45px;}
-.fsigblock{display:flex;flex-direction:column;align-items:center;flex:1;}
-.fsigscript{font-family:'Dancing Script',cursive;font-size:26px;color:#333;line-height:1;margin-bottom:2px;}
-.fsigline{width:200px;height:1px;background:#aaa;margin-bottom:7px;}
-.fsigname{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:#333;letter-spacing:1px;}
-.fsigtitle{font-family:'IM Fell English',serif;font-size:10px;color:#888;font-style:italic;}
-.fdaterow{font-family:'IM Fell English',serif;font-size:14px;color:#888;text-align:center;margin-top:6px;}
-</style></head><body><div class="page">
-<div class="bt"></div><div class="bb"></div><div class="bl"></div><div class="br"></div>
-<div class="bti"></div><div class="bbi"></div><div class="bli"></div><div class="bri"></div>
-<div class="corner c-tl">${fCorner}</div><div class="corner c-tr">${fCorner}</div>
-<div class="corner c-bl">${fCorner}</div><div class="corner c-br">${fCorner}</div>
-<div class="content">
-  <div class="fctitle">${esc(title)}</div>
-  ${flourish}
-  <div class="fptitle">Presented to</div>
-  <div class="fname">${esc(name)}</div>
-  <div class="fnrule"></div>
-  ${course ? `<div class="frecog">In recognition of successfully completing<br>all requirements for the course</div><div class="fcname">${esc(course)}</div>` : ''}
-</div>
-<div class="footer">
-  <div style="flex-shrink:0;">${medal}</div>
-  <div class="fsigblock">
-    <div class="fsigscript">${esc(issuer || 'Signature')}</div>
-    <div class="fsigline"></div>
-    ${issuerTitle ? `<div class="fsigname">${esc(issuerTitle)}</div>` : ''}
-    ${issuer ? `<div class="fsigtitle">${esc(issuer)}</div>` : ''}
-    <div class="fdaterow">${esc(dateStr)}</div>
-  </div>
-  <div style="flex-shrink:0;width:70px;"></div>
-</div>
-</div></body></html>`;
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,700&family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+      *{margin:0;padding:0;box-sizing:border-box;}
+      html,body{width:1100px;height:850px;overflow:hidden;background:${bg};}
+      .page{width:1100px;height:850px;position:relative;background:${bg};display:flex;flex-direction:column;overflow:hidden;}
+      .corner{position:absolute;z-index:5;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
+      .boh{position:absolute;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;}
+      .bov{position:absolute;top:100px;bottom:100px;width:2.5px;background:${gold};z-index:4;}
+      .bih{position:absolute;left:108px;right:108px;height:0.8px;background:${gold};opacity:0.5;z-index:4;}
+      .biv{position:absolute;top:108px;bottom:108px;width:0.8px;background:${gold};opacity:0.5;z-index:4;}
+      .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:55px 110px 15px;flex:1;}
+      .ctitle{font-family:"Cinzel",serif;font-size:22px;font-weight:700;color:${gold};letter-spacing:8px;text-align:center;margin-bottom:12px;}
+      .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:15px;color:rgba(245,236,215,0.6);margin-bottom:4px;text-align:center;}
+      .rname{font-family:"Cormorant Garamond",serif;font-size:78px;font-weight:700;font-style:italic;color:${gold};text-align:center;line-height:1;letter-spacing:1px;margin-bottom:8px;text-shadow:0 0 40px rgba(201,168,76,0.25);}
+      .nrule{width:500px;height:1px;background:linear-gradient(90deg,transparent,${gold} 20%,${gold} 80%,transparent);margin:0 auto 12px;}
+      .recog{font-family:"EB Garamond",serif;font-style:italic;font-size:14px;color:rgba(245,236,215,0.65);text-align:center;line-height:1.6;margin-bottom:6px;}
+      .cname{font-family:"Cinzel",serif;font-size:18px;font-weight:700;color:${goldL};letter-spacing:4px;text-align:center;text-transform:uppercase;}
+      .footer{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;padding:0 100px 38px;}
+      .sigblock{flex:1;display:flex;flex-direction:column;align-items:center;}
+      .sigscript{font-family:"Dancing Script",cursive;font-size:28px;color:${cream};line-height:1;margin-bottom:5px;}
+      .siglineg{width:200px;height:1px;background:linear-gradient(90deg,transparent,${gold} 30%,${gold} 70%,transparent);margin-bottom:6px;}
+      .signame{font-family:"Cinzel",serif;font-size:11px;font-weight:600;color:${gold};letter-spacing:2px;margin-bottom:3px;}
+      .sigtitle{font-family:"EB Garamond",serif;font-size:10px;color:rgba(245,236,215,0.55);font-style:italic;}
+      .sigdate{font-family:"EB Garamond",serif;font-size:12px;color:${gold};opacity:0.7;margin-top:6px;}
+    </style></head><body><div class="page">
+      <div style="position:absolute;top:2px;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;"></div>
+      <div style="position:absolute;bottom:2px;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;"></div>
+      <div style="position:absolute;left:2px;top:100px;bottom:100px;width:2.5px;background:${gold};z-index:4;"></div>
+      <div style="position:absolute;right:2px;top:100px;bottom:100px;width:2.5px;background:${gold};z-index:4;"></div>
+      <div style="position:absolute;top:8px;left:108px;right:108px;height:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
+      <div style="position:absolute;bottom:8px;left:108px;right:108px;height:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
+      <div style="position:absolute;left:8px;top:108px;bottom:108px;width:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
+      <div style="position:absolute;right:8px;top:108px;bottom:108px;width:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
+      <div class="corner c-tl">${corner}</div><div class="corner c-tr">${corner}</div>
+      <div class="corner c-bl">${corner}</div><div class="corner c-br">${corner}</div>
+      <div class="content">
+        <div class="ctitle">${e(title)}</div>
+        ${flourish}
+        <div class="presented">Presented to</div>
+        <div class="rname">${e(name)}</div>
+        <div class="nrule"></div>
+        ${course ? `<div class="recog">In recognition of outstanding completion of</div><div class="cname">${e(course)}</div>` : ''}
+      </div>
+      <div class="footer">
+        <div style="flex-shrink:0;">${medal}</div>
+        <div class="sigblock">
+          <div class="sigscript">${e(issuer || 'Signature')}</div>
+          <div class="siglineg"></div>
+          ${issuerTitle ? `<div class="signame">${e(issuerTitle)}</div>` : ''}
+          ${issuer ? `<div class="sigtitle">${e(issuer)}</div>` : ''}
+          <div class="sigdate">${e(dateStr)}</div>
+        </div>
+        <div style="flex-shrink:0;width:70px;"></div>
+      </div>
+    </div></body></html>`;
   }
 
 
