@@ -1,99 +1,108 @@
 /* ============================================================
    modern.js — Modern certificate template for pdfmake
-   Clean minimal design, purple accent bar, left-aligned.
+   Target: bold purple top bar, massive left-aligned recipient
+   name, signature+date bottom row with QR bottom-left.
    ============================================================ */
 
 const mm = (v) => v * 2.8346;
 
 module.exports = function modernTemplate(data, options = {}) {
-  const color = options.color || "#4F46E5";
+  const color    = options.color || "#4F46E5";
   const pageSize = (options.pageSize || "letter").toUpperCase();
 
   const { recipient = {}, certificate = {}, verifyId, qrDataUrl } = data;
-  const recipientName = recipient.name || "Recipient Name";
-  const certTitle = certificate.title || "Certificate of Completion";
-  const courseName = certificate.course || "";
-  const dateIssued = certificate.date || new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
-  const issuerName = certificate.issuer || "";
-  const issuerTitle = certificate.issuer_title || "";
+  const recipientName = recipient.name            || "Recipient Name";
+  const certTitle     = certificate.title         || "Certificate of Completion";
+  const courseName    = certificate.course        || "";
+  const rawDate       = certificate.date
+    ? new Date(certificate.date + "T12:00:00").toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" })
+    : new Date().toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  const issuerName    = certificate.issuer        || "";
+  const issuerTitle   = certificate.issuer_title  || "";
 
-  // ── Accent bar at top ──
+  const W = 752; // content width for letter landscape minus margins
+
+  // ── Full-width top accent bar ──
   const accentBar = {
-    canvas: [
-      { type: "rect", x: 0, y: 0, w: 752, h: 8, color: color },
-    ],
     absolutePosition: { x: 20, y: 20 },
+    canvas: [
+      { type: "rect", x: 0, y: 0, w: W + 40, h: 10, color: color },
+    ],
+  };
+
+  // ── Full-width bottom accent bar ──
+  const bottomBar = {
+    absolutePosition: { x: 20, y: 602 },
+    canvas: [
+      { type: "rect", x: 0, y: 0, w: W + 40, h: 6, color: color },
+    ],
   };
 
   // ── Certificate type label ──
   const typeLabel = {
     text: certTitle.toUpperCase(),
-    fontSize: 14,
+    fontSize: 13,
     bold: true,
     color: color,
-    characterSpacing: 6,
-    margin: [0, 30, 0, 30],
+    characterSpacing: 5,
+    margin: [0, 28, 0, 20],
   };
 
-  // ── Recipient name ──
+  // ── Recipient name — very large, left-aligned ──
   const recipientSection = {
     text: recipientName,
-    fontSize: 42,
+    fontSize: 52,
     bold: true,
     color: "#111111",
-    margin: [0, 0, 0, 12],
+    margin: [0, 0, 0, 10],
   };
 
-  // ── Course ──
+  // ── Course line ──
   const courseSection = courseName ? {
     text: `For successfully completing ${courseName}`,
-    fontSize: 14,
+    fontSize: 13,
     color: "#555555",
-    margin: [0, 0, 0, 40],
-  } : { text: "", margin: [0, 0, 0, 40] };
+    margin: [0, 0, 0, 0],
+  } : { text: "", margin: [0, 0, 0, 0] };
 
-  // ── Bottom: Date + Issuer + QR ──
-  const bottomSection = {
+  // ── Bottom row: QR left | date + issuer + signature right ──
+  const bottomRow = {
     columns: [
+      // Left: QR code
+      qrDataUrl ? {
+        width: 72,
+        stack: [
+          { image: qrDataUrl, width: 60, height: 60 },
+          { text: verifyId || "", fontSize: 5.5, color: "#aaaaaa", alignment: "center", margin: [0, 2, 0, 0] },
+        ],
+      } : { width: 72, text: "" },
+      // Spacer
+      { width: 20, text: "" },
+      // Right: Date, Issuer, Signature line
       {
         width: "*",
         stack: [
-          { text: dateIssued, fontSize: 11, color: "#888888", margin: [0, 0, 0, 20] },
-          { canvas: [{ type: "line", x1: 0, y1: 0, x2: 180, y2: 0, lineWidth: 1, lineColor: "#dddddd" }] },
-          issuerName ? { text: issuerName, fontSize: 12, bold: true, color: "#222222", margin: [0, 6, 0, 0] } : null,
-          issuerTitle ? { text: issuerTitle, fontSize: 9, color: "#888888", margin: [0, 2, 0, 0] } : null,
+          { text: rawDate, fontSize: 11, color: "#888888", margin: [0, 0, 0, 14] },
+          { canvas: [{ type: "line", x1: 0, y1: 0, x2: 200, y2: 0, lineWidth: 1, lineColor: "#dddddd" }] },
+          issuerName  ? { text: issuerName,  fontSize: 11, bold: true, color: "#222222", margin: [0, 5, 0, 0] } : null,
+          issuerTitle ? { text: issuerTitle, fontSize: 9,  color: "#888888", margin: [0, 2, 0, 0] } : null,
         ].filter(Boolean),
       },
-      qrDataUrl ? {
-        width: 80,
-        alignment: "right",
-        stack: [
-          { image: qrDataUrl, width: 60, height: 60 },
-          { text: `${verifyId || ""}`, fontSize: 6, color: "#aaaaaa", alignment: "center", margin: [0, 2, 0, 0] },
-        ],
-      } : { width: 80, text: "" },
     ],
-  };
-
-  // ── Thin bottom accent line ──
-  const bottomLine = {
-    canvas: [
-      { type: "rect", x: 0, y: 0, w: 752, h: 4, color: color },
-    ],
-    absolutePosition: { x: 20, y: 588 },
+    margin: [0, 28, 0, 0],
   };
 
   return {
     pageSize,
     pageOrientation: "landscape",
-    pageMargins: [mm(25), mm(20), mm(25), options.watermark ? mm(18) + 14 : mm(18)],
+    pageMargins: [mm(22), mm(20), mm(22), options.watermark ? mm(18) + 14 : mm(18)],
     content: [
       accentBar,
       typeLabel,
       recipientSection,
       courseSection,
-      bottomSection,
-      bottomLine,
+      bottomRow,
+      bottomBar,
     ],
     defaultStyle: {
       font: "Roboto",
