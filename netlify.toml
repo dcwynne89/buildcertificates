@@ -8,8 +8,15 @@
 
 [functions]
   node_bundler = "esbuild"
-  external_node_modules = ["pdfmake"]
-  included_files = ["node_modules/pdfmake/**"]
+
+# Chromium must not be bundled — use the pre-built binary from the layer
+[functions."generate"]
+  external_node_modules = ["@sparticuz/chromium"]
+  included_files = ["node_modules/@sparticuz/chromium/**"]
+
+[functions."bulk"]
+  external_node_modules = ["@sparticuz/chromium"]
+  included_files = ["node_modules/@sparticuz/chromium/**"]
 
 # ── API Redirects ──
 [[redirects]]

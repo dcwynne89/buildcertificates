@@ -109,10 +109,11 @@ exports.handler = async (event) => {
     };
 
     const templateFn = TEMPLATES[templateName];
-    const docDefinition = templateFn(certData, templateOptions);
+    const html = templateFn(certData, templateOptions);
 
-    // ── Render PDF ──
-    const pdfBuffer = await renderPdf(docDefinition);
+    // ── Render PDF via headless Chromium ──
+    const { renderHtmlToPdf } = require("./utils/render-pdf");
+    const pdfBuffer = await renderHtmlToPdf(html, { landscape: true, format: "letter" });
 
     // ── Increment usage ──
     await incrementUsage(auth.hash);
@@ -142,29 +143,4 @@ exports.handler = async (event) => {
   }
 };
 
-// ─────────────────────────────────────────────────────────────
-// Render pdfmake document definition → PDF buffer
-// ─────────────────────────────────────────────────────────────
-async function renderPdf(docDefinition) {
-  const PdfPrinter = require("pdfmake/src/printer");
-  const vfsData = require("pdfmake/build/vfs_fonts");
-  const fonts = {
-    Roboto: {
-      normal:      Buffer.from(vfsData["Roboto-Regular.ttf"],       "base64"),
-      bold:        Buffer.from(vfsData["Roboto-Medium.ttf"],        "base64"),
-      italics:     Buffer.from(vfsData["Roboto-Italic.ttf"],        "base64"),
-      bolditalics: Buffer.from(vfsData["Roboto-MediumItalic.ttf"], "base64"),
-    },
-  };
-
-  const printer = new PdfPrinter(fonts);
-  const pdfDoc = printer.createPdfKitDocument(docDefinition);
-
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    pdfDoc.on("data", (c) => chunks.push(c));
-    pdfDoc.on("end", () => resolve(Buffer.concat(chunks)));
-    pdfDoc.on("error", reject);
-    pdfDoc.end();
-  });
-}
+// renderPdf removed — now using Chromium via ./utils/render-pdf.js
