@@ -40,7 +40,7 @@ const TIERS = {
     watermark: true,
     bulkEnabled: false,
     bulkMax: 0,
-    templates: ["elegant"],
+    templates: ["elegant", "modern", "formal"],
   },
   starter: {
     name: "Starter",
