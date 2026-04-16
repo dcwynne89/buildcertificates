@@ -3,8 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "pdfmake": "^0.2.18",
     "@netlify/blobs": "^8.2.0",
+    "@sparticuz/chromium": "132.0.0",
+    "puppeteer-core": "^22.0.0",
     "qrcode": "^1.5.4"
   }
 }

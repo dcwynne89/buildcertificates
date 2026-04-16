@@ -111,8 +111,9 @@ exports.handler = async (event) => {
 
       const certData = { recipient, certificate, verifyId, qrDataUrl };
       const templateOptions = { color: options.color, accent: options.accent, pageSize: options.pageSize || "letter", watermark: auth.tier.watermark };
-      const docDefinition = templateFn(certData, templateOptions);
-      const pdfBuffer = await renderPdf(docDefinition);
+      const html = templateFn(certData, templateOptions);
+      const { renderHtmlToPdf } = require("./utils/render-pdf");
+      const pdfBuffer = await renderHtmlToPdf(html, { landscape: true, format: "letter" });
 
       results.push({
         recipient: recipient.name,
@@ -145,24 +146,4 @@ exports.handler = async (event) => {
   }
 };
 
-async function renderPdf(docDefinition) {
-  const PdfPrinter = require("pdfmake/src/printer");
-  const vfsData = require("pdfmake/build/vfs_fonts");
-  const fonts = {
-    Roboto: {
-      normal:      Buffer.from(vfsData["Roboto-Regular.ttf"],       "base64"),
-      bold:        Buffer.from(vfsData["Roboto-Medium.ttf"],        "base64"),
-      italics:     Buffer.from(vfsData["Roboto-Italic.ttf"],        "base64"),
-      bolditalics: Buffer.from(vfsData["Roboto-MediumItalic.ttf"], "base64"),
-    },
-  };
-  const printer = new PdfPrinter(fonts);
-  const pdfDoc = printer.createPdfKitDocument(docDefinition);
-  return new Promise((resolve, reject) => {
-    const chunks = [];
-    pdfDoc.on("data", (c) => chunks.push(c));
-    pdfDoc.on("end", () => resolve(Buffer.concat(chunks)));
-    pdfDoc.on("error", reject);
-    pdfDoc.end();
-  });
-}
+// renderPdf removed — now using Chromium via ./utils/render-pdf.js
