@@ -147,95 +147,128 @@
   function buildPreviewHtml({ name, title, course, dateStr, issuer, issuerTitle, color, template }) {
     const e = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-    // =================================================================
-    // PRESTIGE (elegant)
-    // =================================================================
+    // ================================================================
+    // PRESTIGE (elegant) — Classic Academy
+    // Full-width cream, gold double-border, centered 4-zone layout
+    // ================================================================
     if (template === 'elegant') {
       const navy = '#1B365D', gold = '#C9A84C', cream = '#F9F6EE';
-      const sealSvg = `<svg viewBox="0 0 90 90" style="width:90px;height:90px;" xmlns="http://www.w3.org/2000/svg">
-        <circle cx="45" cy="45" r="43" fill="none" stroke="${gold}" stroke-width="2"/>
-        <circle cx="45" cy="45" r="36" fill="none" stroke="${gold}" stroke-width="0.8" stroke-dasharray="3,3"/>
-        <path d="M18,55 Q12,48 15,40 Q18,33 23,36 Q18,42 20,48 Q22,54 18,55Z" fill="${gold}" opacity="0.8"/>
-        <path d="M22,62 Q14,56 16,47 Q18,39 24,41 Q20,47 21,54 Q23,60 22,62Z" fill="${gold}" opacity="0.65"/>
-        <path d="M72,55 Q78,48 75,40 Q72,33 67,36 Q72,42 70,48 Q68,54 72,55Z" fill="${gold}" opacity="0.8"/>
-        <path d="M68,62 Q76,56 74,47 Q72,39 66,41 Q70,47 69,54 Q67,60 68,62Z" fill="${gold}" opacity="0.65"/>
-        <path d="M45,18 L60,24 L60,44 Q60,60 45,68 Q30,60 30,44 L30,24 Z" fill="${navy}" opacity="0.9"/>
-        <path d="M45,22 L56,27 L56,44 Q56,57 45,64 Q34,57 34,44 L34,27 Z" fill="none" stroke="${gold}" stroke-width="1" opacity="0.6"/>
-        <rect x="38" y="34" width="14" height="10" rx="0.5" fill="none" stroke="${gold}" stroke-width="1.2"/>
-        <line x1="45" y1="34" x2="45" y2="44" stroke="${gold}" stroke-width="1"/>
-        <line x1="40" y1="37.5" x2="44" y2="37.5" stroke="${gold}" stroke-width="0.7"/>
-        <line x1="40" y1="40" x2="44" y2="40" stroke="${gold}" stroke-width="0.7"/>
-        <line x1="46" y1="37.5" x2="50" y2="37.5" stroke="${gold}" stroke-width="0.7"/>
-        <line x1="46" y1="40" x2="50" y2="40" stroke="${gold}" stroke-width="0.7"/>
-        <circle cx="45" cy="60" r="2" fill="${gold}"/>
+
+      const corner = `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" style="width:56px;height:56px;display:block;">
+        <line x1="0" y1="1.25" x2="56" y2="1.25" stroke="${gold}" stroke-width="2.5"/>
+        <line x1="1.25" y1="0" x2="1.25" y2="56" stroke="${gold}" stroke-width="2.5"/>
+        <line x1="6" y1="6" x2="50" y2="6" stroke="${gold}" stroke-width="0.8" opacity="0.5"/>
+        <line x1="6" y1="6" x2="6" y2="50" stroke="${gold}" stroke-width="0.8" opacity="0.5"/>
+        <rect x="0" y="0" width="18" height="18" fill="${gold}" opacity="0.08"/>
+        <circle cx="14" cy="14" r="3.5" fill="${gold}"/>
       </svg>`;
-      const panelOrn = `<svg viewBox="0 0 60 200" style="width:60px;height:200px;" xmlns="http://www.w3.org/2000/svg">
-        <line x1="30" y1="0" x2="30" y2="200" stroke="${gold}" stroke-width="0.5" stroke-opacity="0.4"/>
-        <circle cx="30" cy="30" r="4" fill="${gold}" opacity="0.6"/>
-        <circle cx="30" cy="30" r="7" fill="none" stroke="${gold}" stroke-width="0.8" opacity="0.4"/>
-        <path d="M30,40 Q22,55 30,70 Q38,55 30,40Z" fill="${gold}" opacity="0.4"/>
-        <path d="M30,80 L26,90 L30,100 L34,90 Z" fill="${gold}" opacity="0.3"/>
-        <circle cx="30" cy="115" r="4" fill="${gold}" opacity="0.5"/>
-        <path d="M30,125 Q22,140 30,155 Q38,140 30,125Z" fill="${gold}" opacity="0.3"/>
-        <circle cx="30" cy="170" r="4" fill="${gold}" opacity="0.6"/>
+
+      const flourish = `<svg viewBox="0 0 680 22" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:22px;display:block;margin:0 auto;">
+        <line x1="0" y1="11" x2="310" y2="11" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
+        <line x1="370" y1="11" x2="680" y2="11" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
+        <rect x="330" y="7" width="8" height="8" fill="${gold}" transform="rotate(45,334,11)"/>
+        <rect x="320" y="8.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,322.5,11)"/>
+        <rect x="345" y="8.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,347.5,11)"/>
+        <line x1="308" y1="11" x2="295" y2="11" stroke="${gold}" stroke-width="2" opacity="0.3"/>
+        <line x1="372" y1="11" x2="385" y2="11" stroke="${gold}" stroke-width="2" opacity="0.3"/>
       </svg>`;
+
+      const nameRule = `<svg viewBox="0 0 520 12" xmlns="http://www.w3.org/2000/svg" style="width:520px;max-width:100%;height:12px;display:block;margin:0 auto;">
+        <line x1="0" y1="6" x2="240" y2="6" stroke="${gold}" stroke-width="1.5"/>
+        <rect x="254" y="2" width="8" height="8" fill="${gold}" transform="rotate(45,258,6)"/>
+        <rect x="246" y="3.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,248.5,6)"/>
+        <rect x="267" y="3.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,269.5,6)"/>
+        <line x1="280" y1="6" x2="520" y2="6" stroke="${gold}" stroke-width="1.5"/>
+      </svg>`;
+
+      const sealSvg = `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:80px;">
+        <circle cx="40" cy="40" r="38" fill="none" stroke="${gold}" stroke-width="2"/>
+        <circle cx="40" cy="40" r="31" fill="none" stroke="${gold}" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <path d="M16,48 Q10,40 13,31 Q16,23 22,26 Q17,34 19,41 Q21,47 16,48Z" fill="${gold}" opacity="0.7"/>
+        <path d="M64,48 Q70,40 67,31 Q64,23 58,26 Q63,34 61,41 Q59,47 64,48Z" fill="${gold}" opacity="0.7"/>
+        <path d="M20,56 Q12,48 15,39 Q18,30 25,33 Q20,41 22,48 Q24,54 20,56Z" fill="${gold}" opacity="0.5"/>
+        <path d="M60,56 Q68,48 65,39 Q62,30 55,33 Q60,41 58,48 Q56,54 60,56Z" fill="${gold}" opacity="0.5"/>
+        <path d="M40,14 L56,20 L56,40 Q56,55 40,64 Q24,55 24,40 L24,20 Z" fill="${navy}" opacity="0.85"/>
+        <path d="M40,18 L52,23 L52,40 Q52,52 40,60 Q28,52 28,40 L28,23 Z" fill="none" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+        <rect x="33" y="30" width="14" height="10" rx="0.5" fill="none" stroke="${gold}" stroke-width="1.2"/>
+        <line x1="40" y1="30" x2="40" y2="40" stroke="${gold}" stroke-width="0.9"/>
+        <circle cx="40" cy="63" r="2.5" fill="${gold}"/>
+      </svg>`;
+
       return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
         @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
         *{margin:0;padding:0;box-sizing:border-box;}
         html,body{width:1100px;height:850px;overflow:hidden;background:${cream};}
-        .page{width:1100px;height:850px;position:relative;background:${cream};display:flex;overflow:hidden;}
-        .left{width:140px;background:${navy};flex-shrink:0;position:relative;display:flex;align-items:center;justify-content:center;}
-        .left::after{content:"";position:absolute;right:-1px;top:8%;bottom:8%;width:2px;background:linear-gradient(180deg,transparent,${gold} 15%,${gold} 85%,transparent);}
-        .main{flex:1;display:flex;flex-direction:column;padding:52px 60px 22px 50px;}
-        .top-rule{display:flex;align-items:center;gap:10px;margin-bottom:22px;}
-        .trl{flex:1;height:1px;background:linear-gradient(90deg,${gold},transparent);}
-        .trd{width:8px;height:8px;background:${gold};transform:rotate(45deg);flex-shrink:0;}
-        /* FONT SIZES: print-correct for 1100x850 canvas */
-        .ctitle{font-family:"Cinzel",serif;font-size:22px;font-weight:600;color:${navy};letter-spacing:6px;text-transform:uppercase;margin-bottom:12px;}
-        .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:#888;margin-bottom:4px;}
-        .rname{font-family:"Playfair Display",serif;font-size:78px;font-weight:800;color:${navy};line-height:0.95;letter-spacing:-1px;margin-bottom:10px;}
-        .nrule{display:flex;align-items:center;gap:8px;margin-bottom:12px;}
-        .nrl{flex:1;height:1.5px;background:linear-gradient(90deg,${gold},rgba(201,168,76,0.2));}
-        .nrd{width:8px;height:8px;background:${gold};transform:rotate(45deg);flex-shrink:0;}
-        .nrds{width:5px;height:5px;background:${gold};transform:rotate(45deg);flex-shrink:0;opacity:0.6;}
-        .cintro{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:#999;margin-bottom:4px;}
-        .cname{font-family:"Cinzel",serif;font-size:22px;font-weight:600;color:${navy};letter-spacing:3px;text-transform:uppercase;margin-bottom:8px;}
-        .mdate{font-family:"EB Garamond",serif;font-size:16px;color:#aaa;}
-        .missuer{font-family:"Cinzel",serif;font-size:16px;font-weight:600;color:${navy};letter-spacing:2px;}
-        .footer{margin-top:auto;display:flex;align-items:flex-end;justify-content:space-between;}
-        .sig{display:flex;flex-direction:column;}
-        .siglabel{font-family:"EB Garamond",serif;font-size:13px;color:#bbb;letter-spacing:2px;text-transform:uppercase;margin-bottom:3px;}
-        .sigscript{font-family:"Dancing Script",cursive;font-size:32px;color:#444;line-height:1;margin-bottom:5px;}
-        .sigline{width:200px;height:1px;background:#ccc;margin-bottom:5px;}
-        .signame{font-family:"EB Garamond",serif;font-size:15px;color:#888;}
+        .page{width:1100px;height:850px;position:relative;background:${cream};display:flex;flex-direction:column;}
+        /* Corner ornaments */
+        .corner{position:absolute;z-index:6;line-height:0;}
+        .c-tl{top:0;left:0;} .c-tr{top:0;right:0;transform:scaleX(-1);}
+        .c-bl{bottom:0;left:0;transform:scaleY(-1);} .c-br{bottom:0;right:0;transform:scale(-1);}
+        /* Border — between corners */
+        .bh{position:absolute;left:56px;right:56px;height:2.5px;background:${gold};z-index:5;}
+        .bv{position:absolute;top:56px;bottom:56px;width:2.5px;background:${gold};z-index:5;}
+        .bht{top:1.25px;} .bhb{bottom:1.25px;} .bvl{left:1.25px;} .bvr{right:1.25px;}
+        .bhi{position:absolute;left:62px;right:62px;height:0.8px;background:${gold};opacity:0.45;z-index:5;}
+        .bvi{position:absolute;top:62px;bottom:62px;width:0.8px;background:${gold};opacity:0.45;z-index:5;}
+        .bhit{top:7px;} .bhib{bottom:7px;} .bvil{left:7px;} .bvir{right:7px;}
+        /* Content area */
+        .content{position:absolute;inset:50px;display:flex;flex-direction:column;align-items:center;z-index:2;}
+        /* Zone 1 — Header */
+        .zone-header{width:100%;display:flex;flex-direction:column;align-items:center;padding-bottom:14px;}
+        .cert-title{font-family:"Cinzel",serif;font-size:30px;font-weight:700;color:${navy};letter-spacing:7px;text-transform:uppercase;text-align:center;margin-bottom:16px;}
+        /* Zone 2 — Recipient */
+        .zone-recipient{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;}
+        .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:#999;text-align:center;margin-bottom:10px;}
+        .recipient-name{font-family:"Playfair Display",serif;font-size:78px;font-weight:800;color:${navy};text-align:center;line-height:1;letter-spacing:-1px;margin-bottom:10px;}
+        /* Zone 3 — Achievement */
+        .zone-achievement{width:100%;display:flex;flex-direction:column;align-items:center;padding:6px 0 14px;}
+        .course-intro{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:#999;text-align:center;margin-bottom:7px;}
+        .course-name{font-family:"Cinzel",serif;font-size:24px;font-weight:700;color:${navy};letter-spacing:3px;text-transform:uppercase;text-align:center;}
+        /* Footer */
+        .zone-footer{width:100%;display:flex;align-items:flex-end;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(201,168,76,0.3);min-height:90px;}
+        .footer-col{display:flex;flex-direction:column;justify-content:flex-end;}
+        .f-label{font-family:"EB Garamond",serif;font-size:12px;color:#bbb;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+        .f-date{font-family:"EB Garamond",serif;font-size:16px;color:#777;}
+        .f-org{font-family:"Cinzel",serif;font-size:14px;font-weight:600;color:${navy};letter-spacing:1px;margin-top:2px;}
+        .sig-wrap{display:flex;flex-direction:column;align-items:center;}
+        .sig-script{font-family:"Dancing Script",cursive;font-size:32px;color:#444;line-height:1;margin-bottom:6px;}
+        .sig-line{width:220px;height:1px;background:#ccc;margin-bottom:6px;}
+        .sig-name{font-family:"EB Garamond",serif;font-size:15px;color:#555;text-align:center;}
+        .sig-title-text{font-family:"EB Garamond",serif;font-style:italic;font-size:13px;color:#999;text-align:center;}
+        .seal-wrap{display:flex;align-items:flex-end;justify-content:flex-end;}
       </style></head><body><div class="page">
-        <div class="left">${panelOrn}</div>
-        <div class="main">
-          <div class="top-rule"><div class="trl"></div><div class="trd"></div></div>
-          <div class="ctitle">${e(title)}</div>
-          <div class="presented">This is proudly presented to</div>
-          <div class="rname">${e(name)}</div>
-          <div class="nrule"><div class="nrl"></div><div class="nrds"></div><div class="nrd"></div><div class="nrds"></div></div>
-          ${course ? `<div class="cintro">For successfully completing</div><div class="cname">${e(course)}</div>` : ''}
-          <div class="mdate">${e(dateStr)}</div>
-          ${issuer ? `<div class="missuer">${e(issuer)}</div>` : ''}
-          <div class="footer">
-            <div class="sig">
-              <div class="siglabel">Authorized Signature</div>
-              <div class="sigscript">${e(issuer || 'Signature')}</div>
-              <div class="sigline"></div>
-              ${issuerTitle ? `<div class="signame">${e(issuerTitle)}</div>` : ''}
-            </div>
-            <div>${sealSvg}</div>
-            <div></div>
+        <div class="bh bht"></div><div class="bh bhb"></div>
+        <div class="bv bvl"></div><div class="bv bvr"></div>
+        <div class="bhi bhit"></div><div class="bhi bhib"></div>
+        <div class="bvi bvil"></div><div class="bvi bvir"></div>
+        <div class="corner c-tl">${corner}</div><div class="corner c-tr">${corner}</div>
+        <div class="corner c-bl">${corner}</div><div class="corner c-br">${corner}</div>
+        <div class="content">
+          <div class="zone-header">
+            <div class="cert-title">${e(title)}</div>
+            ${flourish}
+          </div>
+          <div class="zone-recipient">
+            <div class="presented">This certificate is proudly presented to</div>
+            <div class="recipient-name">${e(name)}</div>
+            ${nameRule}
+          </div>
+          <div class="zone-achievement">
+            ${course ? `<div class="course-intro">For successfully completing</div><div class="course-name">${e(course)}</div>` : ''}
+          </div>
+          <div class="zone-footer">
+            <div class="footer-col"><div class="f-label">Date Issued</div><div class="f-date">${e(dateStr)}</div>${issuer ? `<div class="f-org">${e(issuer)}</div>` : ''}</div>
+            <div class="footer-col"><div class="sig-wrap"><div class="sig-script">${e(issuer || 'Signature')}</div><div class="sig-line"></div>${issuer ? `<div class="sig-name">${e(issuer)}</div>` : ''}${issuerTitle ? `<div class="sig-title-text">${e(issuerTitle)}</div>` : ''}</div></div>
+            <div class="footer-col"><div class="seal-wrap">${sealSvg}</div></div>
           </div>
         </div>
       </div></body></html>`;
     }
 
-    // =================================================================
-    // EXECUTIVE (modern)
-    // =================================================================
+    // ================================================================
+    // EXECUTIVE (modern) — Bold Corporate
+    // White, gradient header, all centered, 3-col footer
+    // ================================================================
     if (template === 'modern') {
       const c = color || '#3730A3';
       const cB = '#7C3AED';
@@ -243,26 +276,37 @@
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@600;700&display=swap');
         *{margin:0;padding:0;box-sizing:border-box;}
         html,body{width:1100px;height:850px;overflow:hidden;background:#fff;}
-        .page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;overflow:hidden;}
-        .header{flex-shrink:0;height:200px;background:linear-gradient(135deg,${c} 0%,${cB} 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 70px;position:relative;}
-        .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:4px;background:rgba(255,255,255,0.15);}
-        /* FONT SIZES: print-correct */
-        .heyebrow{font-family:"Inter",sans-serif;font-size:14px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:6px;text-transform:uppercase;margin-bottom:8px;}
-        .htitle{font-family:"Inter",sans-serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:5px;text-transform:uppercase;text-align:center;line-height:1;margin-bottom:14px;}
-        .hrule{width:260px;height:1px;background:rgba(255,255,255,0.35);}
-        .body{flex:1;display:flex;flex-direction:column;padding:42px 70px 28px;}
-        .presented{font-family:"Inter",sans-serif;font-size:16px;font-weight:400;color:#aaa;letter-spacing:3px;text-transform:uppercase;margin-bottom:6px;}
-        .rname{font-family:"Inter",sans-serif;font-size:85px;font-weight:900;color:#0f0f0f;line-height:0.95;letter-spacing:-3px;margin-bottom:18px;}
-        .divider{width:60px;height:4px;background:${c};border-radius:2px;margin-bottom:14px;}
-        .cintro{font-family:"Inter",sans-serif;font-size:24px;font-weight:400;color:#888;line-height:1.4;}
-        .cname{font-family:"Inter",sans-serif;font-size:24px;font-weight:700;color:#444;line-height:1.4;}
-        .bottom{display:flex;align-items:flex-end;justify-content:space-between;padding-top:18px;border-top:1px solid #f0f0f0;margin-top:auto;}
-        .mdate{font-family:"Inter",sans-serif;font-size:18px;color:#999;}
-        .missuer{font-family:"Inter",sans-serif;font-size:20px;font-weight:700;color:#222;}
-        .sigblock{display:flex;flex-direction:column;align-items:center;}
-        .sigscript{font-family:"Dancing Script",cursive;font-size:34px;color:#333;line-height:1;margin-bottom:4px;}
-        .sigline{width:200px;height:1px;background:#ddd;margin-bottom:5px;}
-        .siglabel{font-family:"Inter",sans-serif;font-size:13px;color:#bbb;letter-spacing:2px;}
+        .page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;outline:1px solid #e8e8e8;}
+        /* Header */
+        .header{flex-shrink:0;height:190px;background:linear-gradient(135deg,${c} 0%,${cB} 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 80px;position:relative;}
+        .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.2);}
+        .heyebrow{font-family:"Inter",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:6px;text-transform:uppercase;margin-bottom:10px;}
+        .htitle{font-family:"Inter",sans-serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:4px;text-transform:uppercase;text-align:center;line-height:1;margin-bottom:14px;}
+        .hrule{width:240px;height:1px;background:rgba(255,255,255,0.35);}
+        /* Body */
+        .body{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 80px 0;}
+        /* Zone 2 — Recipient */
+        .zone-recipient{display:flex;flex-direction:column;align-items:center;width:100%;}
+        .presented{font-family:"Inter",sans-serif;font-size:16px;font-weight:400;color:#bbb;letter-spacing:4px;text-transform:uppercase;text-align:center;margin-bottom:10px;}
+        .recipient-name{font-family:"Inter",sans-serif;font-size:85px;font-weight:900;color:#0f0f0f;text-align:center;line-height:1;letter-spacing:-3px;margin-bottom:14px;}
+        .name-accent{width:72px;height:5px;background:${c};border-radius:3px;margin-bottom:16px;}
+        /* Zone 3 — Achievement */
+        .zone-achievement{display:flex;flex-direction:column;align-items:center;width:100%;flex:1;justify-content:flex-start;}
+        .course-intro{font-family:"Inter",sans-serif;font-size:22px;font-weight:400;color:#aaa;text-align:center;}
+        .course-name{font-family:"Inter",sans-serif;font-size:24px;font-weight:700;color:#333;text-align:center;margin-top:4px;}
+        /* Footer 3-col */
+        .footer{flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;padding:14px 80px 38px;border-top:1.5px solid ${c};margin-top:auto;}
+        .footer-left{display:flex;flex-direction:column;gap:4px;min-width:180px;}
+        .f-org{font-family:"Inter",sans-serif;font-size:18px;font-weight:700;color:#111;}
+        .f-sub{font-family:"Inter",sans-serif;font-size:15px;color:#888;}
+        .f-date{font-family:"Inter",sans-serif;font-size:15px;color:#aaa;margin-top:2px;}
+        .footer-center{display:flex;flex-direction:column;align-items:center;flex:1;max-width:260px;}
+        .sig-script{font-family:"Dancing Script",cursive;font-size:34px;color:#333;line-height:1;margin-bottom:6px;}
+        .sig-line{width:200px;height:1px;background:#ddd;margin-bottom:6px;}
+        .sig-name{font-family:"Inter",sans-serif;font-size:14px;font-weight:600;color:#555;text-align:center;}
+        .sig-label{font-family:"Inter",sans-serif;font-size:12px;color:#bbb;letter-spacing:2px;margin-top:2px;}
+        .footer-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;min-width:80px;}
+        .qr-label{font-family:"Inter",sans-serif;font-size:10px;color:#ccc;letter-spacing:1px;text-transform:uppercase;margin-top:4px;text-align:center;}
       </style></head><body><div class="page">
         <div class="header">
           <div class="heyebrow">Official Document</div>
@@ -270,120 +314,154 @@
           <div class="hrule"></div>
         </div>
         <div class="body">
-          <div class="presented">Presented to</div>
-          <div class="rname">${e(name)}</div>
-          <div class="divider"></div>
-          ${course ? `<div class="cintro">For successfully completing</div><div class="cname">${e(course)}</div>` : ''}
-          <div class="bottom">
-            <div><div class="mdate">${e(dateStr)}</div>${issuer ? `<div class="missuer">${e(issuer)}</div>` : ''}</div>
-            <div class="sigblock">
-              <div class="sigscript">${e(issuerTitle || issuer || 'Signature')}</div>
-              <div class="sigline"></div>
-              <div class="siglabel">Authorized Signature</div>
-            </div>
-            <div></div>
+          <div class="zone-recipient">
+            <div class="presented">Proudly presented to</div>
+            <div class="recipient-name">${e(name)}</div>
+            <div class="name-accent"></div>
           </div>
+          <div class="zone-achievement">
+            ${course ? `<div class="course-intro">For successfully completing</div><div class="course-name">${e(course)}</div>` : ''}
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer-left">${issuer ? `<div class="f-org">${e(issuer)}</div>` : ''}${issuerTitle ? `<div class="f-sub">${e(issuerTitle)}</div>` : ''}<div class="f-date">${e(dateStr)}</div></div>
+          <div class="footer-center"><div class="sig-script">${e(issuer || 'Signature')}</div><div class="sig-line"></div>${issuer ? `<div class="sig-name">${e(issuer)}</div>` : ''}<div class="sig-label">Authorized Signature</div></div>
+          <div class="footer-right"></div>
         </div>
       </div></body></html>`;
     }
 
-    // =================================================================
-    // HERITAGE (formal)
-    // =================================================================
+    // ================================================================
+    // HERITAGE (formal) — Dark Grand
+    // Midnight navy, 140px corner ornaments, centered 4-zone,
+    // 3-col footer: medallion | signature | QR+date
+    // ================================================================
     const bg = '#0F1729', gold = '#C9A84C', goldL = '#E8CB7A', cream = '#F5ECD7';
-    const corner = `<svg viewBox="0 0 100 100" style="width:100px;height:100px;" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="2" x2="100" y2="2" stroke="${gold}" stroke-width="2.5"/>
-      <line x1="2" y1="0" x2="2" y2="100" stroke="${gold}" stroke-width="2.5"/>
-      <line x1="8" y1="8" x2="100" y2="8" stroke="${gold}" stroke-width="0.8"/>
-      <line x1="8" y1="8" x2="8" y2="100" stroke="${gold}" stroke-width="0.8"/>
-      <rect x="0" y="0" width="28" height="28" fill="${gold}" opacity="0.12"/>
-      <rect x="13" y="13" width="10" height="10" fill="${gold}" transform="rotate(45,18,18)"/>
-      <circle cx="46" cy="2" r="2.5" fill="${gold}"/>
-      <circle cx="2" cy="46" r="2.5" fill="${gold}"/>
-      <path d="M22,10 Q28,8 30,14" stroke="${gold}" stroke-width="0.8" fill="none"/>
-      <path d="M10,22 Q8,28 14,30" stroke="${gold}" stroke-width="0.8" fill="none"/>
+
+    const corner = `<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="width:140px;height:140px;display:block;">
+      <line x1="0" y1="1.25" x2="140" y2="1.25" stroke="${gold}" stroke-width="2.5"/>
+      <line x1="1.25" y1="0"  x2="1.25" y2="140" stroke="${gold}" stroke-width="2.5"/>
+      <line x1="8" y1="8" x2="132" y2="8"  stroke="${gold}" stroke-width="0.8" opacity="0.45"/>
+      <line x1="8" y1="8" x2="8"  y2="132" stroke="${gold}" stroke-width="0.8" opacity="0.45"/>
+      <rect x="0" y="0" width="34" height="34" fill="${gold}" opacity="0.1"/>
+      <rect x="21" y="21" width="14" height="14" fill="${gold}" transform="rotate(45,28,28)"/>
+      <line x1="60"  y1="0" x2="60"  y2="8" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <line x1="100" y1="0" x2="100" y2="8" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <line x1="0" y1="60"  x2="8"  y2="60"  stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <line x1="0" y1="100" x2="8"  y2="100" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <circle cx="60"  cy="4" r="2" fill="${gold}" opacity="0.6"/>
+      <circle cx="100" cy="4" r="2" fill="${gold}" opacity="0.6"/>
+      <circle cx="4" cy="60"  r="2" fill="${gold}" opacity="0.6"/>
+      <circle cx="4" cy="100" r="2" fill="${gold}" opacity="0.6"/>
     </svg>`;
-    const flourish = `<svg viewBox="0 0 700 36" style="width:700px;height:36px;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
-      <rect x="344" y="13" width="12" height="12" fill="${gold}" transform="rotate(45,350,19)"/>
-      <rect x="338" y="16" width="6" height="6" fill="${gold}" opacity="0.5" transform="rotate(45,341,19)"/>
-      <rect x="356" y="16" width="6" height="6" fill="${gold}" opacity="0.5" transform="rotate(45,359,19)"/>
-      <line x1="0" y1="19" x2="322" y2="19" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
-      <line x1="700" y1="19" x2="378" y2="19" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
-      <path d="M322,19 Q330,19 330,12 Q330,5 340,5" stroke="${gold}" stroke-width="1.2" fill="none"/>
-      <path d="M378,19 Q370,19 370,12 Q370,5 360,5" stroke="${gold}" stroke-width="1.2" fill="none"/>
-      <path d="M270,19 Q278,19 278,14 Q278,9 285,9" stroke="${gold}" stroke-width="0.8" fill="none" opacity="0.6"/>
-      <path d="M430,19 Q422,19 422,14 Q422,9 415,9" stroke="${gold}" stroke-width="0.8" fill="none" opacity="0.6"/>
-      <circle cx="285" cy="9" r="2" fill="${gold}" opacity="0.5"/>
-      <circle cx="415" cy="9" r="2" fill="${gold}" opacity="0.5"/>
+
+    const flourish = `<svg viewBox="0 0 700 32" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;height:32px;display:block;margin:0 auto;">
+      <rect x="343" y="11" width="14" height="14" fill="${gold}" transform="rotate(45,350,18)"/>
+      <rect x="335" y="14.5" width="7" height="7" fill="${gold}" opacity="0.45" transform="rotate(45,338.5,18)"/>
+      <rect x="358" y="14.5" width="7" height="7" fill="${gold}" opacity="0.45" transform="rotate(45,361.5,18)"/>
+      <line x1="0"   y1="18" x2="320" y2="18" stroke="${gold}" stroke-width="0.8" opacity="0.55"/>
+      <line x1="380" y1="18" x2="700" y2="18" stroke="${gold}" stroke-width="0.8" opacity="0.55"/>
+      <path d="M320,18 Q330,18 330,10 Q330,3 341,3" stroke="${gold}" stroke-width="1.2" fill="none"/>
+      <path d="M380,18 Q370,18 370,10 Q370,3 359,3" stroke="${gold}" stroke-width="1.2" fill="none"/>
     </svg>`;
-    const notches = Array.from({length:24},(_,i)=>{const a=(i/24)*Math.PI*2,x1=(60+53*Math.cos(a)).toFixed(1),y1=(60+53*Math.sin(a)).toFixed(1),x2=(60+57*Math.cos(a)).toFixed(1),y2=(60+57*Math.sin(a)).toFixed(1);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${gold}" stroke-width="1.8"/>`;}).join('');
-    const medal = `<svg viewBox="0 0 120 120" style="width:105px;height:105px;" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="60" cy="60" r="57" fill="${bg}" stroke="${gold}" stroke-width="2.5"/>
-      <circle cx="60" cy="60" r="50" fill="none" stroke="${gold}" stroke-width="0.8"/>
-      <circle cx="60" cy="60" r="43" fill="none" stroke="${gold}" stroke-width="0.4" stroke-dasharray="2,3"/>
+
+    const nameRule = `<svg viewBox="0 0 540 10" xmlns="http://www.w3.org/2000/svg" style="width:540px;max-width:100%;height:10px;display:block;margin:0 auto;">
+      <line x1="0"  y1="5" x2="255" y2="5" stroke="${gold}" stroke-width="1.5"/>
+      <rect x="263" y="1" width="8" height="8" fill="${gold}" transform="rotate(45,267,5)"/>
+      <rect x="255" y="2.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,257.5,5)"/>
+      <rect x="277" y="2.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,279.5,5)"/>
+      <line x1="282" y1="5" x2="540" y2="5" stroke="${gold}" stroke-width="1.5"/>
+    </svg>`;
+
+    const notches = Array.from({length:24},(_,i)=>{const a=(i/24)*Math.PI*2,x1=(55+48*Math.cos(a)).toFixed(1),y1=(55+48*Math.sin(a)).toFixed(1),x2=(55+53*Math.cos(a)).toFixed(1),y2=(55+53*Math.sin(a)).toFixed(1);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${gold}" stroke-width="2"/>`;}).join('');
+    const medal = `<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" style="width:110px;height:110px;">
+      <circle cx="55" cy="55" r="53" fill="${bg}" stroke="${gold}" stroke-width="2.5"/>
+      <circle cx="55" cy="55" r="46" fill="none" stroke="${gold}" stroke-width="0.8"/>
+      <circle cx="55" cy="55" r="39" fill="none" stroke="${gold}" stroke-width="0.4" stroke-dasharray="2,3"/>
       ${notches}
-      <path d="M22,68 Q14,58 18,47 Q22,37 29,40 Q24,50 27,58 Q29,65 22,68Z" fill="${gold}" opacity="0.7"/>
-      <path d="M26,76 Q17,68 20,57 Q23,47 31,50 Q26,60 28,68 Q30,74 26,76Z" fill="${gold}" opacity="0.55"/>
-      <path d="M98,68 Q106,58 102,47 Q98,37 91,40 Q96,50 93,58 Q91,65 98,68Z" fill="${gold}" opacity="0.7"/>
-      <path d="M94,76 Q103,68 100,57 Q97,47 89,50 Q94,60 92,68 Q90,74 94,76Z" fill="${gold}" opacity="0.55"/>
-      <path d="M60,22 L80,30 L80,56 Q80,76 60,86 Q40,76 40,56 L40,30 Z" fill="${gold}" opacity="0.12"/>
-      <path d="M60,22 L80,30 L80,56 Q80,76 60,86 Q40,76 40,56 L40,30 Z" fill="none" stroke="${gold}" stroke-width="1.5"/>
-      <rect x="50" y="42" width="20" height="14" rx="1" fill="none" stroke="${goldL}" stroke-width="1.2"/>
-      <line x1="60" y1="42" x2="60" y2="56" stroke="${goldL}" stroke-width="1"/>
-      <circle cx="60" cy="68" r="6" fill="none" stroke="${gold}" stroke-width="1"/>
-      <line x1="54" y1="68" x2="66" y2="68" stroke="${gold}" stroke-width="0.7"/>
-      <text x="60" y="100" font-family="sans-serif" font-size="6" font-weight="bold" fill="${gold}" text-anchor="middle" letter-spacing="2">OFFICIAL SEAL</text>
+      <path d="M20,64 Q13,55 16,44 Q19,34 26,37 Q21,46 24,54 Q26,62 20,64Z" fill="${gold}" opacity="0.7"/>
+      <path d="M24,73 Q15,65 18,54 Q21,44 29,47 Q24,56 26,64 Q28,71 24,73Z" fill="${gold}" opacity="0.5"/>
+      <path d="M90,64 Q97,55 94,44 Q91,34 84,37 Q89,46 86,54 Q84,62 90,64Z" fill="${gold}" opacity="0.7"/>
+      <path d="M86,73 Q95,65 92,54 Q89,44 81,47 Q86,56 84,64 Q82,71 86,73Z" fill="${gold}" opacity="0.5"/>
+      <path d="M55,20 L75,27 L75,52 Q75,70 55,80 Q35,70 35,52 L35,27 Z" fill="${gold}" opacity="0.1"/>
+      <path d="M55,20 L75,27 L75,52 Q75,70 55,80 Q35,70 35,52 L35,27 Z" fill="none" stroke="${gold}" stroke-width="1.8"/>
+      <rect x="45" y="38" width="20" height="14" rx="1" fill="none" stroke="${goldL}" stroke-width="1.3"/>
+      <line x1="55" y1="38" x2="55" y2="52" stroke="${goldL}" stroke-width="1"/>
+      <circle cx="55" cy="64" r="6" fill="none" stroke="${gold}" stroke-width="1"/>
+      <line x1="49" y1="64" x2="61" y2="64" stroke="${gold}" stroke-width="0.7"/>
+      <text x="55" y="94" font-family="sans-serif" font-size="5.5" font-weight="bold" fill="${gold}" text-anchor="middle" letter-spacing="1.5">OFFICIAL SEAL</text>
     </svg>`;
+
     return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
       @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,700&family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
       *{margin:0;padding:0;box-sizing:border-box;}
       html,body{width:1100px;height:850px;overflow:hidden;background:${bg};}
-      .page{width:1100px;height:850px;position:relative;background:${bg};display:flex;flex-direction:column;overflow:hidden;}
-      .corner{position:absolute;z-index:5;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
-      /* FONT SIZES: print-correct */
-      .content{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;padding:55px 110px 15px;flex:1;}
-      .ctitle{font-family:"Cinzel",serif;font-size:30px;font-weight:700;color:${gold};letter-spacing:8px;text-align:center;margin-bottom:12px;}
-      .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:rgba(245,236,215,0.6);margin-bottom:4px;text-align:center;}
-      .rname{font-family:"Cormorant Garamond",serif;font-size:78px;font-weight:700;font-style:italic;color:${gold};text-align:center;line-height:1;letter-spacing:1px;margin-bottom:8px;text-shadow:0 0 40px rgba(201,168,76,0.25);}
-      .nrule{width:500px;height:1px;background:linear-gradient(90deg,transparent,${gold} 20%,${gold} 80%,transparent);margin:0 auto 12px;}
-      .recog{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:rgba(245,236,215,0.65);text-align:center;line-height:1.6;margin-bottom:6px;}
-      .cname{font-family:"Cinzel",serif;font-size:26px;font-weight:700;color:${goldL};letter-spacing:4px;text-align:center;text-transform:uppercase;}
-      .footer{position:relative;z-index:2;display:flex;align-items:flex-end;justify-content:space-between;padding:0 100px 38px;}
-      .sigblock{flex:1;display:flex;flex-direction:column;align-items:center;}
-      .sigscript{font-family:"Dancing Script",cursive;font-size:34px;color:${cream};line-height:1;margin-bottom:5px;}
-      .siglineg{width:220px;height:1px;background:linear-gradient(90deg,transparent,${gold} 30%,${gold} 70%,transparent);margin-bottom:6px;}
-      .signame{font-family:"Cinzel",serif;font-size:15px;font-weight:600;color:${gold};letter-spacing:2px;margin-bottom:3px;}
-      .sigtitle{font-family:"EB Garamond",serif;font-size:13px;color:rgba(245,236,215,0.55);font-style:italic;}
-      .sigdate{font-family:"EB Garamond",serif;font-size:16px;color:${gold};opacity:0.7;margin-top:6px;}
+      .page{width:1100px;height:850px;position:relative;background:${bg};display:flex;flex-direction:column;}
+      /* Corner ornaments */
+      .corner{position:absolute;z-index:6;line-height:0;}
+      .c-tl{top:0;left:0;} .c-tr{top:0;right:0;transform:scaleX(-1);}
+      .c-bl{bottom:0;left:0;transform:scaleY(-1);} .c-br{bottom:0;right:0;transform:scale(-1);}
+      /* Border */
+      .bh{position:absolute;left:140px;right:140px;height:2.5px;background:${gold};z-index:5;}
+      .bv{position:absolute;top:140px;bottom:140px;width:2.5px;background:${gold};z-index:5;}
+      .bht{top:1.25px;} .bhb{bottom:1.25px;} .bvl{left:1.25px;} .bvr{right:1.25px;}
+      .bhi{position:absolute;left:148px;right:148px;height:0.8px;background:${gold};opacity:0.4;z-index:5;}
+      .bvi{position:absolute;top:148px;bottom:148px;width:0.8px;background:${gold};opacity:0.4;z-index:5;}
+      .bhit{top:8px;} .bhib{bottom:8px;} .bvil{left:8px;} .bvir{right:8px;}
+      /* Content inside corners + padding */
+      .content{position:absolute;top:52px;bottom:0;left:60px;right:60px;display:flex;flex-direction:column;align-items:center;z-index:2;}
+      /* Zone 1 — Header */
+      .zone-header{width:100%;display:flex;flex-direction:column;align-items:center;padding-bottom:12px;}
+      .cert-title{font-family:"Cinzel",serif;font-size:30px;font-weight:700;color:${gold};letter-spacing:8px;text-transform:uppercase;text-align:center;margin-bottom:16px;}
+      /* Zone 2 — Recipient */
+      .zone-recipient{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;}
+      .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:rgba(245,236,215,0.6);text-align:center;margin-bottom:10px;}
+      .recipient-name{font-family:"Cormorant Garamond",serif;font-size:78px;font-weight:700;font-style:italic;color:${gold};text-align:center;line-height:1;letter-spacing:1px;margin-bottom:10px;text-shadow:0 0 50px rgba(201,168,76,0.3);}
+      /* Zone 3 — Achievement */
+      .zone-achievement{width:100%;display:flex;flex-direction:column;align-items:center;padding:6px 0 16px;}
+      .recog-text{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:rgba(245,236,215,0.6);text-align:center;line-height:1.5;margin-bottom:7px;}
+      .course-name{font-family:"Cinzel",serif;font-size:26px;font-weight:700;color:${goldL};letter-spacing:4px;text-transform:uppercase;text-align:center;}
+      /* Footer 3-col */
+      .footer{position:absolute;bottom:0;left:60px;right:60px;display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:38px;z-index:2;}
+      .footer-left{flex-shrink:0;}
+      .footer-center{flex:1;display:flex;flex-direction:column;align-items:center;padding:0 30px;}
+      .sig-script{font-family:"Dancing Script",cursive;font-size:34px;color:${cream};line-height:1;margin-bottom:6px;}
+      .sig-line-g{width:220px;height:1px;background:linear-gradient(90deg,transparent,${gold} 25%,${gold} 75%,transparent);margin-bottom:7px;}
+      .sig-name{font-family:"Cinzel",serif;font-size:15px;font-weight:600;color:${gold};letter-spacing:2px;text-align:center;}
+      .sig-title{font-family:"EB Garamond",serif;font-style:italic;font-size:13px;color:rgba(245,236,215,0.5);text-align:center;margin-top:2px;}
+      .sig-date{font-family:"EB Garamond",serif;font-size:16px;color:${gold};opacity:0.65;margin-top:8px;text-align:center;}
+      .footer-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
     </style></head><body><div class="page">
-      <div style="position:absolute;top:2px;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;"></div>
-      <div style="position:absolute;bottom:2px;left:100px;right:100px;height:2.5px;background:${gold};z-index:4;"></div>
-      <div style="position:absolute;left:2px;top:100px;bottom:100px;width:2.5px;background:${gold};z-index:4;"></div>
-      <div style="position:absolute;right:2px;top:100px;bottom:100px;width:2.5px;background:${gold};z-index:4;"></div>
-      <div style="position:absolute;top:8px;left:108px;right:108px;height:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
-      <div style="position:absolute;bottom:8px;left:108px;right:108px;height:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
-      <div style="position:absolute;left:8px;top:108px;bottom:108px;width:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
-      <div style="position:absolute;right:8px;top:108px;bottom:108px;width:0.8px;background:${gold};opacity:0.5;z-index:4;"></div>
+      <div class="bh bht"></div><div class="bh bhb"></div>
+      <div class="bv bvl"></div><div class="bv bvr"></div>
+      <div class="bhi bhit"></div><div class="bhi bhib"></div>
+      <div class="bvi bvil"></div><div class="bvi bvir"></div>
       <div class="corner c-tl">${corner}</div><div class="corner c-tr">${corner}</div>
       <div class="corner c-bl">${corner}</div><div class="corner c-br">${corner}</div>
       <div class="content">
-        <div class="ctitle">${e(title)}</div>
-        ${flourish}
-        <div class="presented">Presented to</div>
-        <div class="rname">${e(name)}</div>
-        <div class="nrule"></div>
-        ${course ? `<div class="recog">In recognition of outstanding completion of</div><div class="cname">${e(course)}</div>` : ''}
+        <div class="zone-header">
+          <div class="cert-title">${e(title)}</div>
+          ${flourish}
+        </div>
+        <div class="zone-recipient">
+          <div class="presented">Presented to</div>
+          <div class="recipient-name">${e(name)}</div>
+          ${nameRule}
+        </div>
+        <div class="zone-achievement">
+          ${course ? `<div class="recog-text">In recognition of outstanding completion of</div><div class="course-name">${e(course)}</div>` : ''}
+        </div>
       </div>
       <div class="footer">
-        <div style="flex-shrink:0;">${medal}</div>
-        <div class="sigblock">
-          <div class="sigscript">${e(issuer || 'Signature')}</div>
-          <div class="siglineg"></div>
-          ${issuerTitle ? `<div class="signame">${e(issuerTitle)}</div>` : ''}
-          ${issuer ? `<div class="sigtitle">${e(issuer)}</div>` : ''}
-          <div class="sigdate">${e(dateStr)}</div>
+        <div class="footer-left">${medal}</div>
+        <div class="footer-center">
+          <div class="sig-script">${e(issuer || 'Signature')}</div>
+          <div class="sig-line-g"></div>
+          ${issuer ? `<div class="sig-name">${e(issuer)}</div>` : ''}
+          ${issuerTitle ? `<div class="sig-title">${e(issuerTitle)}</div>` : ''}
+          <div class="sig-date">${e(dateStr)}</div>
         </div>
-        <div style="flex-shrink:0;width:70px;"></div>
+        <div class="footer-right"></div>
       </div>
     </div></body></html>`;
   }
