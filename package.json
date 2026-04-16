@@ -1,0 +1,11 @@
+{
+  "name": "buildcertificates",
+  "version": "1.0.0",
+  "description": "Certificate generation API engine — buildcertificates.com",
+  "private": true,
+  "dependencies": {
+    "pdfmake": "^0.2.18",
+    "@netlify/blobs": "^8.2.0",
+    "qrcode": "^1.5.4"
+  }
+}

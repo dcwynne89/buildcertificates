@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>BuildCertificates — Free Certificate Generator | Create PDF Certificates Online</title>
+  <meta name="description" content="Generate professional PDF certificates for free. Choose from elegant, modern, and formal templates. QR verification codes included. No signup required.">
+  <meta name="keywords" content="certificate generator, free certificate maker, PDF certificate, certificate of completion, bulk certificates, certificate template">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://buildcertificates.com">
+  <link rel="stylesheet" href="styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+  <!-- Open Graph -->
+  <meta property="og:title" content="BuildCertificates — Free Certificate Generator">
+  <meta property="og:description" content="Generate professional PDF certificates instantly. Elegant templates, QR verification, bulk generation. No signup required.">
+  <meta property="og:url" content="https://buildcertificates.com">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://buildcertificates.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="BuildCertificates — Free Certificate Generator">
+  <meta name="twitter:description" content="Generate professional PDF certificates instantly. QR verification included.">
+  <meta name="twitter:image" content="https://buildcertificates.com/og-image.png">
+  <!-- Structured Data -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "BuildCertificates",
+    "url": "https://buildcertificates.com",
+    "description": "Free online certificate generator. Create elegant PDF certificates with QR verification codes. Bulk generation via API.",
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "creator": {
+      "@type": "Organization",
+      "name": "BuildCertificates",
+      "url": "https://buildcertificates.com"
+    }
+  }
+  </script>
+</head>
+<body>
+
+  <!-- ── Navigation ── -->
+  <nav class="navbar" id="navbar">
+    <a href="/" class="navbar-brand">🏅 BuildCertificates</a>
+    <div class="navbar-links">
+      <a href="/api/docs">API Docs</a>
+      <a href="/about.html">About</a>
+    </div>
+  </nav>
+
+  <!-- ── Hero ── -->
+  <section class="hero-banner">
+    <h1>Free Certificate Generator</h1>
+    <p>Create elegant PDF certificates in seconds. Choose a template, fill in the details, download instantly — with QR verification built in.</p>
+  </section>
+
+  <!-- ── Mode Tabs ── -->
+  <div class="tab-bar">
+    <button class="tab-btn active" id="tabSingle" onclick="switchTab('single')">Single Certificate</button>
+    <button class="tab-btn" id="tabBulk" onclick="switchTab('bulk')">Bulk CSV Upload</button>
+  </div>
+
+  <!-- ── Main App ── -->
+  <main class="app-container">
+
+    <!-- ── FORM PANEL ── -->
+    <div class="form-panel">
+
+      <!-- Single Mode -->
+      <div class="single-panel active" id="singlePanel">
+
+        <!-- Recipient -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <h3>🎓 Recipient</h3>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label for="recipientName">Recipient Name *</label>
+              <input type="text" id="recipientName" placeholder="Jane Smith" required>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certificate Details -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <h3>📜 Certificate Details</h3>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label for="certTitle">Certificate Title</label>
+              <input type="text" id="certTitle" placeholder="Certificate of Completion" value="Certificate of Completion">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label for="courseName">Course / Event Name</label>
+              <input type="text" id="courseName" placeholder="Advanced Web Development">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="certDate">Date</label>
+              <input type="date" id="certDate">
+            </div>
+            <div class="form-group">
+              <label for="templateSelect">Template</label>
+              <select id="templateSelect">
+                <option value="elegant" selected>Elegant (Gold & Navy)</option>
+                <option value="modern">Modern (Minimal)</option>
+                <option value="formal">Formal (Academic)</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Issuer -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <h3>🏢 Issuer</h3>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="issuerName">Issuer Name</label>
+              <input type="text" id="issuerName" placeholder="Acme Academy">
+            </div>
+            <div class="form-group">
+              <label for="issuerTitle">Issuer Title</label>
+              <input type="text" id="issuerTitle" placeholder="Director of Education">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="accentColor">Accent Color</label>
+              <div class="color-row">
+                <input type="color" id="accentColor" value="#C5A55A">
+                <input type="text" id="accentColorHex" value="#C5A55A" style="flex:1" readonly>
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="verifyToggle">QR Verification</label>
+              <select id="verifyToggle">
+                <option value="true" selected>Enabled</option>
+                <option value="false">Disabled</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <!-- Download -->
+        <button type="button" class="btn-download" id="btnDownload">
+          ⬇ Download Certificate PDF
+        </button>
+
+      </div>
+
+      <!-- Bulk Mode -->
+      <div class="bulk-panel" id="bulkPanel">
+        <div class="form-section">
+          <div class="form-section-header">
+            <h3>📊 CSV Bulk Upload</h3>
+          </div>
+          <div class="csv-upload-area" id="csvUploadArea">
+            <h3>📁 Drop CSV file here or click to browse</h3>
+            <p>CSV must have a "name" column. Optional: "course", "date"</p>
+            <input type="file" id="csvFile" accept=".csv" style="display:none">
+          </div>
+          <div class="csv-preview" id="csvPreview" style="display:none"></div>
+        </div>
+
+        <!-- Shared settings for bulk -->
+        <div class="form-section">
+          <div class="form-section-header">
+            <h3>📜 Shared Certificate Settings</h3>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label for="bulkTitle">Certificate Title</label>
+              <input type="text" id="bulkTitle" placeholder="Certificate of Completion" value="Certificate of Completion">
+            </div>
+          </div>
+          <div class="form-row full">
+            <div class="form-group">
+              <label for="bulkCourse">Course / Event Name</label>
+              <input type="text" id="bulkCourse" placeholder="Advanced Web Development">
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="bulkIssuer">Issuer Name</label>
+              <input type="text" id="bulkIssuer" placeholder="Acme Academy">
+            </div>
+            <div class="form-group">
+              <label for="bulkTemplate">Template</label>
+              <select id="bulkTemplate">
+                <option value="elegant" selected>Elegant</option>
+                <option value="modern">Modern</option>
+                <option value="formal">Formal</option>
+              </select>
+            </div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-download" id="btnBulkGenerate">
+          ⬇ Generate All Certificates
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ── PREVIEW PANEL ── -->
+    <div class="preview-panel" id="previewPanel">
+      <div class="preview-header">
+        <h3>📄 Live Preview</h3>
+        <span style="font-size:0.75rem; color:var(--text-muted)">Updates as you type</span>
+      </div>
+      <div class="preview-body" id="previewBody">
+        <!-- Live certificate preview rendered by JS -->
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ── Toast ── -->
+  <div class="toast" id="toast"></div>
+
+  <!-- ── Footer ── -->
+  <footer class="site-footer">
+    <p>© 2026 BuildCertificates · <a href="/api/docs">API</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  </footer>
+
+  <script src="certificate-app.js"></script>
+</body>
+</html>

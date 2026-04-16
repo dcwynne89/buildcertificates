@@ -1,0 +1,66 @@
+# ─────────────────────────────────────────────────────────────
+# BuildCertificates — Netlify configuration
+# ─────────────────────────────────────────────────────────────
+
+[build]
+  publish = "."
+  functions = "netlify/functions"
+
+[functions]
+  node_bundler = "esbuild"
+  external_node_modules = ["pdfmake"]
+  included_files = ["node_modules/pdfmake/**"]
+
+# ── API Redirects ──
+[[redirects]]
+  from = "/api/v1/generate"
+  to = "/.netlify/functions/generate"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/register"
+  to = "/.netlify/functions/register"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/usage"
+  to = "/.netlify/functions/usage"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/health"
+  to = "/.netlify/functions/health"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/verify/*"
+  to = "/.netlify/functions/verify"
+  status = 200
+
+[[redirects]]
+  from = "/api/v1/bulk"
+  to = "/.netlify/functions/bulk"
+  status = 200
+
+[[redirects]]
+  from = "/api/docs"
+  to = "/api-docs.html"
+  status = 200
+
+# ── Security Headers ──
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=63072000; includeSubDomains; preload"
+
+[[headers]]
+  for = "/.netlify/functions/*"
+  [headers.values]
+    Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "GET, POST, OPTIONS"
+    Access-Control-Allow-Headers = "Content-Type, X-API-Key"
+    Access-Control-Max-Age = "86400"

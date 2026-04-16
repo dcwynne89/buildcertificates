@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <title>API Docs — BuildCertificates | Certificate Generator API</title>
+  <meta name="description" content="BuildCertificates API documentation. Generate PDF certificates from structured JSON. Includes QR verification, bulk generation, and multiple templates.">
+  <link rel="canonical" href="https://buildcertificates.com/api/docs">
+  <link rel="stylesheet" href="/styles.css">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
+  <meta property="og:title" content="BuildCertificates API — Certificate Generator for Developers">
+  <meta property="og:description" content="Generate PDF certificates programmatically. QR verification, bulk generation, 3 templates.">
+  <meta property="og:url" content="https://buildcertificates.com/api/docs">
+  <meta property="og:type" content="website">
+  <style>
+    .docs-container { max-width: 800px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+    .docs-hero { text-align: center; padding: 2rem 0 2.5rem; }
+    .docs-hero h1 { font-size: 2rem; font-weight: 800; background: linear-gradient(135deg, #C5A55A, #f0e68c); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 0.5rem; }
+    .docs-hero p { color: var(--text-secondary); font-size: 1rem; }
+    .endpoint-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius); margin-bottom: 1.5rem; overflow: hidden; }
+    .endpoint-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem 1.25rem; border-bottom: 1px solid var(--border); }
+    .method-badge { padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.7rem; font-weight: 700; letter-spacing: 1px; }
+    .method-post { background: rgba(34,197,94,0.15); color: #22c55e; }
+    .method-get { background: rgba(59,130,246,0.15); color: #3b82f6; }
+    .endpoint-path { font-family: 'Courier New', monospace; font-size: 0.9rem; color: var(--text-primary); font-weight: 600; }
+    .endpoint-body { padding: 1.25rem; }
+    .endpoint-body p { color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; line-height: 1.6; }
+    .endpoint-body h4 { color: var(--accent); font-size: 0.8rem; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 0.5rem; }
+    pre { background: #0d0e1a; border: 1px solid var(--border); border-radius: var(--radius-sm); padding: 1rem; overflow-x: auto; font-size: 0.8rem; line-height: 1.5; color: #e0e0e0; margin-bottom: 1rem; }
+    code { font-family: 'Courier New', monospace; }
+    .tier-table { width: 100%; border-collapse: collapse; margin: 1rem 0; font-size: 0.85rem; }
+    .tier-table th, .tier-table td { padding: 0.6rem 0.75rem; border-bottom: 1px solid var(--border); text-align: left; }
+    .tier-table th { color: var(--accent); font-weight: 600; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+    .tier-table td { color: var(--text-secondary); }
+    .section-title { color: var(--text-primary); font-size: 1.3rem; font-weight: 700; margin: 2.5rem 0 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid var(--border); }
+  </style>
+</head>
+<body>
+  <nav class="navbar">
+    <a href="/" class="navbar-brand">🏅 BuildCertificates</a>
+    <div class="navbar-links">
+      <a href="/api/docs">API Docs</a>
+      <a href="/about.html">About</a>
+    </div>
+  </nav>
+
+  <div class="docs-container">
+    <div class="docs-hero">
+      <h1>Certificate API<br>for Developers</h1>
+      <p>Generate professional PDF certificates with QR verification via REST API</p>
+    </div>
+
+    <!-- Quick Start -->
+    <h2 class="section-title">⚡ Quick Start</h2>
+
+    <div class="endpoint-card">
+      <div class="endpoint-body">
+        <h4>1. Get an API key</h4>
+<pre>curl -X POST https://buildcertificates.com/api/v1/register \
+  -H "Content-Type: application/json" \
+  -d '{"email": "you@example.com"}'</pre>
+
+        <h4>2. Generate a certificate</h4>
+<pre>curl -X POST https://buildcertificates.com/api/v1/generate \
+  -H "Content-Type: application/json" \
+  -H "X-API-Key: bcrt_YOUR_KEY" \
+  -d '{
+    "recipient": { "name": "Jane Smith" },
+    "certificate": {
+      "title": "Certificate of Completion",
+      "course": "Advanced Web Development",
+      "date": "2026-04-16",
+      "issuer": "Acme Academy",
+      "issuer_title": "Director of Education"
+    },
+    "options": {
+      "template": "elegant",
+      "verification": true
+    }
+  }'</pre>
+      </div>
+    </div>
+
+    <!-- Endpoints -->
+    <h2 class="section-title">📡 Endpoints</h2>
+
+    <!-- Generate -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method-badge method-post">POST</span>
+        <span class="endpoint-path">/api/v1/generate</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Generate a single PDF certificate with optional QR verification.</p>
+        <h4>Request Body</h4>
+<pre>{
+  "recipient": {
+    "name": "Jane Smith"         // Required
+  },
+  "certificate": {
+    "title": "Certificate of Completion",
+    "course": "Web Development",
+    "date": "2026-04-16",
+    "issuer": "Acme Academy",
+    "issuer_title": "Director"
+  },
+  "options": {
+    "template": "elegant",       // elegant | modern | formal
+    "color": "#C5A55A",          // Accent color (hex)
+    "verification": true,        // Enable QR code
+    "pageSize": "letter"         // letter | A4
+  }
+}</pre>
+        <h4>Response</h4>
+<pre>{
+  "success": true,
+  "pdf": "JVBERi0xLjQ...",      // Base64 PDF
+  "pages": 1,
+  "sizeBytes": 45231,
+  "verification": {
+    "id": "a1B2c3D4e5F6",
+    "url": "https://buildcertificates.com/verify.html?id=a1B2c3D4e5F6"
+  },
+  "template": "elegant",
+  "usage": { "used": 1, "limit": 25, "remaining": 24 }
+}</pre>
+      </div>
+    </div>
+
+    <!-- Bulk -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method-badge method-post">POST</span>
+        <span class="endpoint-path">/api/v1/bulk</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Generate certificates for multiple recipients in one request. <strong>Starter plan and above.</strong></p>
+        <h4>Request Body</h4>
+<pre>{
+  "recipients": [
+    { "name": "Jane Smith" },
+    { "name": "John Doe" },
+    { "name": "Alice Johnson" }
+  ],
+  "certificate": {
+    "title": "Certificate of Completion",
+    "course": "Team Leadership Workshop",
+    "issuer": "Acme Corp"
+  },
+  "options": { "template": "elegant" }
+}</pre>
+        <h4>Response</h4>
+<pre>{
+  "success": true,
+  "generated": 3,
+  "certificates": [
+    { "recipient": "Jane Smith", "pdf": "...", "verification": { "id": "...", "url": "..." } },
+    { "recipient": "John Doe", "pdf": "...", "verification": { "id": "...", "url": "..." } },
+    ...
+  ]
+}</pre>
+      </div>
+    </div>
+
+    <!-- Verify -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method-badge method-get">GET</span>
+        <span class="endpoint-path">/api/v1/verify/{id}</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Public endpoint — no API key required. Verify a certificate's authenticity by its ID.</p>
+<pre>{
+  "success": true,
+  "verified": true,
+  "certificate": {
+    "recipient": "Jane Smith",
+    "title": "Certificate of Completion",
+    "course": "Advanced Web Development",
+    "issuer": "Acme Academy",
+    "dateIssued": "2026-04-16"
+  }
+}</pre>
+      </div>
+    </div>
+
+    <!-- Register -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method-badge method-post">POST</span>
+        <span class="endpoint-path">/api/v1/register</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Register for a free API key. Keys use the <code>bcrt_</code> prefix.</p>
+<pre>// Request
+{ "email": "you@example.com" }
+
+// Response
+{
+  "success": true,
+  "api_key": "bcrt_aBcDeFgHiJkL...",
+  "tier": "Free",
+  "limits": { "certsPerMonth": 25, "ratePerMinute": 5 }
+}</pre>
+      </div>
+    </div>
+
+    <!-- Usage -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method-badge method-get">GET</span>
+        <span class="endpoint-path">/api/v1/usage</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Check your current quota and usage.</p>
+      </div>
+    </div>
+
+    <!-- Health -->
+    <div class="endpoint-card">
+      <div class="endpoint-header">
+        <span class="method-badge method-get">GET</span>
+        <span class="endpoint-path">/api/v1/health</span>
+      </div>
+      <div class="endpoint-body">
+        <p>Service health check. No authentication required.</p>
+      </div>
+    </div>
+
+    <!-- Templates -->
+    <h2 class="section-title">🎨 Templates</h2>
+    <table class="tier-table">
+      <tr><th>Template</th><th>Style</th><th>Best For</th></tr>
+      <tr><td><strong>elegant</strong> (default)</td><td>Gold & navy, ornamental borders</td><td>Courses, workshops, training</td></tr>
+      <tr><td><strong>modern</strong></td><td>Clean, accent bar, left-aligned</td><td>Tech, bootcamps, conferences</td></tr>
+      <tr><td><strong>formal</strong></td><td>Academic diploma, double border, seal</td><td>Universities, certifications</td></tr>
+    </table>
+
+    <!-- Pricing -->
+    <h2 class="section-title" id="pricing">💎 Pricing</h2>
+    <table class="tier-table">
+      <tr><th>Feature</th><th>Free</th><th>Starter</th><th>Pro</th><th>Business</th></tr>
+      <tr><td>Certs/month</td><td>25</td><td>500</td><td>5,000</td><td>25,000</td></tr>
+      <tr><td>Templates</td><td>Elegant only</td><td>All 3</td><td>All 3</td><td>All 3</td></tr>
+      <tr><td>Watermark</td><td>Yes</td><td>No</td><td>No</td><td>No</td></tr>
+      <tr><td>Bulk API</td><td>—</td><td>50/batch</td><td>100/batch</td><td>500/batch</td></tr>
+      <tr><td>QR Verification</td><td>✅</td><td>✅</td><td>✅</td><td>✅</td></tr>
+      <tr><td>Rate limit</td><td>5/min</td><td>30/min</td><td>150/min</td><td>500/min</td></tr>
+    </table>
+  </div>
+
+  <footer class="site-footer">
+    <p>© 2026 BuildCertificates · <a href="/api/docs">API</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+  </footer>
+</body>
+</html>
