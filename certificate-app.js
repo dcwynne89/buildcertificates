@@ -83,40 +83,65 @@
 
     const html = buildPreviewHtml({ name, title, course, dateStr, issuer, issuerTitle, color, template });
 
-    // Scale: fit 1100×850 certificate into the preview panel
-    // The previewBody is roughly 500px wide — scale to fill it
+    // Certificate native dimensions (matching template HTML)
     const CERT_W = 1100, CERT_H = 850;
     const previewBody = document.getElementById("previewBody");
-    const panelW = previewBody.offsetWidth || 480;
-    const scale  = Math.min((panelW - 8) / CERT_W, 400 / CERT_H);
-    const dispW  = Math.round(CERT_W * scale);
-    const dispH  = Math.round(CERT_H * scale);
 
+    // Build DOM once
     let wrapper = document.getElementById("previewWrapper");
     let iframe  = document.getElementById("previewIframe");
 
     if (!wrapper) {
       previewBody.innerHTML = "";
-      previewBody.style.cssText = "padding:0;background:#555;display:flex;align-items:flex-start;justify-content:center;";
 
       wrapper = document.createElement("div");
       wrapper.id = "previewWrapper";
-      wrapper.style.cssText = `position:relative;overflow:hidden;flex-shrink:0;`;
+      // CSS handles box-shadow & border-radius via #previewWrapper rule
+      wrapper.style.cssText = "position:relative;overflow:hidden;flex-shrink:0;";
       previewBody.appendChild(wrapper);
 
       iframe = document.createElement("iframe");
       iframe.id = "previewIframe";
-      iframe.style.cssText = `position:absolute;top:0;left:0;width:${CERT_W}px;height:${CERT_H}px;border:none;`;
+      iframe.style.cssText = `position:absolute;top:0;left:0;width:${CERT_W}px;height:${CERT_H}px;border:none;display:block;`;
+      iframe.setAttribute("sandbox", "allow-same-origin");
       wrapper.appendChild(iframe);
+
+      // Re-scale whenever the panel resizes (e.g. window resize)
+      if (window.ResizeObserver) {
+        const ro = new ResizeObserver(() => _applyScale(CERT_W, CERT_H));
+        ro.observe(previewBody);
+      }
     }
 
-    // Apply scale via wrapper clip + iframe transform
+    _applyScale(CERT_W, CERT_H);
+    iframe.srcdoc = html;
+  }
+
+  function _applyScale(certW, certH) {
+    const wrapper = document.getElementById("previewWrapper");
+    const previewBody = document.getElementById("previewBody");
+    const iframe  = document.getElementById("previewIframe");
+    if (!wrapper || !iframe) return;
+
+    // Available space: panel width/height minus 32px padding budget (16px each side)
+    const PAD = 32;
+    const availW = (previewBody.offsetWidth  || 500) - PAD;
+    const availH = (previewBody.offsetHeight || 460) - PAD;
+
+    // Scale to fit both dimensions, preserving aspect ratio
+    const scaleW = availW / certW;
+    const scaleH = availH / certH;
+    const scale  = Math.min(scaleW, scaleH, 1); // never upscale beyond 100%
+
+    const dispW = Math.round(certW * scale);
+    const dispH = Math.round(certH * scale);
+
     wrapper.style.width  = dispW + "px";
     wrapper.style.height = dispH + "px";
     iframe.style.transform       = `scale(${scale})`;
     iframe.style.transformOrigin = "top left";
-    iframe.srcdoc = html;
   }
+
 
   // -- Build preview HTML (mirrors Chromium templates exactly) --
   function buildPreviewHtml({ name, title, course, dateStr, issuer, issuerTitle, color, template }) {

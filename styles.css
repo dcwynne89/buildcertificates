@@ -306,7 +306,10 @@ a:hover { color: var(--accent-hover); }
   border-radius: var(--radius);
   position: sticky;
   top: 80px;
-  max-height: calc(100vh - 100px);
+  /* Lock panel height so preview is always fully visible */
+  height: calc(100vh - 120px);
+  min-height: 480px;
+  max-height: 800px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
@@ -316,143 +319,43 @@ a:hover { color: var(--accent-hover); }
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.75rem 1rem;
+  padding: 0.65rem 1rem;
   border-bottom: 1px solid var(--border);
+  flex-shrink: 0;
 }
 
 .preview-header h3 {
-  font-size: 0.85rem;
+  font-size: 0.82rem;
   font-weight: 600;
   color: var(--text-secondary);
+  letter-spacing: 0.3px;
+}
+
+.preview-badge {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  background: rgba(255,255,255,0.04);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 2px 8px;
 }
 
 .preview-body {
   flex: 1;
-  padding: 1rem;
-  overflow-y: auto;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #f8f6f2;
-  min-height: 400px;
-}
-
-.preview-cert {
-  width: 100%;
-  aspect-ratio: 11 / 8.5;
-  background: #ffffff;
-  border-radius: 4px;
-  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-  padding: 24px;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  /* Neutral dark background — no harsh color showing through */
+  background: #1a1b28;
   overflow: hidden;
+  position: relative;
 }
 
-.preview-cert .border-frame {
-  position: absolute;
-  inset: 8px;
-  border: 2px solid var(--accent);
+/* Preview iframe wrapper — sized dynamically by JS */
+#previewWrapper {
+  box-shadow: 0 8px 40px rgba(0,0,0,0.6), 0 2px 8px rgba(0,0,0,0.4);
   border-radius: 2px;
-  pointer-events: none;
-}
-
-.preview-cert .inner-frame {
-  position: absolute;
-  inset: 14px;
-  border: 1px solid var(--accent);
-  border-radius: 1px;
-  pointer-events: none;
-}
-
-.preview-cert .cert-ornament {
-  font-size: 14px;
-  color: var(--accent);
-  margin-bottom: 6px;
-}
-
-.preview-cert .cert-title {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: #1B365D;
-  margin-bottom: 4px;
-}
-
-.preview-cert .cert-divider {
-  width: 120px;
-  height: 1px;
-  background: var(--accent);
-  margin: 8px 0;
-}
-
-.preview-cert .cert-presented {
-  font-size: 9px;
-  color: #888;
-  margin-bottom: 8px;
-}
-
-.preview-cert .cert-recipient {
-  font-size: 24px;
-  font-weight: 700;
-  color: #1B365D;
-  margin-bottom: 4px;
-  text-align: center;
-  padding: 0 20px;
-}
-
-.preview-cert .cert-name-line {
-  width: 200px;
-  height: 1px;
-  background: var(--accent);
-  margin-bottom: 10px;
-}
-
-.preview-cert .cert-course {
-  font-size: 10px;
-  color: #555;
-  text-align: center;
-  padding: 0 30px;
-  margin-bottom: 10px;
-}
-
-.preview-cert .cert-date {
-  font-size: 9px;
-  color: #888;
-  margin-bottom: 12px;
-}
-
-.preview-cert .cert-footer {
-  display: flex;
-  justify-content: center;
-  align-items: flex-end;
-  gap: 40px;
-  width: 80%;
-}
-
-.preview-cert .cert-issuer {
-  text-align: center;
-}
-
-.preview-cert .cert-sig-line {
-  width: 100px;
-  height: 1px;
-  background: #999;
-  margin-bottom: 4px;
-}
-
-.preview-cert .cert-issuer-name {
-  font-size: 9px;
-  font-weight: 600;
-  color: #333;
-}
-
-.preview-cert .cert-issuer-title {
-  font-size: 7px;
-  color: #888;
+  overflow: hidden;
 }
 
 /* ── Toast ── */
@@ -499,7 +402,12 @@ a:hover { color: var(--accent-hover); }
   }
   .preview-panel {
     position: static;
-    max-height: 500px;
+    height: auto;
+    min-height: 360px;
+    max-height: none;
+  }
+  .preview-body {
+    min-height: 320px;
   }
   .hero-banner h1 { font-size: 1.6rem; }
   .navbar { padding: 0.75rem 1rem; }
