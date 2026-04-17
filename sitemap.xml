@@ -13,10 +13,40 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://buildcertificates.com/verify.html</loc>
+    <loc>https://buildcertificates.com/blog/</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://buildcertificates.com/blog/how-to-create-certificate-of-completion.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://buildcertificates.com/blog/bulk-certificate-generation-for-courses.html</loc>
     <lastmod>2026-04-17</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://buildcertificates.com/blog/qr-code-certificate-verification.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://buildcertificates.com/blog/free-certificate-templates.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://buildcertificates.com/verify.html</loc>
+    <lastmod>2026-04-17</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
   </url>
   <url>
     <loc>https://buildcertificates.com/about.html</loc>
