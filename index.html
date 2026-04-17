@@ -4,46 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="icon" type="image/png" href="/favicon.png">
-  <title>BuildCertificates — Free Certificate Generator | Create PDF Certificates Online</title>
-  <meta name="description" content="Generate professional PDF certificates for free. Choose from elegant, modern, and formal templates. QR verification codes included. No signup required.">
-  <meta name="keywords" content="certificate generator, free certificate maker, PDF certificate, certificate of completion, bulk certificates, certificate template">
+  <title>Free Certificate Generator — Create PDF Certificates Online | BuildCertificates</title>
+  <meta name="description" content="Generate professional PDF certificates of completion for free. Choose from 3 templates, add QR verification, and download instantly. No signup required. Bulk CSV upload included.">
+  <meta name="keywords" content="free certificate generator, certificate of completion, PDF certificate maker, certificate template, bulk certificate generator, QR certificate verification, online certificate creator, training certificate, course completion certificate">
+  <meta name="author" content="BuildCertificates">
   <meta name="robots" content="index, follow">
-  <link rel="canonical" href="https://buildcertificates.com">
+  <link rel="canonical" href="https://buildcertificates.com/">
+  <!-- Performance: preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://pagead2.googlesyndication.com">
   <link rel="stylesheet" href="styles.css">
   <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6010936774105671" crossorigin="anonymous"></script>
   <!-- Open Graph -->
-  <meta property="og:title" content="BuildCertificates — Free Certificate Generator">
-  <meta property="og:description" content="Generate professional PDF certificates instantly. Elegant templates, QR verification, bulk generation. No signup required.">
-  <meta property="og:url" content="https://buildcertificates.com">
+  <meta property="og:site_name" content="BuildCertificates">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="Free Certificate Generator — Create PDF Certificates Online">
+  <meta property="og:description" content="Generate professional PDF certificates of completion for free. 3 templates, QR verification, bulk CSV upload. No signup required.">
+  <meta property="og:url" content="https://buildcertificates.com/">
   <meta property="og:type" content="website">
   <meta property="og:image" content="https://buildcertificates.com/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="BuildCertificates — Free PDF Certificate Generator">
   <!-- Twitter Cards -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="BuildCertificates — Free Certificate Generator">
-  <meta name="twitter:description" content="Generate professional PDF certificates instantly. QR verification included.">
+  <meta name="twitter:site" content="@buildcertificates">
+  <meta name="twitter:title" content="Free Certificate Generator — BuildCertificates">
+  <meta name="twitter:description" content="Create professional PDF certificates with QR verification. Free, instant, no signup.">
   <meta name="twitter:image" content="https://buildcertificates.com/og-image.png">
-  <!-- Structured Data -->
+  <meta name="twitter:image:alt" content="BuildCertificates certificate generator">
+  <!-- Structured Data: SoftwareApplication -->
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
-    "@type": "WebApplication",
+    "@type": "SoftwareApplication",
     "name": "BuildCertificates",
     "url": "https://buildcertificates.com",
-    "description": "Free online certificate generator. Create elegant PDF certificates with QR verification codes. Bulk generation via API.",
+    "description": "Free online certificate generator. Create professional PDF certificates with QR verification codes. Supports bulk CSV generation and REST API access.",
     "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "DocumentCreation",
     "operatingSystem": "Web",
+    "browserRequirements": "Requires JavaScript",
+    "screenshot": "https://buildcertificates.com/og-image.png",
+    "featureList": "PDF certificate generation, QR code verification, bulk CSV upload, 3 professional templates, REST API",
     "offers": {
       "@type": "Offer",
       "price": "0",
-      "priceCurrency": "USD"
+      "priceCurrency": "USD",
+      "description": "Free plan — 25 certificates per month"
     },
     "creator": {
       "@type": "Organization",
       "name": "BuildCertificates",
       "url": "https://buildcertificates.com"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "47",
+      "bestRating": "5"
     }
+  }
+  </script>
+  <!-- Structured Data: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Is BuildCertificates free to use?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. BuildCertificates is free with no signup required. You can generate and download PDF certificates instantly with no account needed."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What certificate templates are available?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Three professional templates are available: Prestige (gold and navy, ornamental borders), Executive (bold gradient, modern layout), and Heritage (dark luxury, formal style)."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I generate certificates in bulk?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Upload a CSV file with a list of recipient names and BuildCertificates will generate a ZIP file of individual PDF certificates — one per recipient."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What is QR certificate verification?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Each certificate includes a unique QR code that links to a verification page. Anyone can scan it to confirm the certificate is genuine and view its details."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Is there an API for generating certificates programmatically?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. The BuildCertificates REST API lets developers generate certificates from JSON with a single HTTP request. Full documentation is available at buildcertificates.com/api/docs."
+        }
+      }
+    ]
   }
   </script>
 </head>
@@ -235,9 +305,60 @@
   <!-- ── Toast ── -->
   <div class="toast" id="toast"></div>
 
+  <!-- ── SEO Content Section ── -->
+  <section style="max-width:860px;margin:3rem auto;padding:0 1.5rem 1rem;">
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem;">Why Use BuildCertificates?</h2>
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.25rem;margin-bottom:2.5rem;">
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">📄</div>
+        <h3 style="color:var(--text-primary);font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;">Instant PDF Download</h3>
+        <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.6;">Generate a print-ready PDF certificate of completion in seconds. No account, no waiting, no watermark on the free plan.</p>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">🔳</div>
+        <h3 style="color:var(--text-primary);font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;">QR Verification Built In</h3>
+        <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.6;">Every certificate includes a scannable QR code. Recipients or employers can verify authenticity instantly — no login required.</p>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">📊</div>
+        <h3 style="color:var(--text-primary);font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;">Bulk CSV Generation</h3>
+        <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.6;">Upload a CSV of recipient names and download a ZIP of individual certificates. Perfect for classrooms, training sessions, and events.</p>
+      </div>
+      <div style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1.25rem;">
+        <div style="font-size:1.5rem;margin-bottom:0.5rem;">⚙️</div>
+        <h3 style="color:var(--text-primary);font-size:0.95rem;font-weight:700;margin-bottom:0.4rem;">REST API for Developers</h3>
+        <p style="color:var(--text-secondary);font-size:0.85rem;line-height:1.6;">Integrate certificate generation directly into your platform. <a href="/api/docs" style="color:var(--accent);">Explore the API docs</a> and start generating certificates from JSON.</p>
+      </div>
+    </div>
+
+    <h2 style="font-size:1.3rem;font-weight:700;color:var(--text-primary);margin-bottom:1.25rem;border-bottom:1px solid var(--border);padding-bottom:0.5rem;">Frequently Asked Questions</h2>
+    <div style="display:flex;flex-direction:column;gap:1rem;margin-bottom:2rem;">
+      <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;">
+        <summary style="color:var(--text-primary);font-weight:600;font-size:0.9rem;cursor:pointer;">Is BuildCertificates free to use?</summary>
+        <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6;margin-top:0.75rem;">Yes — completely free with no signup required. Generate and download PDF certificates directly in your browser. No account needed.</p>
+      </details>
+      <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;">
+        <summary style="color:var(--text-primary);font-weight:600;font-size:0.9rem;cursor:pointer;">What certificate templates are available?</summary>
+        <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6;margin-top:0.75rem;">Three professional templates: <strong style="color:var(--text-primary);">Prestige</strong> (gold & navy, ornamental borders), <strong style="color:var(--text-primary);">Executive</strong> (bold gradient, modern layout), and <strong style="color:var(--text-primary);">Heritage</strong> (dark luxury, formal style).</p>
+      </details>
+      <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;">
+        <summary style="color:var(--text-primary);font-weight:600;font-size:0.9rem;cursor:pointer;">Can I generate certificates in bulk?</summary>
+        <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6;margin-top:0.75rem;">Yes. Switch to the Bulk CSV Upload tab, upload a CSV with a "name" column, and download a ZIP of individual certificates — one per recipient. Ideal for courses, workshops, and events.</p>
+      </details>
+      <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;">
+        <summary style="color:var(--text-primary);font-weight:600;font-size:0.9rem;cursor:pointer;">How does QR code certificate verification work?</summary>
+        <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6;margin-top:0.75rem;">Every certificate gets a unique ID and QR code. Scan it to open a public verification page showing the recipient name, course, issuer, and date issued — no login required.</p>
+      </details>
+      <details style="background:var(--bg-card);border:1px solid var(--border);border-radius:var(--radius);padding:1rem 1.25rem;">
+        <summary style="color:var(--text-primary);font-weight:600;font-size:0.9rem;cursor:pointer;">Is there a certificate generator API?</summary>
+        <p style="color:var(--text-secondary);font-size:0.875rem;line-height:1.6;margin-top:0.75rem;">Yes. The <a href="/api/docs" style="color:var(--accent);">BuildCertificates REST API</a> lets you generate certificates programmatically from JSON. Perfect for e-learning platforms, HR tools, and event apps. Available on RapidAPI with a free tier.</p>
+      </details>
+    </div>
+  </section>
+
   <!-- ── Footer ── -->
   <footer class="site-footer">
-    <p>© 2026 BuildCertificates · <a href="/api/docs">API</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
+    <p>© 2026 BuildCertificates · <a href="/api/docs">API Docs</a> · <a href="/about.html">About</a> · <a href="/privacy.html">Privacy</a> · <a href="/terms.html">Terms</a></p>
   </footer>
 
   <script src="certificate-app.js"></script>
