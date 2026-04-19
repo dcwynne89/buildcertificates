@@ -18,6 +18,25 @@
   external_node_modules = ["@sparticuz/chromium"]
   included_files = ["node_modules/@sparticuz/chromium/**"]
 
+# ── Bot Blocking ──
+[[redirects]]
+  from   = "/wp-admin/*"
+  to     = "/"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/wordpress/*"
+  to     = "/"
+  status = 301
+  force  = true
+
+[[redirects]]
+  from   = "/.env"
+  to     = "/"
+  status = 301
+  force  = true
+
 # ── API Redirects ──
 [[redirects]]
   from = "/api/v1/generate"
