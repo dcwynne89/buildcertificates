@@ -2,7 +2,7 @@ const fs = require('fs');
 let src = fs.readFileSync('certificate-app.js', 'utf8');
 
 // Find the old buildPreviewHtml function boundaries
-const start = src.indexOf('  // \u2500\u2500 Build preview HTML (mirrors Chromium templates exactly) \u2500\u2500');
+const start = src.indexOf('  // -- Build preview HTML (mirrors Chromium templates exactly) --');
 const end   = src.indexOf('  // \u2500\u2500 Color sync \u2500\u2500');
 if (start === -1 || end === -1) {
   console.error('Markers not found! start=' + start + ' end=' + end);

@@ -1,228 +1,322 @@
   // -- Build preview HTML (mirrors Chromium templates exactly) --
   function buildPreviewHtml({ name, title, course, dateStr, issuer, issuerTitle, color, template }) {
-    const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+    const e = s => String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
 
-    // ============================================================
-    // ELEGANT
-    // ============================================================
+    // ================================================================
+    // PRESTIGE (elegant) — Classic Academy
+    // Full-width cream, gold double-border, centered 4-zone layout
+    // ================================================================
     if (template === 'elegant') {
-      const navy = '#1B365D';
-      const gold = '#C5A55A';
-      const words = title.split(' ');
-      const mid = Math.ceil(words.length / 2);
-      const line1 = words.slice(0, mid).join(' ').toUpperCase();
-      const line2 = words.slice(mid).join(' ').toUpperCase();
-      const C = (transform) => `<svg viewBox="0 0 120 120" style="width:120px;height:120px;" xmlns="http://www.w3.org/2000/svg">
-        <rect x="0" y="0" width="22" height="22" fill="${navy}"/>
-        <line x1="22" y1="4" x2="116" y2="4" stroke="${gold}" stroke-width="2.5"/>
-        <line x1="22" y1="11" x2="116" y2="11" stroke="${navy}" stroke-width="7"/>
-        <line x1="4" y1="22" x2="4" y2="116" stroke="${gold}" stroke-width="2.5"/>
-        <line x1="11" y1="22" x2="11" y2="116" stroke="${navy}" stroke-width="7"/>
-        <path d="M22,22 Q30,22 30,30 Q30,38 38,38" stroke="${gold}" stroke-width="1.5" fill="none"/>
-        <circle cx="38" cy="38" r="3" fill="${gold}" opacity="0.7"/>
-        <path d="M56,4 L56,0 M56,0 L52,4 M56,0 L60,4" stroke="${gold}" stroke-width="1.2" fill="none"/>
-        <path d="M4,56 L0,56 M0,56 L4,52 M0,56 L4,60" stroke="${gold}" stroke-width="1.2" fill="none"/>
+      const navy = '#1B365D', gold = '#C9A84C', cream = '#F9F6EE';
+
+      const corner = `<svg viewBox="0 0 56 56" xmlns="http://www.w3.org/2000/svg" style="width:56px;height:56px;display:block;">
+        <line x1="0" y1="1.25" x2="56" y2="1.25" stroke="${gold}" stroke-width="2.5"/>
+        <line x1="1.25" y1="0" x2="1.25" y2="56" stroke="${gold}" stroke-width="2.5"/>
+        <line x1="6" y1="6" x2="50" y2="6" stroke="${gold}" stroke-width="0.8" opacity="0.5"/>
+        <line x1="6" y1="6" x2="6" y2="50" stroke="${gold}" stroke-width="0.8" opacity="0.5"/>
+        <rect x="0" y="0" width="18" height="18" fill="${gold}" opacity="0.08"/>
+        <circle cx="14" cy="14" r="3.5" fill="${gold}"/>
       </svg>`;
-      const seal = `<svg viewBox="0 0 80 80" style="width:68px;height:68px;" xmlns="http://www.w3.org/2000/svg">
-        <path d="M40,4 L68,14 L68,42 Q68,62 40,76 Q12,62 12,42 L12,14 Z" fill="none" stroke="${gold}" stroke-width="2"/>
-        <rect x="30" y="30" width="20" height="14" rx="1" fill="none" stroke="${navy}" stroke-width="1.5"/>
-        <line x1="40" y1="30" x2="40" y2="44" stroke="${navy}" stroke-width="1.2"/>
-        <line x1="33" y1="34" x2="38" y2="34" stroke="${navy}" stroke-width="0.8"/>
-        <line x1="42" y1="34" x2="47" y2="34" stroke="${navy}" stroke-width="0.8"/>
-        <circle cx="40" cy="60" r="2" fill="${gold}"/>
+
+      const flourish = `<svg viewBox="0 0 680 22" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:680px;height:22px;display:block;margin:0 auto;">
+        <line x1="0" y1="11" x2="310" y2="11" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
+        <line x1="370" y1="11" x2="680" y2="11" stroke="${gold}" stroke-width="0.8" opacity="0.6"/>
+        <rect x="330" y="7" width="8" height="8" fill="${gold}" transform="rotate(45,334,11)"/>
+        <rect x="320" y="8.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,322.5,11)"/>
+        <rect x="345" y="8.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,347.5,11)"/>
+        <line x1="308" y1="11" x2="295" y2="11" stroke="${gold}" stroke-width="2" opacity="0.3"/>
+        <line x1="372" y1="11" x2="385" y2="11" stroke="${gold}" stroke-width="2" opacity="0.3"/>
       </svg>`;
+
+      const nameRule = `<svg viewBox="0 0 520 12" xmlns="http://www.w3.org/2000/svg" style="width:520px;max-width:100%;height:12px;display:block;margin:0 auto;">
+        <line x1="0" y1="6" x2="240" y2="6" stroke="${gold}" stroke-width="1.5"/>
+        <rect x="254" y="2" width="8" height="8" fill="${gold}" transform="rotate(45,258,6)"/>
+        <rect x="246" y="3.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,248.5,6)"/>
+        <rect x="267" y="3.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,269.5,6)"/>
+        <line x1="280" y1="6" x2="520" y2="6" stroke="${gold}" stroke-width="1.5"/>
+      </svg>`;
+
+      const sealSvg = `<svg viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg" style="width:80px;height:80px;">
+        <circle cx="40" cy="40" r="38" fill="none" stroke="${gold}" stroke-width="2"/>
+        <circle cx="40" cy="40" r="31" fill="none" stroke="${gold}" stroke-width="0.7" stroke-dasharray="3,3"/>
+        <path d="M16,48 Q10,40 13,31 Q16,23 22,26 Q17,34 19,41 Q21,47 16,48Z" fill="${gold}" opacity="0.7"/>
+        <path d="M64,48 Q70,40 67,31 Q64,23 58,26 Q63,34 61,41 Q59,47 64,48Z" fill="${gold}" opacity="0.7"/>
+        <path d="M20,56 Q12,48 15,39 Q18,30 25,33 Q20,41 22,48 Q24,54 20,56Z" fill="${gold}" opacity="0.5"/>
+        <path d="M60,56 Q68,48 65,39 Q62,30 55,33 Q60,41 58,48 Q56,54 60,56Z" fill="${gold}" opacity="0.5"/>
+        <path d="M40,14 L56,20 L56,40 Q56,55 40,64 Q24,55 24,40 L24,20 Z" fill="${navy}" opacity="0.85"/>
+        <path d="M40,18 L52,23 L52,40 Q52,52 40,60 Q28,52 28,40 L28,23 Z" fill="none" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+        <rect x="33" y="30" width="14" height="10" rx="0.5" fill="none" stroke="${gold}" stroke-width="1.2"/>
+        <line x1="40" y1="30" x2="40" y2="40" stroke="${gold}" stroke-width="0.9"/>
+        <circle cx="40" cy="63" r="2.5" fill="${gold}"/>
+      </svg>`;
+
       return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600&family=Dancing+Script:wght@600&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}html,body{width:1100px;height:850px;overflow:hidden;background:#FDFAF3;}
-.page{width:1100px;height:850px;position:relative;background:#FDFAF3;display:flex;flex-direction:column;align-items:center;overflow:hidden;}
-.corner{position:absolute;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
-.b-top{position:absolute;top:11px;left:112px;right:112px;height:7px;background:${navy};}
-.b-top::before{content:"";position:absolute;top:-4px;left:0;right:0;height:2.5px;background:${gold};}
-.b-bottom{position:absolute;bottom:11px;left:112px;right:112px;height:7px;background:${navy};}
-.b-bottom::before{content:"";position:absolute;bottom:-4px;left:0;right:0;height:2.5px;background:${gold};}
-.b-left{position:absolute;left:11px;top:112px;bottom:112px;width:7px;background:${navy};}
-.b-left::before{content:"";position:absolute;left:-4px;top:0;bottom:0;width:2.5px;background:${gold};}
-.b-right{position:absolute;right:11px;top:112px;bottom:112px;width:7px;background:${navy};}
-.b-right::before{content:"";position:absolute;right:-4px;top:0;bottom:0;width:2.5px;background:${gold};}
-.inner-border{position:absolute;top:24px;left:24px;right:24px;bottom:24px;border:1px solid ${gold};pointer-events:none;}
-.content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;justify-content:center;width:100%;flex:1;padding:0 130px 0;}
-.t1{font-family:'Cinzel',serif;font-size:52px;font-weight:700;color:${navy};letter-spacing:6px;text-align:center;line-height:1;}
-.t2{font-family:'Cinzel',serif;font-size:38px;font-weight:600;color:${navy};letter-spacing:4px;text-align:center;line-height:1;margin-bottom:10px;}
-.presented{font-family:'EB Garamond',serif;font-style:italic;font-size:16px;color:#666;margin-bottom:5px;}
-.recname{font-family:'Cormorant Garamond',serif;font-size:72px;font-weight:700;color:${navy};text-align:center;line-height:1;letter-spacing:2px;margin-bottom:4px;}
-.nrule{width:480px;height:1.5px;background:linear-gradient(90deg,transparent,${gold} 20%,${gold} 80%,transparent);margin:6px auto 12px;}
-.ct{font-family:'Cinzel',serif;font-size:13px;font-weight:600;color:#444;letter-spacing:3px;text-align:center;margin-bottom:4px;}
-.cn{font-family:'Cinzel',serif;font-size:15px;font-weight:700;color:#222;letter-spacing:3px;text-align:center;margin-bottom:8px;}
-.ddate{font-family:'EB Garamond',serif;font-size:14px;color:#888;text-align:center;margin-bottom:6px;}
-.iissuer{font-family:'Cinzel',serif;font-size:16px;font-weight:700;color:${navy};letter-spacing:4px;text-align:center;}
-.footer{position:relative;z-index:5;display:flex;align-items:flex-end;justify-content:space-between;width:100%;padding:0 100px 28px;}
-.sig{display:flex;flex-direction:column;}.siglabel{font-family:'EB Garamond',serif;font-size:10px;color:#888;margin-bottom:3px;}
-.sigscript{font-family:'Dancing Script',cursive;font-size:22px;color:#333;line-height:1;margin-bottom:3px;}
-.sigline{width:150px;height:1px;background:#aaa;margin-bottom:5px;}.signame{font-family:'EB Garamond',serif;font-size:11px;color:#555;}
-</style></head><body><div class="page">
-<div class="b-top"></div><div class="b-bottom"></div><div class="b-left"></div><div class="b-right"></div>
-<div class="inner-border"></div>
-<div class="corner c-tl">${C()}</div><div class="corner c-tr">${C()}</div>
-<div class="corner c-bl">${C()}</div><div class="corner c-br">${C()}</div>
-<div class="content">
-  <div class="t1">${esc(line1)}</div>${line2 ? `<div class="t2">${esc(line2)}</div>` : ''}
-  <div class="presented">This is proudly presented to</div>
-  <div class="recname">${esc(name)}</div><div class="nrule"></div>
-  ${course ? `<div class="ct">FOR SUCCESSFULLY COMPLETING</div><div class="cn">${esc(course.toUpperCase())}</div>` : ''}
-  <div class="ddate">Date: ${esc(dateStr)}</div>
-  ${issuer ? `<div class="iissuer">${esc(issuer.toUpperCase())}</div>` : ''}
-</div>
-<div class="footer">
-  <div class="sig">
-    <div class="siglabel">Authorized Signature:</div>
-    <div class="sigscript">${esc(issuer || 'Signature')}</div>
-    <div class="sigline"></div>
-    ${issuerTitle ? `<div class="signame">${esc(issuerTitle)}${issuer ? ', ' + esc(issuer) : ''}</div>` : ''}
-  </div>
-  <div>${seal}</div>
-  <div></div>
-</div>
-</div></body></html>`;
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,800;1,700&family=Cinzel:wght@400;600;700&family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{width:1100px;height:850px;overflow:hidden;background:${cream};}
+        .page{width:1100px;height:850px;position:relative;background:${cream};display:flex;flex-direction:column;}
+        /* Corner ornaments */
+        .corner{position:absolute;z-index:6;line-height:0;}
+        .c-tl{top:0;left:0;} .c-tr{top:0;right:0;transform:scaleX(-1);}
+        .c-bl{bottom:0;left:0;transform:scaleY(-1);} .c-br{bottom:0;right:0;transform:scale(-1);}
+        /* Border — between corners */
+        .bh{position:absolute;left:56px;right:56px;height:2.5px;background:${gold};z-index:5;}
+        .bv{position:absolute;top:56px;bottom:56px;width:2.5px;background:${gold};z-index:5;}
+        .bht{top:1.25px;} .bhb{bottom:1.25px;} .bvl{left:1.25px;} .bvr{right:1.25px;}
+        .bhi{position:absolute;left:62px;right:62px;height:0.8px;background:${gold};opacity:0.45;z-index:5;}
+        .bvi{position:absolute;top:62px;bottom:62px;width:0.8px;background:${gold};opacity:0.45;z-index:5;}
+        .bhit{top:7px;} .bhib{bottom:7px;} .bvil{left:7px;} .bvir{right:7px;}
+        /* Content area */
+        .content{position:absolute;inset:50px;display:flex;flex-direction:column;align-items:center;z-index:2;}
+        /* Zone 1 — Header */
+        .zone-header{width:100%;display:flex;flex-direction:column;align-items:center;padding-bottom:14px;}
+        .cert-title{font-family:"Cinzel",serif;font-size:30px;font-weight:700;color:${navy};letter-spacing:7px;text-transform:uppercase;text-align:center;margin-bottom:16px;}
+        /* Zone 2 — Recipient */
+        .zone-recipient{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;}
+        .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:#999;text-align:center;margin-bottom:10px;}
+        .recipient-name{font-family:"Playfair Display",serif;font-size:78px;font-weight:800;color:${navy};text-align:center;line-height:1;letter-spacing:-1px;margin-bottom:10px;}
+        /* Zone 3 — Achievement */
+        .zone-achievement{width:100%;display:flex;flex-direction:column;align-items:center;padding:6px 0 14px;}
+        .course-intro{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:#999;text-align:center;margin-bottom:7px;}
+        .course-name{font-family:"Cinzel",serif;font-size:24px;font-weight:700;color:${navy};letter-spacing:3px;text-transform:uppercase;text-align:center;}
+        /* Footer */
+        .zone-footer{width:100%;display:flex;align-items:flex-end;justify-content:space-between;padding-top:14px;border-top:1px solid rgba(201,168,76,0.3);min-height:90px;}
+        .footer-col{display:flex;flex-direction:column;justify-content:flex-end;}
+        .f-label{font-family:"EB Garamond",serif;font-size:12px;color:#bbb;text-transform:uppercase;letter-spacing:2px;margin-bottom:4px;}
+        .f-date{font-family:"EB Garamond",serif;font-size:16px;color:#777;}
+        .f-org{font-family:"Cinzel",serif;font-size:14px;font-weight:600;color:${navy};letter-spacing:1px;margin-top:2px;}
+        .sig-wrap{display:flex;flex-direction:column;align-items:center;}
+        .sig-script{font-family:"Dancing Script",cursive;font-size:32px;color:#444;line-height:1;margin-bottom:6px;}
+        .sig-line{width:220px;height:1px;background:#ccc;margin-bottom:6px;}
+        .sig-name{font-family:"EB Garamond",serif;font-size:15px;color:#555;text-align:center;}
+        .sig-title-text{font-family:"EB Garamond",serif;font-style:italic;font-size:13px;color:#999;text-align:center;}
+        .seal-wrap{display:flex;align-items:flex-end;justify-content:flex-end;}
+      </style></head><body><div class="page">
+        <div class="bh bht"></div><div class="bh bhb"></div>
+        <div class="bv bvl"></div><div class="bv bvr"></div>
+        <div class="bhi bhit"></div><div class="bhi bhib"></div>
+        <div class="bvi bvil"></div><div class="bvi bvir"></div>
+        <div class="corner c-tl">${corner}</div><div class="corner c-tr">${corner}</div>
+        <div class="corner c-bl">${corner}</div><div class="corner c-br">${corner}</div>
+        <div class="content">
+          <div class="zone-header">
+            <div class="cert-title">${e(title)}</div>
+            ${flourish}
+          </div>
+          <div class="zone-recipient">
+            <div class="presented">This certificate is proudly presented to</div>
+            <div class="recipient-name">${e(name)}</div>
+            ${nameRule}
+          </div>
+          <div class="zone-achievement">
+            ${course ? `<div class="course-intro">For successfully completing</div><div class="course-name">${e(course)}</div>` : ''}
+          </div>
+          <div class="zone-footer">
+            <div class="footer-col"><div class="f-label">Date Issued</div><div class="f-date">${e(dateStr)}</div>${issuer ? `<div class="f-org">${e(issuer)}</div>` : ''}</div>
+            <div class="footer-col"><div class="sig-wrap"><div class="sig-script">${e(issuer || 'Signature')}</div><div class="sig-line"></div>${issuer ? `<div class="sig-name">${e(issuer)}</div>` : ''}${issuerTitle ? `<div class="sig-title-text">${e(issuerTitle)}</div>` : ''}</div></div>
+            <div class="footer-col"><div class="seal-wrap">${sealSvg}</div></div>
+          </div>
+        </div>
+      </div></body></html>`;
     }
 
-    // ============================================================
-    // MODERN
-    // ============================================================
+    // ================================================================
+    // EXECUTIVE (modern) — Bold Corporate
+    // White, gradient header, all centered, 3-col footer
+    // ================================================================
     if (template === 'modern') {
-      const c = color || '#4F46E5';
+      const c = color || '#3730A3';
+      const cB = '#7C3AED';
       return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&family=Dancing+Script:wght@600&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}html,body{width:1100px;height:850px;overflow:hidden;background:#fff;}
-.page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;overflow:hidden;}
-.topbar{height:18px;background:${c};flex-shrink:0;}
-.content{flex:1;display:flex;flex-direction:column;justify-content:flex-start;padding:60px 75px 20px;}
-.mtype{font-family:'Inter',sans-serif;font-size:15px;font-weight:700;color:${c};letter-spacing:5px;text-transform:uppercase;margin-bottom:18px;}
-.mname{font-family:'Inter',sans-serif;font-size:82px;font-weight:900;color:#111;line-height:1;letter-spacing:-2px;margin-bottom:18px;}
-.mcl1{font-family:'Inter',sans-serif;font-size:24px;font-weight:600;color:#777;line-height:1.4;}
-.mcl2{font-family:'Inter',sans-serif;font-size:24px;font-weight:600;color:#777;line-height:1.4;}
-.bottom{padding:0 75px 50px;}
-.metarow{display:flex;align-items:flex-end;gap:50px;margin-bottom:22px;}
-.dateval{font-family:'Inter',sans-serif;font-size:16px;color:#111;}
-.issuval{font-family:'Inter',sans-serif;font-size:16px;font-weight:700;color:#111;}
-.siggrp{display:flex;align-items:flex-end;gap:12px;}
-.sigscript{font-family:'Dancing Script',cursive;font-size:28px;color:#333;line-height:1;margin-bottom:-4px;}
-.sigline{width:200px;height:1px;background:#ccc;margin-bottom:8px;}
-</style></head><body><div class="page">
-<div class="topbar"></div>
-<div class="content">
-  <div class="mtype">${esc(title)}</div>
-  <div class="mname">${esc(name)}</div>
-  ${course ? `<div class="mcl1">For successfully completing</div><div class="mcl2">${esc(course)}</div>` : ''}
-</div>
-<div class="bottom">
-  <div class="metarow">
-    <div>
-      <div class="dateval">${esc(dateStr)}</div>
-      ${issuer ? `<div class="issuval">${esc(issuer)}</div>` : ''}
-    </div>
-    <div class="siggrp">
-      <div class="sigscript">${esc(issuerTitle || issuer || 'Signature')}</div>
-      <div class="sigline"></div>
-    </div>
-  </div>
-</div>
-</div></body></html>`;
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Dancing+Script:wght@600;700&display=swap');
+        *{margin:0;padding:0;box-sizing:border-box;}
+        html,body{width:1100px;height:850px;overflow:hidden;background:#fff;}
+        .page{width:1100px;height:850px;background:#fff;display:flex;flex-direction:column;outline:1px solid #e8e8e8;}
+        /* Header */
+        .header{flex-shrink:0;height:190px;background:linear-gradient(135deg,${c} 0%,${cB} 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;padding:0 80px;position:relative;}
+        .header::after{content:"";position:absolute;bottom:0;left:0;right:0;height:3px;background:rgba(255,255,255,0.2);}
+        .heyebrow{font-family:"Inter",sans-serif;font-size:13px;font-weight:500;color:rgba(255,255,255,0.6);letter-spacing:6px;text-transform:uppercase;margin-bottom:10px;}
+        .htitle{font-family:"Inter",sans-serif;font-size:42px;font-weight:800;color:#fff;letter-spacing:4px;text-transform:uppercase;text-align:center;line-height:1;margin-bottom:14px;}
+        .hrule{width:240px;height:1px;background:rgba(255,255,255,0.35);}
+        /* Body */
+        .body{flex:1;display:flex;flex-direction:column;align-items:center;padding:40px 80px 0;}
+        /* Zone 2 — Recipient */
+        .zone-recipient{display:flex;flex-direction:column;align-items:center;width:100%;}
+        .presented{font-family:"Inter",sans-serif;font-size:16px;font-weight:400;color:#bbb;letter-spacing:4px;text-transform:uppercase;text-align:center;margin-bottom:10px;}
+        .recipient-name{font-family:"Inter",sans-serif;font-size:85px;font-weight:900;color:#0f0f0f;text-align:center;line-height:1;letter-spacing:-3px;margin-bottom:14px;}
+        .name-accent{width:72px;height:5px;background:${c};border-radius:3px;margin-bottom:16px;}
+        /* Zone 3 — Achievement */
+        .zone-achievement{display:flex;flex-direction:column;align-items:center;width:100%;flex:1;justify-content:flex-start;}
+        .course-intro{font-family:"Inter",sans-serif;font-size:22px;font-weight:400;color:#aaa;text-align:center;}
+        .course-name{font-family:"Inter",sans-serif;font-size:24px;font-weight:700;color:#333;text-align:center;margin-top:4px;}
+        /* Footer 3-col */
+        .footer{flex-shrink:0;display:flex;align-items:flex-end;justify-content:space-between;padding:14px 80px 38px;border-top:1.5px solid ${c};margin-top:auto;}
+        .footer-left{display:flex;flex-direction:column;gap:4px;min-width:180px;}
+        .f-org{font-family:"Inter",sans-serif;font-size:18px;font-weight:700;color:#111;}
+        .f-sub{font-family:"Inter",sans-serif;font-size:15px;color:#888;}
+        .f-date{font-family:"Inter",sans-serif;font-size:15px;color:#aaa;margin-top:2px;}
+        .footer-center{display:flex;flex-direction:column;align-items:center;flex:1;max-width:260px;}
+        .sig-script{font-family:"Dancing Script",cursive;font-size:34px;color:#333;line-height:1;margin-bottom:6px;}
+        .sig-line{width:200px;height:1px;background:#ddd;margin-bottom:6px;}
+        .sig-name{font-family:"Inter",sans-serif;font-size:14px;font-weight:600;color:#555;text-align:center;}
+        .sig-label{font-family:"Inter",sans-serif;font-size:12px;color:#bbb;letter-spacing:2px;margin-top:2px;}
+        .footer-right{display:flex;flex-direction:column;align-items:flex-end;justify-content:flex-end;min-width:80px;}
+        .qr-label{font-family:"Inter",sans-serif;font-size:10px;color:#ccc;letter-spacing:1px;text-transform:uppercase;margin-top:4px;text-align:center;}
+      </style></head><body><div class="page">
+        <div class="header">
+          <div class="heyebrow">Official Document</div>
+          <div class="htitle">${e(title)}</div>
+          <div class="hrule"></div>
+        </div>
+        <div class="body">
+          <div class="zone-recipient">
+            <div class="presented">Proudly presented to</div>
+            <div class="recipient-name">${e(name)}</div>
+            <div class="name-accent"></div>
+          </div>
+          <div class="zone-achievement">
+            ${course ? `<div class="course-intro">For successfully completing</div><div class="course-name">${e(course)}</div>` : ''}
+          </div>
+        </div>
+        <div class="footer">
+          <div class="footer-left">${issuer ? `<div class="f-org">${e(issuer)}</div>` : ''}${issuerTitle ? `<div class="f-sub">${e(issuerTitle)}</div>` : ''}<div class="f-date">${e(dateStr)}</div></div>
+          <div class="footer-center"><div class="sig-script">${e(issuer || 'Signature')}</div><div class="sig-line"></div>${issuer ? `<div class="sig-name">${e(issuer)}</div>` : ''}<div class="sig-label">Authorized Signature</div></div>
+          <div class="footer-right"></div>
+        </div>
+      </div></body></html>`;
     }
 
-    // ============================================================
-    // FORMAL
-    // ============================================================
-    const fc = color || '#6B1D2A';
-    const fg = '#B8962E';
-    const fCorner = `<svg viewBox="0 0 90 90" style="width:90px;height:90px;" xmlns="http://www.w3.org/2000/svg">
-      <line x1="0" y1="0" x2="90" y2="0" stroke="${fc}" stroke-width="3.5"/>
-      <line x1="0" y1="0" x2="0" y2="90" stroke="${fc}" stroke-width="3.5"/>
-      <line x1="4" y1="4" x2="88" y2="4" stroke="${fc}" stroke-width="1"/>
-      <line x1="4" y1="4" x2="4" y2="88" stroke="${fc}" stroke-width="1"/>
-      <path d="M10,10 Q20,8 22,18 Q24,28 14,28 Q4,28 6,18 Q8,10 14,12" fill="${fc}" opacity="0.85"/>
-      <line x1="14" y1="28" x2="14" y2="40" stroke="${fc}" stroke-width="1.5"/>
-      <path d="M14,40 Q10,36 12,32" stroke="${fc}" stroke-width="1" fill="none"/>
-      <path d="M14,40 Q18,36 16,32" stroke="${fc}" stroke-width="1" fill="none"/>
-      <line x1="28" y1="14" x2="40" y2="14" stroke="${fc}" stroke-width="1.5"/>
-      <path d="M40,14 Q36,10 32,12" stroke="${fc}" stroke-width="1" fill="none"/>
-      <path d="M40,14 Q36,18 32,16" stroke="${fc}" stroke-width="1" fill="none"/>
+    // ================================================================
+    // HERITAGE (formal) — Dark Grand
+    // Midnight navy, 140px corner ornaments, centered 4-zone,
+    // 3-col footer: medallion | signature | QR+date
+    // ================================================================
+    const bg = '#0F1729', gold = '#C9A84C', goldL = '#E8CB7A', cream = '#F5ECD7';
+
+    const corner = `<svg viewBox="0 0 140 140" xmlns="http://www.w3.org/2000/svg" style="width:140px;height:140px;display:block;">
+      <line x1="0" y1="1.25" x2="140" y2="1.25" stroke="${gold}" stroke-width="2.5"/>
+      <line x1="1.25" y1="0"  x2="1.25" y2="140" stroke="${gold}" stroke-width="2.5"/>
+      <line x1="8" y1="8" x2="132" y2="8"  stroke="${gold}" stroke-width="0.8" opacity="0.45"/>
+      <line x1="8" y1="8" x2="8"  y2="132" stroke="${gold}" stroke-width="0.8" opacity="0.45"/>
+      <rect x="0" y="0" width="34" height="34" fill="${gold}" opacity="0.1"/>
+      <rect x="21" y="21" width="14" height="14" fill="${gold}" transform="rotate(45,28,28)"/>
+      <line x1="60"  y1="0" x2="60"  y2="8" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <line x1="100" y1="0" x2="100" y2="8" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <line x1="0" y1="60"  x2="8"  y2="60"  stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <line x1="0" y1="100" x2="8"  y2="100" stroke="${gold}" stroke-width="1" opacity="0.5"/>
+      <circle cx="60"  cy="4" r="2" fill="${gold}" opacity="0.6"/>
+      <circle cx="100" cy="4" r="2" fill="${gold}" opacity="0.6"/>
+      <circle cx="4" cy="60"  r="2" fill="${gold}" opacity="0.6"/>
+      <circle cx="4" cy="100" r="2" fill="${gold}" opacity="0.6"/>
     </svg>`;
-    const flourish = `<svg viewBox="0 0 600 28" style="width:600px;height:28px;display:block;margin:0 auto;" xmlns="http://www.w3.org/2000/svg">
-      <rect x="295" y="9" width="10" height="10" fill="${fc}" transform="rotate(45,300,14)"/>
-      <line x1="0" y1="14" x2="276" y2="14" stroke="${fc}" stroke-width="1"/>
-      <path d="M276,14 Q284,14 284,8 Q284,2 290,2 Q296,2 296,8" stroke="${fc}" stroke-width="1.2" fill="none"/>
-      <line x1="600" y1="14" x2="324" y2="14" stroke="${fc}" stroke-width="1"/>
-      <path d="M324,14 Q316,14 316,8 Q316,2 310,2 Q304,2 304,8" stroke="${fc}" stroke-width="1.2" fill="none"/>
-      <path d="M230,14 Q222,14 222,8 Q222,4 228,4" stroke="${fc}" stroke-width="0.8" fill="none" opacity="0.7"/>
-      <path d="M370,14 Q378,14 378,8 Q378,4 372,4" stroke="${fc}" stroke-width="0.8" fill="none" opacity="0.7"/>
+
+    const flourish = `<svg viewBox="0 0 700 32" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:700px;height:32px;display:block;margin:0 auto;">
+      <rect x="343" y="11" width="14" height="14" fill="${gold}" transform="rotate(45,350,18)"/>
+      <rect x="335" y="14.5" width="7" height="7" fill="${gold}" opacity="0.45" transform="rotate(45,338.5,18)"/>
+      <rect x="358" y="14.5" width="7" height="7" fill="${gold}" opacity="0.45" transform="rotate(45,361.5,18)"/>
+      <line x1="0"   y1="18" x2="320" y2="18" stroke="${gold}" stroke-width="0.8" opacity="0.55"/>
+      <line x1="380" y1="18" x2="700" y2="18" stroke="${gold}" stroke-width="0.8" opacity="0.55"/>
+      <path d="M320,18 Q330,18 330,10 Q330,3 341,3" stroke="${gold}" stroke-width="1.2" fill="none"/>
+      <path d="M380,18 Q370,18 370,10 Q370,3 359,3" stroke="${gold}" stroke-width="1.2" fill="none"/>
     </svg>`;
-    const notches = Array.from({length:16},(_,i)=>{
-      const a=(i/16)*Math.PI*2;
-      const x1=(55+48*Math.cos(a)).toFixed(1), y1=(55+48*Math.sin(a)).toFixed(1);
-      const x2=(55+52*Math.cos(a)).toFixed(1), y2=(55+52*Math.sin(a)).toFixed(1);
-      return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${fc}" stroke-width="2"/>`;
-    }).join('');
-    const medal = `<svg viewBox="0 0 110 110" style="width:110px;height:110px;" xmlns="http://www.w3.org/2000/svg">
-      <circle cx="55" cy="55" r="52" fill="${fc}" opacity="0.08"/>
-      <circle cx="55" cy="55" r="52" fill="none" stroke="${fc}" stroke-width="3"/>
-      <circle cx="55" cy="55" r="44" fill="none" stroke="${fc}" stroke-width="1.5"/>
-      <circle cx="55" cy="55" r="36" fill="none" stroke="${fc}" stroke-width="0.8"/>
+
+    const nameRule = `<svg viewBox="0 0 540 10" xmlns="http://www.w3.org/2000/svg" style="width:540px;max-width:100%;height:10px;display:block;margin:0 auto;">
+      <line x1="0"  y1="5" x2="255" y2="5" stroke="${gold}" stroke-width="1.5"/>
+      <rect x="263" y="1" width="8" height="8" fill="${gold}" transform="rotate(45,267,5)"/>
+      <rect x="255" y="2.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,257.5,5)"/>
+      <rect x="277" y="2.5" width="5" height="5" fill="${gold}" opacity="0.5" transform="rotate(45,279.5,5)"/>
+      <line x1="282" y1="5" x2="540" y2="5" stroke="${gold}" stroke-width="1.5"/>
+    </svg>`;
+
+    const notches = Array.from({length:24},(_,i)=>{const a=(i/24)*Math.PI*2,x1=(55+48*Math.cos(a)).toFixed(1),y1=(55+48*Math.sin(a)).toFixed(1),x2=(55+53*Math.cos(a)).toFixed(1),y2=(55+53*Math.sin(a)).toFixed(1);return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${gold}" stroke-width="2"/>`;}).join('');
+    const medal = `<svg viewBox="0 0 110 110" xmlns="http://www.w3.org/2000/svg" style="width:110px;height:110px;">
+      <circle cx="55" cy="55" r="53" fill="${bg}" stroke="${gold}" stroke-width="2.5"/>
+      <circle cx="55" cy="55" r="46" fill="none" stroke="${gold}" stroke-width="0.8"/>
+      <circle cx="55" cy="55" r="39" fill="none" stroke="${gold}" stroke-width="0.4" stroke-dasharray="2,3"/>
       ${notches}
-      <path d="M55,22 L74,28 L74,50 Q74,68 55,78 Q36,68 36,50 L36,28 Z" fill="none" stroke="${fc}" stroke-width="1.5"/>
-      <rect x="46" y="38" width="18" height="12" rx="1" fill="none" stroke="${fc}" stroke-width="1.2"/>
-      <line x1="55" y1="38" x2="55" y2="50" stroke="${fc}" stroke-width="1"/>
-      <text x="55" y="92" font-family="sans-serif" font-size="5" fill="${fc}" text-anchor="middle" font-weight="bold">ACADEMY OF EXCELLENCE</text>
+      <path d="M20,64 Q13,55 16,44 Q19,34 26,37 Q21,46 24,54 Q26,62 20,64Z" fill="${gold}" opacity="0.7"/>
+      <path d="M24,73 Q15,65 18,54 Q21,44 29,47 Q24,56 26,64 Q28,71 24,73Z" fill="${gold}" opacity="0.5"/>
+      <path d="M90,64 Q97,55 94,44 Q91,34 84,37 Q89,46 86,54 Q84,62 90,64Z" fill="${gold}" opacity="0.7"/>
+      <path d="M86,73 Q95,65 92,54 Q89,44 81,47 Q86,56 84,64 Q82,71 86,73Z" fill="${gold}" opacity="0.5"/>
+      <path d="M55,20 L75,27 L75,52 Q75,70 55,80 Q35,70 35,52 L35,27 Z" fill="${gold}" opacity="0.1"/>
+      <path d="M55,20 L75,27 L75,52 Q75,70 55,80 Q35,70 35,52 L35,27 Z" fill="none" stroke="${gold}" stroke-width="1.8"/>
+      <rect x="45" y="38" width="20" height="14" rx="1" fill="none" stroke="${goldL}" stroke-width="1.3"/>
+      <line x1="55" y1="38" x2="55" y2="52" stroke="${goldL}" stroke-width="1"/>
+      <circle cx="55" cy="64" r="6" fill="none" stroke="${gold}" stroke-width="1"/>
+      <line x1="49" y1="64" x2="61" y2="64" stroke="${gold}" stroke-width="0.7"/>
+      <text x="55" y="94" font-family="sans-serif" font-size="5.5" font-weight="bold" fill="${gold}" text-anchor="middle" letter-spacing="1.5">OFFICIAL SEAL</text>
     </svg>`;
+
     return `<!DOCTYPE html><html><head><meta charset="UTF-8"><style>
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,700&family=Dancing+Script:wght@500;600&family=IM+Fell+English:ital@0;1&display=swap');
-*{margin:0;padding:0;box-sizing:border-box;}html,body{width:1100px;height:850px;overflow:hidden;background:#F5EDD8;}
-.page{width:1100px;height:850px;position:relative;background:#F5EDD8;display:flex;flex-direction:column;overflow:hidden;}
-.corner{position:absolute;z-index:10;}.c-tl{top:0;left:0;}.c-tr{top:0;right:0;transform:scaleX(-1);}.c-bl{bottom:0;left:0;transform:scaleY(-1);}.c-br{bottom:0;right:0;transform:scale(-1);}
-.bt{position:absolute;top:0;left:90px;right:90px;height:3.5px;background:${fc};z-index:5;}
-.bb{position:absolute;bottom:0;left:90px;right:90px;height:3.5px;background:${fc};z-index:5;}
-.bl{position:absolute;left:0;top:90px;bottom:90px;width:3.5px;background:${fc};z-index:5;}
-.br{position:absolute;right:0;top:90px;bottom:90px;width:3.5px;background:${fc};z-index:5;}
-.bti{position:absolute;top:4px;left:94px;right:94px;height:1px;background:${fc};z-index:5;}
-.bbi{position:absolute;bottom:4px;left:94px;right:94px;height:1px;background:${fc};z-index:5;}
-.bli{position:absolute;left:4px;top:94px;bottom:94px;width:1px;background:${fc};z-index:5;}
-.bri{position:absolute;right:4px;top:94px;bottom:94px;width:1px;background:${fc};z-index:5;}
-.content{position:relative;z-index:5;display:flex;flex-direction:column;align-items:center;padding:60px 100px 0;flex:1;}
-.fctitle{font-family:'Cinzel',serif;font-size:30px;font-weight:700;color:${fc};letter-spacing:3px;text-align:center;margin-bottom:10px;}
-.fptitle{font-family:'IM Fell English',serif;font-style:italic;font-size:15px;color:#666;text-align:center;margin-bottom:6px;}
-.fname{font-family:'Cormorant Garamond',serif;font-size:70px;font-weight:700;font-style:italic;color:#1a1a1a;text-align:center;line-height:1;margin-bottom:6px;}
-.fnrule{width:400px;height:1px;background:linear-gradient(90deg,transparent,#bbb 20%,#bbb 80%,transparent);margin:0 auto 14px;}
-.frecog{font-family:'IM Fell English',serif;font-size:14px;color:#555;text-align:center;line-height:1.5;margin-bottom:6px;}
-.fcname{font-family:'Cinzel',serif;font-size:22px;font-weight:700;color:${fc};letter-spacing:3px;text-align:center;text-transform:uppercase;}
-.footer{position:relative;z-index:5;display:flex;align-items:flex-end;justify-content:space-between;padding:12px 85px 45px;}
-.fsigblock{display:flex;flex-direction:column;align-items:center;flex:1;}
-.fsigscript{font-family:'Dancing Script',cursive;font-size:26px;color:#333;line-height:1;margin-bottom:2px;}
-.fsigline{width:200px;height:1px;background:#aaa;margin-bottom:7px;}
-.fsigname{font-family:'Cinzel',serif;font-size:11px;font-weight:600;color:#333;letter-spacing:1px;}
-.fsigtitle{font-family:'IM Fell English',serif;font-size:10px;color:#888;font-style:italic;}
-.fdaterow{font-family:'IM Fell English',serif;font-size:14px;color:#888;text-align:center;margin-top:6px;}
-</style></head><body><div class="page">
-<div class="bt"></div><div class="bb"></div><div class="bl"></div><div class="br"></div>
-<div class="bti"></div><div class="bbi"></div><div class="bli"></div><div class="bri"></div>
-<div class="corner c-tl">${fCorner}</div><div class="corner c-tr">${fCorner}</div>
-<div class="corner c-bl">${fCorner}</div><div class="corner c-br">${fCorner}</div>
-<div class="content">
-  <div class="fctitle">${esc(title)}</div>
-  ${flourish}
-  <div class="fptitle">Presented to</div>
-  <div class="fname">${esc(name)}</div>
-  <div class="fnrule"></div>
-  ${course ? `<div class="frecog">In recognition of successfully completing<br>all requirements for the course</div><div class="fcname">${esc(course)}</div>` : ''}
-</div>
-<div class="footer">
-  <div style="flex-shrink:0;">${medal}</div>
-  <div class="fsigblock">
-    <div class="fsigscript">${esc(issuer || 'Signature')}</div>
-    <div class="fsigline"></div>
-    ${issuerTitle ? `<div class="fsigname">${esc(issuerTitle)}</div>` : ''}
-    ${issuer ? `<div class="fsigtitle">${esc(issuer)}</div>` : ''}
-    <div class="fdaterow">${esc(dateStr)}</div>
-  </div>
-  <div style="flex-shrink:0;width:70px;"></div>
-</div>
-</div></body></html>`;
+      @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400;1,600;1,700&family=Dancing+Script:wght@600;700&family=EB+Garamond:ital,wght@0,400;1,400&display=swap');
+      *{margin:0;padding:0;box-sizing:border-box;}
+      html,body{width:1100px;height:850px;overflow:hidden;background:${bg};}
+      .page{width:1100px;height:850px;position:relative;background:${bg};display:flex;flex-direction:column;}
+      /* Corner ornaments */
+      .corner{position:absolute;z-index:6;line-height:0;}
+      .c-tl{top:0;left:0;} .c-tr{top:0;right:0;transform:scaleX(-1);}
+      .c-bl{bottom:0;left:0;transform:scaleY(-1);} .c-br{bottom:0;right:0;transform:scale(-1);}
+      /* Border */
+      .bh{position:absolute;left:140px;right:140px;height:2.5px;background:${gold};z-index:5;}
+      .bv{position:absolute;top:140px;bottom:140px;width:2.5px;background:${gold};z-index:5;}
+      .bht{top:1.25px;} .bhb{bottom:1.25px;} .bvl{left:1.25px;} .bvr{right:1.25px;}
+      .bhi{position:absolute;left:148px;right:148px;height:0.8px;background:${gold};opacity:0.4;z-index:5;}
+      .bvi{position:absolute;top:148px;bottom:148px;width:0.8px;background:${gold};opacity:0.4;z-index:5;}
+      .bhit{top:8px;} .bhib{bottom:8px;} .bvil{left:8px;} .bvir{right:8px;}
+      /* Content inside corners + padding */
+      .content{position:absolute;top:52px;bottom:0;left:60px;right:60px;display:flex;flex-direction:column;align-items:center;z-index:2;}
+      /* Zone 1 — Header */
+      .zone-header{width:100%;display:flex;flex-direction:column;align-items:center;padding-bottom:12px;}
+      .cert-title{font-family:"Cinzel",serif;font-size:30px;font-weight:700;color:${gold};letter-spacing:8px;text-transform:uppercase;text-align:center;margin-bottom:16px;}
+      /* Zone 2 — Recipient */
+      .zone-recipient{flex:1;width:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:8px 0;}
+      .presented{font-family:"EB Garamond",serif;font-style:italic;font-size:20px;color:rgba(245,236,215,0.6);text-align:center;margin-bottom:10px;}
+      .recipient-name{font-family:"Cormorant Garamond",serif;font-size:78px;font-weight:700;font-style:italic;color:${gold};text-align:center;line-height:1;letter-spacing:1px;margin-bottom:10px;text-shadow:0 0 50px rgba(201,168,76,0.3);}
+      /* Zone 3 — Achievement */
+      .zone-achievement{width:100%;display:flex;flex-direction:column;align-items:center;padding:6px 0 16px;}
+      .recog-text{font-family:"EB Garamond",serif;font-style:italic;font-size:18px;color:rgba(245,236,215,0.6);text-align:center;line-height:1.5;margin-bottom:7px;}
+      .course-name{font-family:"Cinzel",serif;font-size:26px;font-weight:700;color:${goldL};letter-spacing:4px;text-transform:uppercase;text-align:center;}
+      /* Footer 3-col */
+      .footer{position:absolute;bottom:0;left:60px;right:60px;display:flex;align-items:flex-end;justify-content:space-between;padding-bottom:38px;z-index:2;}
+      .footer-left{flex-shrink:0;}
+      .footer-center{flex:1;display:flex;flex-direction:column;align-items:center;padding:0 30px;}
+      .sig-script{font-family:"Dancing Script",cursive;font-size:34px;color:${cream};line-height:1;margin-bottom:6px;}
+      .sig-line-g{width:220px;height:1px;background:linear-gradient(90deg,transparent,${gold} 25%,${gold} 75%,transparent);margin-bottom:7px;}
+      .sig-name{font-family:"Cinzel",serif;font-size:15px;font-weight:600;color:${gold};letter-spacing:2px;text-align:center;}
+      .sig-title{font-family:"EB Garamond",serif;font-style:italic;font-size:13px;color:rgba(245,236,215,0.5);text-align:center;margin-top:2px;}
+      .sig-date{font-family:"EB Garamond",serif;font-size:16px;color:${gold};opacity:0.65;margin-top:8px;text-align:center;}
+      .footer-right{flex-shrink:0;display:flex;flex-direction:column;align-items:flex-end;gap:4px;}
+    </style></head><body><div class="page">
+      <div class="bh bht"></div><div class="bh bhb"></div>
+      <div class="bv bvl"></div><div class="bv bvr"></div>
+      <div class="bhi bhit"></div><div class="bhi bhib"></div>
+      <div class="bvi bvil"></div><div class="bvi bvir"></div>
+      <div class="corner c-tl">${corner}</div><div class="corner c-tr">${corner}</div>
+      <div class="corner c-bl">${corner}</div><div class="corner c-br">${corner}</div>
+      <div class="content">
+        <div class="zone-header">
+          <div class="cert-title">${e(title)}</div>
+          ${flourish}
+        </div>
+        <div class="zone-recipient">
+          <div class="presented">Presented to</div>
+          <div class="recipient-name">${e(name)}</div>
+          ${nameRule}
+        </div>
+        <div class="zone-achievement">
+          ${course ? `<div class="recog-text">In recognition of outstanding completion of</div><div class="course-name">${e(course)}</div>` : ''}
+        </div>
+      </div>
+      <div class="footer">
+        <div class="footer-left">${medal}</div>
+        <div class="footer-center">
+          <div class="sig-script">${e(issuer || 'Signature')}</div>
+          <div class="sig-line-g"></div>
+          ${issuer ? `<div class="sig-name">${e(issuer)}</div>` : ''}
+          ${issuerTitle ? `<div class="sig-title">${e(issuerTitle)}</div>` : ''}
+          <div class="sig-date">${e(dateStr)}</div>
+        </div>
+        <div class="footer-right"></div>
+      </div>
+    </div></body></html>`;
   }
