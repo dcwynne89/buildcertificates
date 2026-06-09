@@ -5,8 +5,8 @@
   "private": true,
   "dependencies": {
     "@netlify/blobs": "^8.2.0",
-    "qrcode": "^1.5.4",
     "@sparticuz/chromium": "132.0.0",
-    "puppeteer-core": "^22.0.0"
+    "puppeteer-core": "^22.15.0",
+    "qrcode": "^1.5.4"
   }
 }
